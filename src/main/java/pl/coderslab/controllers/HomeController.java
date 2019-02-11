@@ -10,7 +10,7 @@ public class HomeController {
     @GetMapping("")
     public String home(){
 
-        return "../webapp/WEB-INF/html/index.html";
+        return "home";
     }
 
 }
