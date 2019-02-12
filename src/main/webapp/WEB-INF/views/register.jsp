@@ -17,22 +17,43 @@
 
     <section class="login-page">
         <h2>Załóż konto</h2>
-        <form class="form--contact" method="post">
+        <form:form method="post"
+                   action="${formAction}"
+                   modelAttribute="user"
+                   cssClass="form--contact">
+                <form:hidden path="id" />
+
             <div class="form-group">
-                <input type="email" name="email" placeholder="Email" />
+                <c:if test="${not empty user.email}">
+                    <form:input path="email" placeholder="${user.email}"/>
+                </c:if>
+                <c:if test="${empty user.email}">
+                    <form:input path="email" placeholder="Email"/>
+                </c:if>
+
+                <form:errors path="email" cssClass="alert alert-danger" element="div" />
+                <c:if test="${not empty emailErr}">
+                    <div class="alert alert-danger">${emailErr}</div>
+                </c:if>
             </div>
+
             <div class="form-group">
-                <input type="password" name="password" placeholder="Hasło" />
+                <form:password path="password" placeholder="Hasło" />
+                <form:errors path="password" cssClass="alert alert-danger" element="div" />
             </div>
+
             <div class="form-group">
-                <input type="password" name="password2" placeholder="Powtórz hasło" />
+                <form:password path="repeatedPassword" placeholder="Powtórż Hasło" />
+                <c:if test="${not empty pwdErr}">
+                    <div class="alert alert-danger">${pwdErr}</div>
+                </c:if>
             </div>
 
             <div class="form-group form-group--buttons">
                 <a href="/login" class="btn btn--without-border">Zaloguj się</a>
                 <button class="btn" type="submit">Załóż konto</button>
             </div>
-        </form>
+        </form:form>
     </section>
 
 </body>
