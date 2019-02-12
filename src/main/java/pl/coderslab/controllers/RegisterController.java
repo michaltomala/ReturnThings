@@ -28,11 +28,11 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String saveUser(@Validated(ValidationUserGroup.class) User user, BindingResult errors,Model model) {
+    public String saveUser(@Validated(ValidationUserGroup.class) User user, BindingResult errors,Model model,HttpSession session) {
         if (errors.hasErrors()) {
             return "register";
         }
-        if(registerService.saveUser(user,model)){
+        if(registerService.saveUser(user,model,session)){
             return "register";
         }
         return "redirect:/";
