@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.User;
 import pl.coderslab.services.RegisterService;
-import pl.coderslab.validator.ValidationUserGroup;
+import pl.coderslab.validator.ValidationRegisterUserGroup;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,7 +28,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String saveUser(@Validated(ValidationUserGroup.class) User user, BindingResult errors,Model model,HttpSession session) {
+    public String saveUser(@Validated(ValidationRegisterUserGroup.class) User user, BindingResult errors, Model model, HttpSession session) {
         if (errors.hasErrors()) {
             return "auth/register";
         }

@@ -4,7 +4,7 @@ package pl.coderslab.entity;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import pl.coderslab.validator.ValidationUserGroup;
+import pl.coderslab.validator.ValidationRegisterUserGroup;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -16,12 +16,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(groups = ValidationUserGroup.class , message = "Email nie może być pusty!")
-    @Email(groups = ValidationUserGroup.class, message = "Niepoprawny Email!")
+//    todo: pododawać walidacje loginu
+    @NotBlank(groups = { ValdationLoginUserGroup.class,ValidationRegisterUserGroup.class} , message = "Email nie może być pusty!")
+    @Email(groups = ValidationRegisterUserGroup.class, message = "Niepoprawny Email!")
     @Column(unique = true)
     private String email;
 
-    @Size(min = 6, groups = ValidationUserGroup.class, message = "Hasło musi mieć minimum 6 znaków")
+    @Size(min = 8, groups = ValidationRegisterUserGroup.class, message = "Hasło musi mieć minimum 6 znaków")
     private String password;
 
     @Transient

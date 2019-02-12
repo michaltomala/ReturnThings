@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
 //   todo pozycjonowanie w headerze na stronie głównej (najeżdzający się obrazek z oddaj rzeczy itp)
+
     @GetMapping("")
     public String homeRedirect(){
         return "redirect:/home";
     }
+
+//     todo header - pojawiajace i znikajace napisy w zależności od zalogowania
 
     @GetMapping("/home")
     public String home(){
