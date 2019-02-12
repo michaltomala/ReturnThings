@@ -24,16 +24,16 @@ public class RegisterController {
     @GetMapping("/register")
     public String register(Model model,HttpServletRequest request){
         registerService.startRegister(model,request);
-        return "register";
+        return "auth/register";
     }
 
     @PostMapping("/register")
     public String saveUser(@Validated(ValidationUserGroup.class) User user, BindingResult errors,Model model,HttpSession session) {
         if (errors.hasErrors()) {
-            return "register";
+            return "auth/register";
         }
         if(registerService.saveUser(user,model,session)){
-            return "register";
+            return "auth/register";
         }
         return "redirect:/";
     }
