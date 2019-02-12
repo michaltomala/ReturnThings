@@ -9,8 +9,12 @@ public class HomeController {
 
 //   todo pozycjonowanie w headerze na stronie głównej (najeżdzający się obrazek z oddaj rzeczy itp)
     @GetMapping("")
-    public String home(){
+    public String homeRedirect(){
+        return "redirect:/home";
+    }
 
+    @GetMapping("/home")
+    public String home(){
         return "home";
     }
 

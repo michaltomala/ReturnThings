@@ -29,7 +29,7 @@ public class RegisterController {
     @PostMapping("/register")
     public String saveUser(User user) {
         registerService.saveUser(user);
-        return "redirect:";
+        return "redirect:/";
     }
 
 
