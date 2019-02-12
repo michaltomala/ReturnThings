@@ -14,19 +14,18 @@ import pl.coderslab.converter.UserConverter;
 @ComponentScan("pl.coderslab")
 @EnableWebMvc
 @EnableTransactionManagement
-public class FormatterConfig implements WebMvcConfigurer{
+public class FormatterConfig implements WebMvcConfigurer {
 
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
 
         registry.addConverter(getUserConverter());
-
     }
 
     @Bean
-    public UserConverter getUserConverter(){ return new UserConverter(); }
-
-
+    public UserConverter getUserConverter() {
+        return new UserConverter();
+    }
 
 }
