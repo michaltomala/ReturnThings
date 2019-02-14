@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.User;
 import pl.coderslab.services.LoginService;
+import pl.coderslab.validator.ValidationLoginUserGroup;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,11 +27,12 @@ public class LoginController {
         return "auth/login";
     }
 
-//       todo: przerobić w widok logowania
-    //   todo: odebrać formularz logowania
     @PostMapping("/login")
-    public String loginUser(@Validated(ValidationUserGroup.class) User user , BindingResult errors){
+    public String loginUser(@Validated(ValidationLoginUserGroup.class) User user , BindingResult errors,Model model,HttpSession session){
         if (errors.hasErrors()) {
+            return "auth/login";
+        }
+        if(!loginService.loginUser(user,model,session)){
             return "auth/login";
         }
         return "redirect:/home";

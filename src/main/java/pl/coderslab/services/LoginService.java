@@ -1,9 +1,12 @@
 package pl.coderslab.services;
 
 
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.coderslab.entity.User;
+import pl.coderslab.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,7 +15,8 @@ import javax.servlet.http.HttpSession;
 @Service
 public class LoginService {
 
-
+    @Autowired
+    private UserRepository userRepository;
 
     public void startLogin(Model model, HttpServletRequest request){
         model.addAttribute("user", new User());
@@ -20,8 +24,20 @@ public class LoginService {
     }
 
 
-    public void loginUser(){
+    public boolean loginUser(User user,Model model,HttpSession session){
+        User userToCheck = userRepository.findFirstByEmail(user.getEmail());
+        if (userToCheck == null) {
+            model.addAttribute("emailErr", "Nie ma takiego użytkownika");
+            return false;
+        }
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        if ((BCrypt.checkpw(user.getPassword(), userToCheck.getPassword()) )) {
+            model.addAttribute("pwdErr", "Hasło się nie zgadza,spróbuj jeszcze raz");
+            return false;
+        }
 
+        session.setAttribute("user", userToCheck);
+        return true;
     }
 
     public void logout(HttpSession session){
