@@ -77,7 +77,6 @@ public class User {
     public boolean isAdmin() {
         return isAdmin;
     }
-
     public boolean getisAdmin() {
         return isAdmin;
     }
