@@ -26,7 +26,9 @@
             <c:if test="${not empty user}">
                 <li class="btn btn--small btn--without-border" >Witaj ${user.email}</li>
                 <c:if test="${user.isAdmin == true}">
-                    <li class="btn btn--small btn--without-border" >Administrator</li>
+                    <li>
+                        <a href="/admin/dashboard" class="btn btn--small btn--without-border">Panel Administracyjny</a>
+                    </li>
                 </c:if>
                 <li><a href="/login" class="btn btn--small btn--without-border">Profil użytkownika</a></li>
                 <li><a href="/logout" class="btn btn--small btn--highlighted">Wyloguj się</a></li>
