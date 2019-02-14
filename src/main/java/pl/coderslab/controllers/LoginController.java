@@ -35,6 +35,9 @@ public class LoginController {
         if(!loginService.loginUser(user,model,session)){
             return "auth/login";
         }
+        if(loginService.isAdmin(session)){
+            return "redirect:/admin/dashboard";
+        }
         return "redirect:/home";
     }
 

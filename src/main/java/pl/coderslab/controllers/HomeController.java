@@ -14,8 +14,6 @@ public class HomeController {
         return "redirect:/home";
     }
 
-//     todo header - pojawiajace i znikajace napisy w zależności od zalogowania
-
     @GetMapping("/home")
     public String home(){
         return "home";

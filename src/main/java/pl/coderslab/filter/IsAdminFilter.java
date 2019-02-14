@@ -24,8 +24,15 @@ public class IsAdminFilter implements Filter {
         User user = (User) session.getAttribute("user");
         String url = request.getRequestURI();
 
-        if( (url.equals("/admin/*"))) {
-            if(!user.getisAdmin()){
+
+        if( (url.equals("/admin/dashboard"))) {
+            if(user != null){
+                if(!user.getisAdmin()){
+                response.sendRedirect(request.getContextPath()+"/");
+                return;
+                }
+
+            }else{
                 response.sendRedirect(request.getContextPath()+"/login");
                 return;
             }
