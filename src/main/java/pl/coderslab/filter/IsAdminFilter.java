@@ -22,13 +22,11 @@ public class IsAdminFilter implements Filter {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        String url = request.getRequestURI();
 
-
-        if( (url.equals("/admin/dashboard"))) {
             if(user != null){
                 if(!user.getisAdmin()){
                 response.sendRedirect(request.getContextPath()+"/");
+//              todo strona  z błędem - brak dostępu
                 return;
                 }
 
@@ -36,7 +34,6 @@ public class IsAdminFilter implements Filter {
                 response.sendRedirect(request.getContextPath()+"/login");
                 return;
             }
-        }
         chain.doFilter(req, resp);
     }
 

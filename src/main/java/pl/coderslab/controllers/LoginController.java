@@ -32,7 +32,7 @@ public class LoginController {
         if (errors.hasErrors()) {
             return "auth/login";
         }
-        if(!loginService.loginUser(user,model,session)){
+        if(loginService.loginUser(user,model,session)){
             return "auth/login";
         }
         if(loginService.isAdmin(session)){

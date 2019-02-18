@@ -28,24 +28,21 @@ public class LoginService {
         User userToCheck = userRepository.findFirstByEmail(user.getEmail());
         if (userToCheck == null) {
             model.addAttribute("emailErr", "Nie ma takiego użytkownika");
-            return false;
+            return true;
         }
-        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-        if ((BCrypt.checkpw(user.getPassword(), userToCheck.getPassword()) )) {
+//        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        if (!(BCrypt.checkpw(user.getPassword(), userToCheck.getPassword()) )) {
             model.addAttribute("pwdErr", "Hasło się nie zgadza,spróbuj jeszcze raz");
-            return false;
+            return true;
         }
 
         session.setAttribute("user", userToCheck);
-        return true;
+        return false;
     }
 
     public boolean isAdmin(HttpSession session){
         User user = (User)session.getAttribute("user");
-        if(user.getisAdmin()){
-            return true;
-        }
-        return false;
+        return user.getisAdmin();
     }
 
     public void logout(HttpSession session){
