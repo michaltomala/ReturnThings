@@ -30,7 +30,7 @@ public class LoginService {
             model.addAttribute("emailErr", "Nie ma takiego użytkownika");
             return true;
         }
-//        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+//      todo: do obczajenia dlaczego to działa
         if (!(BCrypt.checkpw(user.getPassword(), userToCheck.getPassword()) )) {
             model.addAttribute("pwdErr", "Hasło się nie zgadza,spróbuj jeszcze raz");
             return true;
