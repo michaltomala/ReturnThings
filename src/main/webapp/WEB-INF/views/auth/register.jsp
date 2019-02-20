@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<%@include file="../header.jsp"%>
+    <%@include file="authHeader.jsp"%>
 
     <section class="login-page">
         <h2>Załóż konto</h2>
