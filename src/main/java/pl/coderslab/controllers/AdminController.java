@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
+// todo w widoku wywalić drugą linijkę z header - prawdopodobnie lepiej bedzie bez niej
 
     @GetMapping("/dashboard")
     public String dashboard(){
-//      todo: widok dashboard do zrobienia - tak samo jak w loginie :
-//       - nie ma obrazka i to klamra na środku z napisem panel administracyjny i 4 obrazki do zarządzania
 
         return "admin/dashboard";
     }
+
+
 }
 
 

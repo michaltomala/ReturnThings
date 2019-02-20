@@ -35,7 +35,7 @@
     </a>
 
     <a href="/dary" class="a--dashboard">
-        <img class="img--dashboard" src="/images/myImages/dary.jpeg" title="Dary" alt="">Dary
+        <img class="img--dashboard" src="/images/myImages/bounty.jpeg" title="Dary" alt="">Dary
     </a>
 
 </section>
