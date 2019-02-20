@@ -20,8 +20,26 @@
     <%@include file="../header.jsp"%>
 </header>
 
-    <section class="login-page">
-        <h2>Panel Administracyjny</h2>
-    </section>
+<section class="section--dashboard">
+    <h2>Panel Administracyjny</h2>
+    <a href="/użytkownicy" class="a--dashboard">
+        <img  class="img--dashboard--user" src="/images/myImages/user.jpeg" title="Użytkownicy" >Użytkownicy
+    </a>
+
+    <a href="/administratorzy" class="a--dashboard">
+        <img  src="/images/myImages/admin.jpeg" title="Administratorzy">Administratorzy
+    </a>
+
+    <a href="/instytucje" class="a--dashboard">
+        <img class="img--dashboard" src="/images/myImages/Instytucje.jpg" title="Instytucje" >Instytucje
+    </a>
+
+    <a href="/dary" class="a--dashboard">
+        <img class="img--dashboard" src="/images/myImages/dary.jpeg" title="Dary" alt="">Dary
+    </a>
+
+</section>
+
+
 </body>
 </html>

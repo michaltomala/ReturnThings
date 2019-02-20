@@ -15,8 +15,8 @@ public class AdminController {
 //      todo: widok dashboard do zrobienia - tak samo jak w loginie :
 //       - nie ma obrazka i to klamra na środku z napisem panel administracyjny i 4 obrazki do zarządzania
 
-//      todo: przeniesienie header do folderu auth - tylko tam jest korzystany
-//      todo: w widoku dashboard zrobić header bez obrazka - do styli dodać nową klasę (to samo stylowanie tylko bez obrazka)
         return "admin/dashboard";
     }
 }
+
+
