@@ -20,7 +20,7 @@
 
 <section class="section--dashboard">
     <h2>Panel Administracyjny</h2>
-    <a href="/admin/users" class="a--dashboard">
+    <a href="/admin/user/users" class="a--dashboard">
         <img  class="img--dashboard--user" src="/images/myImages/user.jpeg" title="Użytkownicy" >Użytkownicy
     </a>
 

@@ -18,5 +18,45 @@
 
     <%@include file="adminHeader.jsp"%>
 
+    <h2>Użytkownicy:</h2>
+
+    <ul>
+        <c:forEach items="${users}" var="u">
+            <c:if test="${u.isAdmin == false}">
+                <li>${u.id} ${u.email}
+
+                <a href="${pageContext.request.contextPath}/admin/user/${u.id}">edytuj</a>
+                <a href="${pageContext.request.contextPath}/admin/dashboard/confirm/${u.id}">usuń</a>
+
+                <c:if test="${user.id == u.id}">
+                    <form:form method="post"
+                               action="${formAction}"
+                               modelAttribute="user">
+                        <form:hidden path="id" />
+                        <form:hidden path="password" />
+
+                        <form:input path="email" value="${user.email}" />
+
+                        <form:checkbox path="isAdmin" value="${user.isAdmin}" />
+
+                        <input type="submit"  value="Zapisz zmiany" class="btn btn-success">
+
+                        <c:if test="${not empty emailErr}">
+                            <div class="alert alert-danger">${emailErr}</div>
+                        </c:if>
+
+                        <div><form:errors path="email" /></div>
+                    </form:form>
+                </c:if>
+                <c:if test="${not empty confirm and deletingUser.id == u.id}">
+                    Potwierdź usunięcie tego użytkownika!
+                    <a href="${pageContext.request.contextPath}/admin/user/delete/${u.id}">Tak</a>
+                    <a href="${pageContext.request.contextPath}/admin/user/users">Nie</a>
+                </c:if>
+
+                </li>
+            </c:if>
+        </c:forEach>
+    </ul>
 </body>
 </html>

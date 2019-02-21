@@ -101,4 +101,5 @@ public class User {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+    public void setIsAdmin(boolean admin) { isAdmin = admin; }
 }
