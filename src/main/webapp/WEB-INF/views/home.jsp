@@ -16,9 +16,7 @@
 
 <body>
 
-<header class="header--main-page">
-    <%@include file="header.jsp"%>
-</header>
+    <%@include file="homeHeader.jsp"%>
 
 <section class="stats">
     <div class="container container--85">

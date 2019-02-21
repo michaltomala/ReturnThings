@@ -17,7 +17,7 @@
 <body>
 
 <header>
-    <%@include file="../header.jsp"%>
+    <%@include file="adminHeader.jsp"%>
 </header>
 
 <section class="section--dashboard">
