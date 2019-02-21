@@ -22,19 +22,19 @@
 
 <section class="section--dashboard">
     <h2>Panel Administracyjny</h2>
-    <a href="/użytkownicy" class="a--dashboard">
+    <a href="/admin/users" class="a--dashboard">
         <img  class="img--dashboard--user" src="/images/myImages/user.jpeg" title="Użytkownicy" >Użytkownicy
     </a>
 
-    <a href="/administratorzy" class="a--dashboard">
+    <a href="/admin/admins" class="a--dashboard">
         <img  src="/images/myImages/admin.jpeg" title="Administratorzy">Administratorzy
     </a>
 
-    <a href="/instytucje" class="a--dashboard">
+    <a href="/admin/institutions" class="a--dashboard">
         <img class="img--dashboard" src="/images/myImages/Instytucje.jpg" title="Instytucje" >Instytucje
     </a>
 
-    <a href="/dary" class="a--dashboard">
+    <a href="/admin/bounties" class="a--dashboard">
         <img class="img--dashboard" src="/images/myImages/bounty.jpeg" title="Dary" alt="">Dary
     </a>
 
