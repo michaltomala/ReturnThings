@@ -20,14 +20,6 @@
                 <li><a href="/logout" class="btn btn--small btn--highlighted">Wyloguj się</a></li>
             </c:if>
         </ul>
-
-        <%--<ul>--%>
-            <%--<li><a href="/" class="btn btn--without-border active">Strona Główna</a></li>--%>
-            <%--<li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>--%>
-            <%--<li><a href="#" class="btn btn--without-border">O nas</a></li>--%>
-            <%--<li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>--%>
-            <%--<li><a href="#" class="btn btn--without-border">Kontakt</a></li>--%>
-        <%--</ul>--%>
     </nav>
 
 </header>

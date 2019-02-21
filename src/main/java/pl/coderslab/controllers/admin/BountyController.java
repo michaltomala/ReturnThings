@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin/")
-public class AdminController {
+public class BountyController {
 
 
-    @GetMapping("admins")
-    public String admins(){
+    @GetMapping("bounties")
+    public String bounties(){
 
-        return "admin/admins";
+        return "admin/bounties";
     }
+
 
 
 }

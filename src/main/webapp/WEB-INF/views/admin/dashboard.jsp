@@ -16,9 +16,7 @@
 </head>
 <body>
 
-<header>
     <%@include file="adminHeader.jsp"%>
-</header>
 
 <section class="section--dashboard">
     <h2>Panel Administracyjny</h2>
