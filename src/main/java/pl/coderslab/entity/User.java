@@ -4,6 +4,7 @@ package pl.coderslab.entity;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.coderslab.validator.ValidationEditUserGroup;
 import pl.coderslab.validator.ValidationLoginUserGroup;
 import pl.coderslab.validator.ValidationRegisterUserGroup;
 
@@ -19,8 +20,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(groups = { ValidationLoginUserGroup.class,ValidationRegisterUserGroup.class} , message = "Email nie może być pusty!")
-    @Email(groups = ValidationRegisterUserGroup.class, message = "Niepoprawny Email!")
+    @NotBlank(groups = { ValidationLoginUserGroup.class,
+                        ValidationRegisterUserGroup.class,
+                        ValidationEditUserGroup.class} , message = "Email nie może być pusty!")
+    @Email(groups = {ValidationRegisterUserGroup.class, ValidationEditUserGroup.class}, message = "Niepoprawny Email!")
     @Column(unique = true)
     private String email;
 

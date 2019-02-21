@@ -26,7 +26,7 @@
                 <li>${u.id} ${u.email}
 
                 <a href="${pageContext.request.contextPath}/admin/user/${u.id}">edytuj</a>
-                <a href="${pageContext.request.contextPath}/admin/dashboard/confirm/${u.id}">usuń</a>
+                <a href="${pageContext.request.contextPath}/admin/user/confirm/${u.id}">usuń</a>
 
                 <c:if test="${user.id == u.id}">
                     <form:form method="post"

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import pl.coderslab.entity.User;
 import pl.coderslab.repository.UserRepository;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -24,4 +25,22 @@ public class UserService {
         model.addAttribute("users",userRepository.findAll());
     }
 
+    public void edit(Long id, Model model, HttpServletRequest request){
+        User editingUser = userRepository.findOne(id);
+        model.addAttribute("user",editingUser);
+        model.addAttribute("formAction", request.getContextPath() + "/admin/user/edit/{id}"+id);
+    }
+
+
+    public void confirmDeleteUser(Model model, Long id){
+
+        User user = userRepository.findOne(id);
+        model.addAttribute("deletingUser",user);
+        model.addAttribute("confirm",user);
+    }
+
+    public void deleteUser(User user){
+
+        userRepository.delete(user);
+    }
 }
