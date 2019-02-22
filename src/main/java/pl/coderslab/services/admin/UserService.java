@@ -30,7 +30,7 @@ public class UserService {
 
     public void edit(Long id, Model model, HttpServletRequest request){
         User editingUser = userRepository.findOne(id);
-        model.addAttribute("user",editingUser);
+        model.addAttribute("editingUser",editingUser);
         model.addAttribute("formAction", request.getContextPath() + "/admin/user/edit/{id}"+id);
     }
 
@@ -38,9 +38,8 @@ public class UserService {
 
 //      Checking if email is empty
         if(user.getEmail().equals("")){
-            model.addAttribute("emailErr", "Email musi być unikalny !");
-            model.addAttribute("user",session.getAttribute("user"));
-            return true;
+            model.addAttribute("emailErr", "Email nie może być pusty !");
+            return addModelAttributesDuringEditingUser(user, model, session);
         }
 
 //      Checking if email is email
@@ -57,13 +56,8 @@ public class UserService {
 //      Checking if email is unique
         User checkUser = userRepository.findFirstByEmail(user.getEmail());
         if (checkUser != null && !checkUser.getId().equals(user.getId())) {
-//           todo zrobić porządek z nazwami !!!
             model.addAttribute("emailErr", "Email musi być unikalny !");
-            model.addAttribute("user",session.getAttribute("user"));
-            model.addAttribute("editingUser",user);
-//            model.addAttribute("user",session.getAttribute("userFromSession"));
-//            model.addAttribute("editingUser",user);
-            return true;
+            return addModelAttributesDuringEditingUser(user, model, session);
         }
 
         userRepository.save(user);
@@ -82,5 +76,14 @@ public class UserService {
         userRepository.delete(user);
     }
 
+
+
+    private boolean addModelAttributesDuringEditingUser(User user, Model model, HttpSession session) {
+        model.addAttribute("user",session.getAttribute("user"));
+        User editingUser =userRepository.findOne(user.getId());
+        model.addAttribute("editingUser",editingUser);
+        addListOfUsers(model);
+        return true;
+    }
 
 }

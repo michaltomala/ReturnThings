@@ -28,16 +28,16 @@
                 <a href="${pageContext.request.contextPath}/admin/user/edit/${u.id}">edytuj</a>
                 <a href="${pageContext.request.contextPath}/admin/user/confirm/${u.id}">usuń</a>
 
-                <c:if test="${user.id == u.id}">
+                <c:if test="${editingUser.id == u.id}">
                     <form:form method="post"
                                action="${formAction}"
-                               modelAttribute="user">
+                               modelAttribute="editingUser">
                         <form:hidden path="id" />
                         <form:hidden path="password" />
 
-                        <form:input path="email" value="${user.email}" />
+                        <form:input path="email" value="${editingUser.email}" />
 
-                        <form:checkbox path="isAdmin" value="${user.isAdmin}" />
+                        <form:checkbox path="isAdmin" value="${editingUser.isAdmin}" />
 
                         <input type="submit"  value="Zapisz zmiany" class="btn btn-success">
 
