@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping("users")
     public String users(Model model){
-        userService.start(model);
+        userService.addListOfUsers(model);
         return "admin/users";
     }
 
@@ -42,17 +42,21 @@ public class UserController {
 
     @GetMapping("edit/{id}")
     public String edit(@PathVariable Long id, Model model , HttpServletRequest request){
-        userService.start(model);
+        userService.addListOfUsers(model);
         userService.edit(id,model,request);
         return "admin/users";
     }
 
+//   todo - zrobić tutaj walidację przez @validated - poniżej kod do skopiowania
+//    @Validated({ValidationEditUserGroup.class}) User user,
+//                         BindingResult errors,
+//    if (errors.hasErrors()) {
+//            return "admin/users";
+//        }
+
     @PostMapping("edit/{id}")
-    public String update(@Validated({ValidationEditUserGroup.class}) User user,
-                         BindingResult errors, HttpServletRequest req, Model model, HttpSession session){
-        if (errors.hasErrors()) {
-            return "admin/users";
-        }
+    public String update(User user, HttpServletRequest req, Model model, HttpSession session){
+
         if(userService.update(user,model,session)){
             return "admin/users";
         }
@@ -70,7 +74,7 @@ public class UserController {
 
     @GetMapping("confirm/{id}")
     public String confirm(Model model, @PathVariable Long id){
-        userService.start(model);
+        userService.addListOfUsers(model);
         userService.confirmDeleteUser(model,id);
         return "admin/users";
     }

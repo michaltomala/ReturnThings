@@ -10,6 +10,8 @@ import pl.coderslab.repository.UserRepository;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class UserService {
@@ -22,7 +24,7 @@ public class UserService {
     }
 
 
-    public void start(Model model){
+    public void addListOfUsers(Model model){
         model.addAttribute("users",userRepository.findAll());
     }
 
@@ -34,6 +36,25 @@ public class UserService {
 
     public boolean update(User user, Model model, HttpSession session){
 
+//      Checking if email is empty
+        if(user.getEmail().equals("")){
+            model.addAttribute("emailErr", "Email musi być unikalny !");
+            model.addAttribute("user",session.getAttribute("user"));
+            return true;
+        }
+
+//      Checking if email is email
+//        Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+//        Matcher matcher = pattern.matcher(user.getEmail());
+//
+//
+//        if(!matcher.find()){
+//            model.addAttribute("emailErr", "Niepoprawny format!");
+//            model.addAttribute("user", session.getAttribute("user"));
+//            return true;
+//        }
+
+//      Checking if email is unique
         User checkUser = userRepository.findFirstByEmail(user.getEmail());
         if (checkUser != null && !checkUser.getId().equals(user.getId())) {
 //           todo zrobić porządek z nazwami !!!

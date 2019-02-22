@@ -7,4 +7,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findFirstByEmail(String email);
 
+// todo do wyciągnięcia potrzeba skorzystać z zapytania
 }
