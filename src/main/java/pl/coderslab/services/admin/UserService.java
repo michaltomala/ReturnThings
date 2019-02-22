@@ -8,6 +8,7 @@ import pl.coderslab.entity.User;
 import pl.coderslab.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -31,6 +32,22 @@ public class UserService {
         model.addAttribute("formAction", request.getContextPath() + "/admin/user/edit/{id}"+id);
     }
 
+    public boolean update(User user, Model model, HttpSession session){
+
+        User checkUser = userRepository.findFirstByEmail(user.getEmail());
+        if (checkUser != null && !checkUser.getId().equals(user.getId())) {
+//           todo zrobić porządek z nazwami !!!
+            model.addAttribute("emailErr", "Email musi być unikalny !");
+            model.addAttribute("user",session.getAttribute("user"));
+            model.addAttribute("editingUser",user);
+//            model.addAttribute("user",session.getAttribute("userFromSession"));
+//            model.addAttribute("editingUser",user);
+            return true;
+        }
+
+        userRepository.save(user);
+        return false;
+    }
 
     public void confirmDeleteUser(Model model, Long id){
 
@@ -43,4 +60,6 @@ public class UserService {
 
         userRepository.delete(user);
     }
+
+
 }

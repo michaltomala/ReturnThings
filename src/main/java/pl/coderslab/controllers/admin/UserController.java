@@ -32,37 +32,30 @@ public class UserController {
         return "admin/users";
     }
 
+    /**
+     * methods for edit user by admin
+     * @param id
+     * @param model
+     * @param request
+     * @return
+     */
 
     @GetMapping("edit/{id}")
     public String edit(@PathVariable Long id, Model model , HttpServletRequest request){
+        userService.start(model);
         userService.edit(id,model,request);
-        return "admin/user";
+        return "admin/users";
     }
 
     @PostMapping("edit/{id}")
     public String update(@Validated({ValidationEditUserGroup.class}) User user,
                          BindingResult errors, HttpServletRequest req, Model model, HttpSession session){
         if (errors.hasErrors()) {
-            return "admin/user";
+            return "admin/users";
         }
-//       todo dokończyć edycję (zrobić zakomentowany kod)
-
-//        User checkUser = userRepository.findFirstByLogin(user.getLogin());
-//        if (checkUser != null && !checkUser.getId().equals(user.getId())) {
-//            model.addAttribute("loginErr", "Taki użytkownik już istnieje !");
-//            model.addAttribute("user",session.getAttribute("userFromSession"));
-//            model.addAttribute("editingUser",user);
-//            return "admin/user";
-//        }
-//        checkUser = userRepository.findFirstByEmail(user.getEmail());
-//        if (checkUser != null && !checkUser.getId().equals(user.getId())) {
-//            model.addAttribute("emailErr", "Email musi być unikalny !");
-//            model.addAttribute("user",session.getAttribute("userFromSession"));
-//            model.addAttribute("editingUser",user);
-//            return "admin/user";
-//        }
-//
-//        userRepository.save(user);
+        if(userService.update(user,model,session)){
+            return "admin/users";
+        }
 
         return "redirect:"+req.getContextPath()+"/admin/user/users";
     }
