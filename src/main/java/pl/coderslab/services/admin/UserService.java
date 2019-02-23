@@ -25,7 +25,7 @@ public class UserService {
 
 
     public void addListOfUsers(Model model){
-        model.addAttribute("users",userRepository.findAll());
+        model.addAttribute("users",userRepository.findAllByAdminFalse());
     }
 
     public void edit(Long id, Model model, HttpServletRequest request){
