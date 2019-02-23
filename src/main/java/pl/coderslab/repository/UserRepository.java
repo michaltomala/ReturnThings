@@ -9,9 +9,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findFirstByEmail(String email);
 
-    List<User> findAllByAdminFalse();
-    List<User> findAllByAdmin(boolean isAdmin);
-    List<User> findAllByAdminIs(boolean isAdmin);
     List<User> findAllByIsAdmin(boolean isAdmin);
 // todo do wyciągnięcia potrzeba skorzystać z zapytania
 }
