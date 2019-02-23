@@ -20,12 +20,9 @@
 
     <h2>Użytkownicy:</h2>
 
-    <%--${loop.count}` it will give 1 starting base index.--%>
-    <%--varStatus="loop"--%>
     <ul>
         <c:forEach items="${users}" var="u" varStatus="loop">
 
-            <c:if test="${u.isAdmin == false}">
                 <li>${loop.count} ${u.email}
 
                 <a href="${pageContext.request.contextPath}/admin/user/edit/${u.id}">edytuj</a>
@@ -58,7 +55,6 @@
                 </c:if>
 
                 </li>
-            </c:if>
         </c:forEach>
     </ul>
 </body>

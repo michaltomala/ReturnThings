@@ -10,5 +10,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findFirstByEmail(String email);
 
     List<User> findAllByIsAdmin(boolean isAdmin);
+
+
 // todo do wyciągnięcia potrzeba skorzystać z zapytania
 }
