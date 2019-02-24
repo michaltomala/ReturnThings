@@ -28,22 +28,12 @@ public class User {
     private String email;
 
     @NotBlank(groups = {ValidationLoginUserGroup.class} , message = "Hasło nie może być puste!")
-    @Size(min = 8, groups = ValidationRegisterUserGroup.class, message = "Hasło musi mieć minimum 8 znaków!")
-
-//   todo regex nie przepuszcza żadnego hasła
-
-//    @Pattern(regexp = "(?=.*[a-z])",
-//            groups = ValidationRegisterUserGroup.class,
-//            message="Hasło musi zawierać minimum jedną duzą i małą literę, cyfrę oraz znak specjalny")
-
-//      (?=.*\d) - to też do minimum jednej cyfry
-//    @Pattern.List({
-//            @Pattern(regexp = "(?=.*[0-9])",groups = ValidationRegisterUserGroup.class, message = "Hasło musi zawierać minimum jedną cyfrę!"),
-//            @Pattern(regexp = "(?=.*[a-z])",groups = ValidationRegisterUserGroup.class, message = "Hasło musi zawierać co najmniej jedną małą literę!"),
-//            @Pattern(regexp = "(?=.*[A-Z])",groups = ValidationRegisterUserGroup.class, message = "Hasło musi zawierać co najmniej jendną dużą literę!"),
-//            @Pattern(regexp = "(?=.*[!@#$%^&*+=?-_()/\"\\.,<>~`;:]).+",groups = ValidationRegisterUserGroup.class, message ="Hasło musi mieć minimum jeden znak specjalny!"),
-//            @Pattern(regexp = "(?=\\S+$)",groups = ValidationRegisterUserGroup.class, message = "Hasło nie może zawierać znaków białych (spacji,znaków tabulacji) !")
-//    })
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])" +
+           "(?=.*[\\!@\\]#\\[$%^&*()_+={}\\\\|;:'\",<.>/?`~-])(?=\\S+$).{8,}$" ,
+           groups = ValidationRegisterUserGroup.class,
+           message = "Hasło musi zawierać minimum 8znaków, mieć przynajmniej " +
+                   "jedną cyfrę,małą i dużą literę oraz znak specjalny! \n"+
+                   " Dodatkowo nie może zawierać znaków białych(spacji,tabulacji etc.)")
     private String password;
 
     @Transient
