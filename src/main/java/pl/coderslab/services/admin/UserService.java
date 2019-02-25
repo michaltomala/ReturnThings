@@ -17,25 +17,33 @@ import java.util.regex.Pattern;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final AdminService adminService;
 
     @Autowired
-    public UserService(UserRepository userRepository , AdminService adminService) {
+    public UserService(UserRepository userRepository) { this.userRepository = userRepository; }
 
-        this.userRepository = userRepository;
-        this.adminService = adminService;
+    public void addListOfAdmins(Model model){
+        model.addAttribute("admins",userRepository.findAllByIsAdmin(true));
     }
-
 
     public void addListOfUsers(Model model){
         model.addAttribute("users",userRepository.findAllByIsAdmin(false));
     }
 
+
     public void edit(Long id, Model model, HttpServletRequest request){
         User editingUser = userRepository.findOne(id);
+    if(editingUser.getisAdmin()){
+        model.addAttribute("editingAdmin",editingUser);
+        model.addAttribute("formAction", request.getContextPath() + "/admin/edit/{id}"+id);
+    }else{
         model.addAttribute("editingUser",editingUser);
         model.addAttribute("formAction", request.getContextPath() + "/admin/user/edit/{id}"+id);
+        }
     }
+
+
+
+
 
     public boolean update(User user, Model model, HttpSession session){
 
@@ -84,7 +92,7 @@ public class UserService {
         User editingUser =userRepository.findOne(user.getId());
         if(editingUser.getisAdmin()){
             model.addAttribute("editingAdmin" , editingUser);
-            adminService.addListOfAdmins(model);
+            addListOfAdmins(model);
             return true;
         }
         model.addAttribute("editingUser",editingUser);
