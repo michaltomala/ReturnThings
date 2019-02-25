@@ -61,5 +61,25 @@ public class AdminController {
     }
 
 
+    /**
+     * methods for deleting admins
+     * @param model
+     * @param id
+     * @return
+     */
+
+    @GetMapping("confirm/{id}")
+    public String confirm(Model model, @PathVariable Long id){
+        adminService.addListOfAdmins(model);
+        userService.confirmDeleteUser(model,id);
+        return "admin/admins";
+    }
+
+    @GetMapping("delete/{id}")
+    public String delete(User user,HttpServletRequest request){
+        userService.deleteUser(user);
+        return "redirect:"+request.getContextPath()+"/admin/admins";
+    }
+
 
 }
