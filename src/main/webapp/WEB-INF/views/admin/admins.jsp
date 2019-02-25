@@ -25,7 +25,9 @@
             <li>${loop.count} ${admin.email}
 
                 <a href="${pageContext.request.contextPath}/admin/edit/${admin.id}">edytuj</a>
-                <a href="${pageContext.request.contextPath}/admin/confirm/${admin.id}">usuń</a>
+                <c:if test="${admin.id != 1 and admin.id != user.id}">
+                    <a href="${pageContext.request.contextPath}/admin/confirm/${admin.id}">usuń</a>
+                </c:if>
 
                 <c:if test="${editingAdmin.id == admin.id}">
                     <form:form method="post"
@@ -36,7 +38,9 @@
 
                         <form:input path="email" value="${editingAdmin.email}" />
 
-                        <form:checkbox path="isAdmin" value="${editingAdmin.isAdmin}" />
+                        <c:if test="${admin.id != 1 and admin.id != user.id}">
+                            <form:checkbox path="isAdmin" value="${editingAdmin.isAdmin}" />
+                        </c:if>
 
                         <input type="submit"  value="Zapisz zmiany" class="btn btn-success">
 
