@@ -43,15 +43,13 @@ public class UserService {
         }
 
 //      Checking if email is email
-//        Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-//        Matcher matcher = pattern.matcher(user.getEmail());
-//
-//
-//        if(!matcher.find()){
-//            model.addAttribute("emailErr", "Niepoprawny format!");
-//            model.addAttribute("user", session.getAttribute("user"));
-//            return true;
-//        }
+        Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(user.getEmail());
+
+        if(!matcher.matches()){
+            model.addAttribute("emailErr", "Niepoprawny format!");
+            return addModelAttributesDuringEditingUser(user,model,session);
+        }
 
 //      Checking if email is unique
         User checkUser = userRepository.findFirstByEmail(user.getEmail());

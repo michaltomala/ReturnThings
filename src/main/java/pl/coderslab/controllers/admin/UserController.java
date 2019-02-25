@@ -47,13 +47,6 @@ public class UserController {
         return "admin/users";
     }
 
-//   todo - zrobić tutaj walidację przez @validated - poniżej kod do skopiowania
-//    @Validated({ValidationEditUserGroup.class}) User user,
-//                         BindingResult errors,
-//    if (errors.hasErrors()) {
-//            return "admin/users";
-//        }
-
     @PostMapping("edit/{id}")
     public String update(User user, HttpServletRequest req, Model model, HttpSession session){
 
