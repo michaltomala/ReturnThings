@@ -17,10 +17,13 @@ import java.util.regex.Pattern;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final AdminService adminService;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository , AdminService adminService) {
+
         this.userRepository = userRepository;
+        this.adminService = adminService;
     }
 
 
@@ -79,6 +82,11 @@ public class UserService {
     private boolean addModelAttributesDuringEditingUser(User user, Model model, HttpSession session) {
         model.addAttribute("user",session.getAttribute("user"));
         User editingUser =userRepository.findOne(user.getId());
+        if(editingUser.getisAdmin()){
+            model.addAttribute("editingAdmin" , editingUser);
+            adminService.addListOfAdmins(model);
+            return true;
+        }
         model.addAttribute("editingUser",editingUser);
         addListOfUsers(model);
         return true;
