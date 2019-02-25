@@ -9,8 +9,12 @@ import pl.coderslab.repository.UserRepository;
 @Service
 public class InitApplicationService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public InitApplicationService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     /**
      * In my app there is always minimum one admin - created during server started

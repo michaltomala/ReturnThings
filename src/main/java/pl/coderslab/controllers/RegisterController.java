@@ -18,8 +18,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class RegisterController {
 
+    private final RegisterService registerService;
+
     @Autowired
-    private RegisterService registerService;
+    public RegisterController(RegisterService registerService) {
+        this.registerService = registerService;
+    }
 
     @GetMapping("/register")
     public String register(Model model,HttpServletRequest request){

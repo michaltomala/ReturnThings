@@ -15,8 +15,12 @@ import javax.servlet.http.HttpSession;
 @Service
 public class RegisterService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public RegisterService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
 
     public void startRegister(Model model, HttpServletRequest request){

@@ -15,8 +15,12 @@ import javax.servlet.http.HttpSession;
 @Service
 public class LoginService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public LoginService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public void startLogin(Model model, HttpServletRequest request){
         model.addAttribute("user", new User());
