@@ -41,6 +41,11 @@ public class LoginService {
         return false;
     }
 
+    public boolean isLogged(HttpSession session){
+        User user = (User)session.getAttribute("user");
+        return user != null;
+    }
+
     public boolean isAdmin(HttpSession session){
         User user = (User)session.getAttribute("user");
         return user.getIsAdmin();

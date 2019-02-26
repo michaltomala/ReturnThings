@@ -16,7 +16,7 @@
 
 <body>
 
-    <%@include file="homeHeader.jsp"%>
+    <%@include file="landingPageHeader.jsp"%>
 
 <section class="stats">
     <div class="container container--85">

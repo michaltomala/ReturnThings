@@ -39,7 +39,7 @@ public class RegisterController {
         if(registerService.saveUser(user,model,session)){
             return "auth/register";
         }
-        return "redirect:/";
+        return "redirect:/home";
     }
 
 

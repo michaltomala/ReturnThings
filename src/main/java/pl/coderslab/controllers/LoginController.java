@@ -66,7 +66,7 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpSession session){
         loginService.logout(session);
-        return "redirect:/home";
+        return "redirect:/landingPage";
     }
 
 
