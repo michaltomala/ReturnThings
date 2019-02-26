@@ -30,10 +30,7 @@ public class LoginService {
 
     public boolean loginUser(User user,Model model,HttpSession session){
         User userToCheck = userRepository.findFirstByEmail(user.getEmail());
-        if (userToCheck == null) {
-            model.addAttribute("emailErr", "Nie ma takiego użytkownika");
-            return true;
-        }
+
 
         if (!(BCrypt.checkpw(user.getPassword(), userToCheck.getPassword()) )) {
             model.addAttribute("pwdErr", "Hasło się nie zgadza,spróbuj jeszcze raz");
@@ -46,7 +43,12 @@ public class LoginService {
 
     public boolean isAdmin(HttpSession session){
         User user = (User)session.getAttribute("user");
-        return user.getisAdmin();
+        return user.getIsAdmin();
+    }
+
+    public boolean isBlocked(User user){
+        User userToCheck = userRepository.findFirstByEmail(user.getEmail());
+        return userToCheck.getIsBlocked();
     }
 
     public void logout(HttpSession session){

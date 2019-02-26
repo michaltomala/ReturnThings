@@ -39,6 +39,8 @@
 
                         <form:checkbox path="isAdmin" value="${editingUser.isAdmin}" />
 
+                        <form:checkbox path="isBlocked" value="${editingUser.isAdmin}" />
+
                         <input type="submit"  value="Zapisz zmiany" class="btn btn-success">
 
                         <c:if test="${not empty emailErr}">

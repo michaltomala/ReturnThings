@@ -39,6 +39,7 @@ public class User {
     @Transient
     private String repeatedPassword;
 
+    private boolean isBlocked = false;
 
     private boolean isAdmin = false;
 
@@ -87,7 +88,7 @@ public class User {
     public boolean isAdmin() {
         return isAdmin;
     }
-    public boolean getisAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 
@@ -95,4 +96,10 @@ public class User {
         isAdmin = admin;
     }
     public void setIsAdmin(boolean admin) { isAdmin = admin; }
+
+    public boolean isBlocked() { return isBlocked; }
+    public boolean getIsBlocked() { return isBlocked; }
+
+    public void setBlocked(boolean blocked) { isBlocked = blocked; }
+    public void setIsBlocked(boolean blocked) { isBlocked = blocked; }
 }

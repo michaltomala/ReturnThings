@@ -23,17 +23,22 @@ public class IsAdminFilter implements Filter {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-            if(user != null){
-                if(!user.getisAdmin()){
-                response.sendRedirect(request.getContextPath()+"/");
-//              todo strona  z błędem - brak dostępu
-                return;
-                }
 
-            }else{
-                response.sendRedirect(request.getContextPath()+"/login");
+        if(user != null){
+            if(user.getIsBlocked()){
+                response.sendRedirect(request.getContextPath()+"/blocked");
                 return;
             }
+            if(!user.getIsAdmin()){
+                response.sendRedirect(request.getContextPath()+"/noAccess");
+                return;
+            }
+
+        }else{
+            response.sendRedirect(request.getContextPath()+"/login");
+            return;
+        }
+
         chain.doFilter(req, resp);
     }
 

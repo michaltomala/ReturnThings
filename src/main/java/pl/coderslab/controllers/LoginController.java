@@ -39,10 +39,27 @@ public class LoginController {
         if(loginService.loginUser(user,model,session)){
             return "auth/login";
         }
+
+        if(loginService.isBlocked(user)){
+            loginService.logout(session);
+            return "redirect:/blocked";
+        }
+
         if(loginService.isAdmin(session)){
             return "redirect:/admin/dashboard";
         }
+
         return "redirect:/home";
+    }
+
+    @GetMapping("/blocked")
+    public String blocked(){
+        return "auth/blocked";
+    }
+
+    @GetMapping("/noAccess")
+    public String noAccess(){
+        return "auth/noAccess";
     }
 
 

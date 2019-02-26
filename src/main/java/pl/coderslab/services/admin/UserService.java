@@ -32,7 +32,7 @@ public class UserService {
 
     public void edit(Long id, Model model, HttpServletRequest request){
         User editingUser = userRepository.findOne(id);
-    if(editingUser.getisAdmin()){
+    if(editingUser.getIsAdmin()){
         model.addAttribute("editingAdmin",editingUser);
         model.addAttribute("formAction", request.getContextPath() + "/admin/edit/{id}"+id);
     }else{
@@ -90,7 +90,7 @@ public class UserService {
     private boolean addModelAttributesDuringEditingUser(User user, Model model, HttpSession session) {
         model.addAttribute("user",session.getAttribute("user"));
         User editingUser =userRepository.findOne(user.getId());
-        if(editingUser.getisAdmin()){
+        if(editingUser.getIsAdmin()){
             model.addAttribute("editingAdmin" , editingUser);
             addListOfAdmins(model);
             return true;

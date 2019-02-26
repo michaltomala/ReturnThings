@@ -39,7 +39,8 @@
                         <form:input path="email" value="${editingAdmin.email}" />
 
                         <c:if test="${admin.id != 1 and admin.id != user.id}">
-                            <form:checkbox path="isAdmin" value="${editingAdmin.isAdmin}" />
+                            <form:checkbox path="isAdmin" value="${editingAdmin.isAdmin}"  />
+                            <form:checkbox path="isBlocked" value="${editingUser.isAdmin}" />
                         </c:if>
 
                         <input type="submit"  value="Zapisz zmiany" class="btn btn-success">
