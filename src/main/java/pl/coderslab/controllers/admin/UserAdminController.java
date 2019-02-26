@@ -20,12 +20,12 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin/user/")
-public class UserController {
+public class UserAdminController {
 
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserAdminController(UserService userService) {
         this.userService = userService;
     }
 

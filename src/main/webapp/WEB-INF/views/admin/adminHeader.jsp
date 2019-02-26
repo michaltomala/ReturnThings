@@ -8,7 +8,9 @@
                 <li>
                     <a href="/admin/dashboard" class="btn btn--small btn--without-border">Panel Administracyjny</a>
                 </li>
-                <li><a href="/login" class="btn btn--small btn--without-border">Profil użytkownika</a></li>
+                <li><a href="#" class="btn btn--small btn--without-border">Profil użytkownika</a></li>
+                <li><a href="/user/settings/${user.id}" class="btn btn--small btn--without-border">Ustawienia</a></li>
+
                 <li><a href="/logout" class="btn btn--small btn--highlighted">Wyloguj się</a></li>
         </ul>
     </nav>
