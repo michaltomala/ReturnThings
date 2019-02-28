@@ -4,15 +4,12 @@ package pl.coderslab.controllers.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.entity.User;
-import pl.coderslab.services.admin.UserService;
-import pl.coderslab.validator.ValidationEditUserGroup;
+import pl.coderslab.services.admin.AdminUserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,17 +19,17 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/admin/user/")
 public class UserAdminController {
 
-    private final UserService userService;
+    private final AdminUserService adminUserService;
 
     @Autowired
-    public UserAdminController(UserService userService) {
-        this.userService = userService;
+    public UserAdminController(AdminUserService adminUserService) {
+        this.adminUserService = adminUserService;
     }
 
 
     @GetMapping("users")
     public String users(Model model){
-        userService.addListOfUsers(model);
+        adminUserService.addListOfUsers(model);
         return "admin/users";
     }
 
@@ -46,15 +43,15 @@ public class UserAdminController {
 
     @GetMapping("edit/{id}")
     public String edit(@PathVariable Long id, Model model , HttpServletRequest request){
-        userService.addListOfUsers(model);
-        userService.edit(id,model,request);
+        adminUserService.addListOfUsers(model);
+        adminUserService.edit(id,model,request);
         return "admin/users";
     }
 
     @PostMapping("edit/{id}")
     public String update(User user, HttpServletRequest req, Model model, HttpSession session){
 
-        if(userService.update(user,model,session)){
+        if(adminUserService.update(user,model,session)){
             return "admin/users";
         }
 
@@ -71,15 +68,15 @@ public class UserAdminController {
 
     @GetMapping("confirm/{id}")
     public String confirm(Model model, @PathVariable Long id){
-        userService.addListOfUsers(model);
-        userService.confirmDeleteUser(model,id);
+        adminUserService.addListOfUsers(model);
+        adminUserService.confirmDeleteUser(model,id);
         return "admin/users";
     }
 
     @GetMapping("delete/{id}")
     public String delete(User user,HttpServletRequest request){
 
-        userService.deleteUser(user);
+        adminUserService.deleteUser(user);
         return "redirect:"+request.getContextPath()+"/admin/user/users";
     }
 

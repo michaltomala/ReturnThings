@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <%@include file="noAccessHeader.jsp"%>
+    <%@include file="fundamentalHeader.jsp"%>
 
 
     <h2>Przykro nam,nie masz dostępu</h2>

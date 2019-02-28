@@ -14,12 +14,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class UserService {
+public class AdminUserService {
 
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) { this.userRepository = userRepository; }
+    public AdminUserService(UserRepository userRepository) { this.userRepository = userRepository; }
 
     public void addListOfAdmins(Model model){
         model.addAttribute("admins",userRepository.findAllByIsAdmin(true));
@@ -41,37 +41,17 @@ public class UserService {
         }
     }
 
-
-
-
-
+// todo sprawdzić czy dalej działa
     public boolean update(User user, Model model, HttpSession session){
-
-//      Checking if email is empty
-        if(user.getEmail().equals("")){
-            model.addAttribute("emailErr", "Email nie może być pusty !");
-            return addModelAttributesDuringEditingUser(user, model, session);
-        }
-
-//      Checking if email is email
-        Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(user.getEmail());
-
-        if(!matcher.matches()){
-            model.addAttribute("emailErr", "Niepoprawny format!");
-            return addModelAttributesDuringEditingUser(user,model,session);
-        }
-
-//      Checking if email is unique
-        User checkUser = userRepository.findFirstByEmail(user.getEmail());
-        if (checkUser != null && !checkUser.getId().equals(user.getId())) {
-            model.addAttribute("emailErr", "Email musi być unikalny !");
+        if (checkEmail(user, model)) {
             return addModelAttributesDuringEditingUser(user, model, session);
         }
 
         userRepository.save(user);
         return false;
     }
+
+
 
     public void confirmDeleteUser(Model model, Long id){
 
@@ -100,4 +80,28 @@ public class UserService {
         return true;
     }
 
+    public boolean checkEmail(User user, Model model) {
+//      Checking if email is empty
+        if(user.getEmail().equals("")){
+            model.addAttribute("emailErr", "Email nie może być pusty !");
+            return true;
+        }
+
+//      Checking if email is email
+        Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(user.getEmail());
+
+        if(!matcher.matches()){
+            model.addAttribute("emailErr", "Niepoprawny format!");
+            return true;
+        }
+
+//      Checking if email is unique
+        User checkUser = userRepository.findFirstByEmail(user.getEmail());
+        if (checkUser != null && !checkUser.getId().equals(user.getId())) {
+            model.addAttribute("emailErr", "Email musi być unikalny !");
+            return true;
+        }
+        return false;
+    }
 }
