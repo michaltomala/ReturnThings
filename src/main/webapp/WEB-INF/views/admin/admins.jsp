@@ -45,11 +45,9 @@
 
                         <input type="submit"  value="Zapisz zmiany" class="btn btn-success">
 
-                        <c:if test="${not empty emailErr}">
-                            <div class="alert alert-danger">${emailErr}</div>
-                        </c:if>
+                        <c:if test="${not empty emailErr}">${emailErr}</c:if>
+                        <form:errors path="email" />
 
-                        <div><form:errors path="email" /></div>
                     </form:form>
                 </c:if>
                 <c:if test="${not empty confirm and deletingUser.id == admin.id}">

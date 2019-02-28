@@ -31,22 +31,18 @@
                     <form:input path="email" placeholder="Email"/>
                 </c:if>
 
-                <form:errors path="email" cssClass="alert alert-danger" element="div" />
-                <c:if test="${not empty emailErr}">
-                    <div class="alert alert-danger">${emailErr}</div>
-                </c:if>
+                <form:errors path="email"/>
+                <c:if test="${not empty emailErr}">${emailErr}</c:if>
             </div>
 
             <div class="form-group">
                 <form:password path="password" placeholder="Hasło" />
-                <form:errors path="password" cssClass="alert alert-danger" element="div" />
+                <form:errors path="password" />
             </div>
 
             <div class="form-group">
                 <form:password path="repeatedPassword" placeholder="Powtórż Hasło" />
-                <c:if test="${not empty pwdErr}">
-                    <div class="alert alert-danger">${pwdErr}</div>
-                </c:if>
+                <c:if test="${not empty pwdErr}">${pwdErr}</c:if>
             </div>
 
             <div class="form-group form-group--buttons">

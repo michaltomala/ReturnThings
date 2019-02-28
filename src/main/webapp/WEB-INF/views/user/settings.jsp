@@ -25,9 +25,7 @@
 
             <div class="form-group">
                 <form:input path="email" placeholder="${user.email}"/>
-                <c:if test="${not empty emailErr}">
-                    <div class="alert alert-danger">${emailErr}</div>
-                </c:if>
+                <c:if test="${not empty emailErr}">${emailErr}</c:if>
             </div>
 
             <div class="form-group">
@@ -39,9 +37,7 @@
 
             <div class="form-group">
                 <form:password path="repeatedPassword" placeholder="Powtórz nowe Hasło " />
-                <c:if test="${not empty pwdErr}">
-                    <div class="alert alert-danger">${pwdErr}</div>
-                </c:if>
+                <c:if test="${not empty pwdErr}">${pwdErr}</c:if>
             </div>
 
             <div class="form-group form-group--buttons">
