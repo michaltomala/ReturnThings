@@ -31,6 +31,10 @@ public class LoginService {
     public boolean loginUser(User user,Model model,HttpSession session){
         User userToCheck = userRepository.findFirstByEmail(user.getEmail());
 
+        if(userToCheck== null){
+            model.addAttribute("emailErr", "Email jest nieprawidłowy!");
+            return true;
+        }
 
         if (!(BCrypt.checkpw(user.getPassword(), userToCheck.getPassword()) )) {
             model.addAttribute("pwdErr", "Hasło się nie zgadza,spróbuj jeszcze raz");

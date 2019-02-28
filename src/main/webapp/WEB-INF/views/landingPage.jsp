@@ -230,7 +230,6 @@
         </div>
     </div>
 </footer>
-<%-- todo: podłączenie skryptu pod reszte widoków ? --%>
 <script src="js/app.js" ></script>
 </body>
 </html>

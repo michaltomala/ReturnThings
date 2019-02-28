@@ -41,7 +41,6 @@ public class AdminUserService {
         }
     }
 
-// todo sprawdzić czy dalej działa
     public boolean update(User user, Model model, HttpSession session){
         if (checkEmail(user, model)) {
             return addModelAttributesDuringEditingUser(user, model, session);
