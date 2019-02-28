@@ -1,6 +1,8 @@
 package pl.coderslab.filter;
 
 
+import pl.coderslab.entity.User;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"/login","/register","/home"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = {"/user/*"})
 public class AuthFilter implements Filter {
 
     public void destroy() {
@@ -20,21 +22,16 @@ public class AuthFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
-        String url = request.getRequestURI();
-
-        if( (url.equals("/login")) || (url.equals("/register")) ) {
-            if(session.getAttribute("user") != null){
-                response.sendRedirect(request.getContextPath()+"/");
-                return;
-            }
+        if(user==null){
+            response.sendRedirect(request.getContextPath()+"/login");
+            return;
         }
 
-        if( (url.equals("/home"))) {
-            if(session.getAttribute("user") == null){
-                response.sendRedirect(request.getContextPath()+"/login");
-                return;
-            }
+        if(user.getIsBlocked()){
+            response.sendRedirect(request.getContextPath()+"/blocked");
+            return;
         }
 
         chain.doFilter(req, resp);

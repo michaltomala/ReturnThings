@@ -36,7 +36,7 @@ public class LoginController {
         if (errors.hasErrors()) {
             return "auth/login";
         }
-//      todo null pointer przy nieznanym użytkowniku !!
+
         if(loginService.loginUser(user,model,session)){
             return "auth/login";
         }

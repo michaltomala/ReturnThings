@@ -22,9 +22,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user/")
 public class UserController {
 
-//   todo objąć filtrem żeby zalogowany uzytkownik nie móŋł przełączyć się na innego usera i zeby niezalogowany
-//   todo nie mógł wejść na żadna z tych ściezek
-
     private final UserService userService;
     private final AdminUserService adminUserService;
 
