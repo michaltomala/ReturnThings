@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.coderslab.converter.UserConverter;
+import pl.coderslab.converter.UserDetailsConverter;
 
 
 @Configuration
@@ -21,11 +22,15 @@ public class FormatterConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
 
         registry.addConverter(getUserConverter());
+        registry.addConverter(getUserDetailsConverter());
     }
 
     @Bean
     public UserConverter getUserConverter() {
         return new UserConverter();
     }
+
+    @Bean
+    public UserDetailsConverter getUserDetailsConverter() { return new UserDetailsConverter(); }
 
 }
