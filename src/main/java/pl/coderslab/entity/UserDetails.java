@@ -1,10 +1,7 @@
 package pl.coderslab.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class UserDetails {
@@ -16,6 +13,9 @@ public class UserDetails {
     private String name;
 
     private String surname;
+
+    @OneToOne(mappedBy = "userDetails")
+    private User user;
 
     public UserDetails() {
     }
@@ -48,5 +48,13 @@ public class UserDetails {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
