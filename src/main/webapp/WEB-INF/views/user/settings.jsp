@@ -16,7 +16,7 @@
     <%@include file="../auth/fundamentalHeader.jsp"%>
 
     <section class="login-page">
-        <h2>Ustawienia konta:</h2>
+        <h2>Ustawienia konta</h2>
         <form:form method="post"
                    action="${formAction}"
                    modelAttribute="user"
