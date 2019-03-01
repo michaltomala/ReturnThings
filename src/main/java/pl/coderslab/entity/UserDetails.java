@@ -10,6 +10,7 @@ public class UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //  todo pododawać do każdego hedera name
     private String name;
 
     private String surname;
@@ -19,7 +20,6 @@ public class UserDetails {
 
     public UserDetails() {
     }
-
 
     @Override
     public String toString() {

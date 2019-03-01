@@ -45,6 +45,16 @@ public class RegisterService {
         userRepository.save(user);
         session.setAttribute("user",user);
         return false;
+
+        /*
+//       todo refactor serwisóœ
+        public List<TwojEnum> saveUser(User user){
+Lista<TwojEnum> enumy = new ArrayList<>;
+if(Haslo zle ) enumy.add(HASLO_ZLE_ENUM)
+return enumy;
+}
+         */
+
     }
 
 }
