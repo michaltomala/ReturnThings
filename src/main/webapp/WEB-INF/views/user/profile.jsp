@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Settings</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
@@ -16,28 +16,20 @@
     <%@include file="../auth/fundamentalHeader.jsp"%>
 
     <section class="login-page">
-        <h2>Ustawienia konta:</h2>
+        <h2>Twoje dane</h2>
+
         <form:form method="post"
                    action="${formAction}"
-                   modelAttribute="user"
+                   modelAttribute="userDetails"
                    cssClass="form--contact">
             <form:hidden path="id" />
 
             <div class="form-group">
-                <form:input path="email" placeholder="${user.email}"/>
-                <c:if test="${not empty emailErr}">${emailErr}</c:if>
+                <form:input path="name" placeholder="${userDetails.name}"/>
             </div>
 
             <div class="form-group">
-                <form:password path="password" placeholder="nowe Hasło" />
-                <c:if test="${empty emailErr}">
-                    <form:errors path="password" />
-                </c:if>
-            </div>
-
-            <div class="form-group">
-                <form:password path="repeatedPassword" placeholder="Powtórz nowe Hasło " />
-                <c:if test="${not empty pwdErr}">${pwdErr}</c:if>
+                <form:input path="surname" placeholder="${userDetails.surname}" />
             </div>
 
             <div class="form-group form-group--buttons">
@@ -47,7 +39,12 @@
         </form:form>
 
     </section>
+
+
+
+
+
+
+
 </body>
 </html>
-
-

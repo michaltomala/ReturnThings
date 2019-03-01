@@ -10,7 +10,6 @@ public class UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //  todo pododawać do każdego hedera name
     private String name;
 
     private String surname;

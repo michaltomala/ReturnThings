@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.entity.User;
+import pl.coderslab.entity.UserDetails;
 import pl.coderslab.services.UserService;
 import pl.coderslab.services.admin.AdminUserService;
 import pl.coderslab.validator.ValidationRegisterUserGroup;
@@ -80,4 +81,15 @@ public class UserController {
     }
 
 
+    @GetMapping("profile")
+    public String profile(Model model , HttpServletRequest request , HttpSession session){
+        userService.editUserDetails(model , request , session);
+        return "user/profile";
+    }
+
+    @PostMapping("profile")
+    public String saveProfile(UserDetails userDetails,Model model,HttpSession session, HttpServletRequest request){
+        userService.saveUserDetails(userDetails,model, session);
+        return "redirect:"+request.getContextPath()+"/user/profile";
+    }
 }
