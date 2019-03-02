@@ -2,8 +2,11 @@ package pl.coderslab.entity;
 
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Institution {
@@ -18,6 +21,10 @@ public class Institution {
 
     @NotBlank
     private String goal;
+
+    @NotEmpty
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<InstitutionLocation> institutionLocations;
 
     @NotNull
     private InstitutionWhomHelpEnum institutionWhomHelpEnum;
@@ -53,6 +60,14 @@ public class Institution {
 
     public void setGoal(String goal) {
         this.goal = goal;
+    }
+
+    public List<InstitutionLocation> getInstitutionLocations() {
+        return institutionLocations;
+    }
+
+    public void setInstitutionLocations(List<InstitutionLocation> institutionLocations) {
+        this.institutionLocations = institutionLocations;
     }
 
     public InstitutionWhomHelpEnum getInstitutionWhomHelpEnum() {
