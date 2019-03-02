@@ -1,4 +1,4 @@
-package pl.coderslab.controllers.admin;
+package pl.coderslab.controllers;
 
 
 import org.springframework.stereotype.Controller;
