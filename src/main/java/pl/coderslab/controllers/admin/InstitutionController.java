@@ -4,11 +4,16 @@ package pl.coderslab.controllers.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.entity.InstitutionLocation;
 import pl.coderslab.services.admin.InstitutionService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin/institutions/")
@@ -30,13 +35,51 @@ public class InstitutionController {
     }
 
     /**
-     * Add Location
+     * CRUD Institution Location
      */
 
-    @GetMapping("/addLocation")
-    public String addLocation(){
-        return "admin/institution/institutionLocationAdd";
+    @GetMapping("/locations")
+    public String locations(Model model){
+        institutionService.addListOfLocationInstitutions(model);
+        return "admin/institution/addLocation";
     }
+
+    @GetMapping("/addLocation")
+    public String addLocation(Model model){
+        institutionService.startAddLocation(model);
+        institutionService.addListOfLocationInstitutions(model);
+        return "admin/institution/addLocation";
+    }
+
+    @PostMapping("/addLocation")
+    private String saveLocation(@Valid InstitutionLocation institutionLocation , BindingResult errors ,Model model){
+//       todo - błąd się nie pokazuje - zrobić przez dodawanie w modelu
+//       todo - nazwy nie są unikalne - zrobić z tym
+        if(errors.hasErrors()){
+            institutionService.startAgainToAddLocation(model,institutionLocation);
+            institutionService.addListOfLocationInstitutions(model);
+            return "admin/institution/addLocation";
+        }
+        institutionService.saveLocation(institutionLocation);
+        return "redirect:/admin/institutions/locations";
+    }
+
+    @GetMapping("/editLocation/{id}")
+    public String editLocation(Model model , @PathVariable Long id){
+        institutionService.addListOfLocationInstitutions(model);
+        institutionService.editLocation(model,id);
+        return "admin/institution/addLocation";
+    }
+
+    @PostMapping("/editLocation/{id}")
+    public String saveChangeLocation(@Valid InstitutionLocation location , BindingResult errors){
+        if(errors.hasErrors()){
+            return "admin/institution/addLocation";
+        }
+        institutionService.saveLocation(location);
+        return "redirect:/admin/institution/addLocation";
+    }
+
 
     /**
      * CRUD Institution

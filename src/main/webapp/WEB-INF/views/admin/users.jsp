@@ -18,7 +18,7 @@
 
     <%@include file="adminHeader.jsp"%>
 
-    <h2>Użytkownicy:</h2>
+    <h2>Użytkownicy</h2>
 
     <ul>
         <c:forEach items="${users}" var="u" varStatus="loop">

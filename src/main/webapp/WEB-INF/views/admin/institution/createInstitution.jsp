@@ -44,21 +44,25 @@
                         <form:option value="0" disabled="true" selected="true">Wybierz markę</form:option>
                         <form:options  items="${locations}"
                                        itemValue="id"
-                                       itemLabel="name" />
+                                       itemLabel="location" />
                     </form:select>
                     <form:errors path="institutionLocations" />
             </div>
 
-            <form:select path="whomHelp">
-                <form:option value="0" disabled="true" >Komu pomaga</form:option>
-                <form:options  items="${whomHelp}"/>
-            </form:select>
-            <form:errors path="whomHelp" />
+            <div class="form-group">
+                <form:select path="whomHelp">
+                    <form:option value="0" disabled="true" >Komu pomaga</form:option>
+                    <form:options  items="${whomHelp}"/>
+                </form:select>
+                <form:errors path="whomHelp" />
+            </div>
 
             <div class="form-group form-group--buttons">
-                <a class="btn btn--without-border"></a>
-                <button class="btn" type="submit">Dodaj nową organizację</button>
+                <a class="btn btn--without-border"
+                   href="${pageContext.request.contextPath}/admin/institutions/locations">Lokalizacje</a>
+                <button class="btn" type="submit">Zapisz organizację</button>
             </div>
+
         </form:form>
     </section>
 

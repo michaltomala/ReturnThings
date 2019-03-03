@@ -18,7 +18,7 @@
 
     <%@include file="../adminHeader.jsp"%>
 
-    <h2>Organizacje:</h2>
+    <h2>Organizacje</h2>
 
     <a href="${pageContext.request.contextPath}/admin/institutions/create">Dodaj nową organizację</a>
 

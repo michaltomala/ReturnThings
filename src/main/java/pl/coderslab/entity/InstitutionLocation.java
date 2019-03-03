@@ -12,13 +12,18 @@ public class InstitutionLocation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Lokalizacja nie może być pusta!")
     private String location;
 
     @ManyToMany(mappedBy = "institutionLocations",fetch = FetchType.EAGER)
     private List<Institution> institution;
 
     public InstitutionLocation() {
+    }
+
+    @Override
+    public String toString() {
+        return this.location;
     }
 
     public Long getId() {

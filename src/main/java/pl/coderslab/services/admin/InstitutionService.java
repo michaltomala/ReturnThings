@@ -28,6 +28,21 @@ public class InstitutionService {
         model.addAttribute("institutions",institutionRepository.findAll());
     }
 
+    public void addListOfLocationInstitutions(Model model){
+        model.addAttribute("locations",institutionLocationRepository.findAll());
+        model.addAttribute("locationsEnableToDelete",institutionLocationRepository.findAllByInstitutionIsNull());
+    }
+
+    public void startAddLocation(Model model){ model.addAttribute("addLocation",new InstitutionLocation()); }
+    public void startAgainToAddLocation(Model model,InstitutionLocation intitutionLocation){
+        model.addAttribute("addLocation",intitutionLocation);
+    }
+    public void saveLocation(InstitutionLocation location){ institutionLocationRepository.save(location); }
+
+    public void editLocation(Model model , Long id){
+        model.addAttribute("editLocation",institutionLocationRepository.findOne(id));
+    }
+
     public void startAddingInstitution(Model model , HttpServletRequest request){
 
         List<InstitutionLocation> locations = institutionLocationRepository.findAll();
