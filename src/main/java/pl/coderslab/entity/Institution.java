@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,11 +26,23 @@ public class Institution {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<InstitutionLocation> institutionLocations;
 
-    @NotNull
-    private InstitutionWhomHelpEnum institutionWhomHelpEnum;
+    @NotBlank
+    private String whomHelp;
 
 
     public Institution() {
+    }
+
+    public static List<String> listOfWhomHelp (){
+        return new ArrayList<String>() {
+            {
+                add("dzieciom");
+                add("samotnym matkom");
+                add("bezdomnym");
+                add("niepełnosprawnym");
+                add("osobom starszym");
+            }
+        };
     }
 
     @Override
@@ -70,11 +82,11 @@ public class Institution {
         this.institutionLocations = institutionLocations;
     }
 
-    public InstitutionWhomHelpEnum getInstitutionWhomHelpEnum() {
-        return institutionWhomHelpEnum;
+    public String getWhomHelp() {
+        return whomHelp;
     }
 
-    public void setInstitutionWhomHelpEnum(InstitutionWhomHelpEnum institutionWhomHelpEnum) {
-        this.institutionWhomHelpEnum = institutionWhomHelpEnum;
+    public void setWhomHelp(String whomHelp) {
+        this.whomHelp = whomHelp;
     }
 }
