@@ -28,7 +28,7 @@
         <img  src="/images/myImages/admin.jpeg" title="Administratorzy">Administratorzy
     </a>
 
-    <a href="/admin/institutions" class="a--dashboard">
+    <a href="/admin/institutions/" class="a--dashboard">
         <img class="img--dashboard" src="/images/myImages/Instytucje.jpg" title="Instytucje" >Instytucje
     </a>
 

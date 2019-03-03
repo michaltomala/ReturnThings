@@ -16,24 +16,9 @@
 </head>
 <body>
 
-    <%@include file="adminHeader.jsp"%>
+    <%@include file="../adminHeader.jsp"%>
 
-    <h2>Organizacje:</h2>
-
-    <a href="${pageContext.request.contextPath}/admin/institutions/create">Dodaj nową organizację</a>
-
-    <ul>
-        <c:forEach items="${institutions}" var="institution" varStatus="loop">
-
-            <li>${loop.count} ${institution.name}
-
-                <a href="${pageContext.request.contextPath}/admin/user/edit/${u.id}">edytuj</a>
-                <a href="${pageContext.request.contextPath}/admin/user/confirm/${u.id}">usuń</a>
-
-            </li>
-        </c:forEach>
-    </ul>
-
+    <h2>Lokalizacje:</h2>
 
 
 </body>
