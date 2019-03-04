@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.entity.Institution;
 import pl.coderslab.entity.InstitutionLocation;
 import pl.coderslab.services.admin.InstitutionService;
 
@@ -42,5 +43,16 @@ public class InstitutionController {
     public String addInstitution(Model model , HttpServletRequest request) {
         institutionService.startAddingInstitution(model,request);
         return "admin/institution/createInstitution";
+    }
+
+    @PostMapping("/create")
+    private String saveInstitution(@Valid Institution institution,BindingResult errors){
+        // walidacja
+        if(errors.hasErrors()){
+            return "admin/institution/createInstitution";
+        }
+        //zapis
+        institutionService.saveInstitution(institution);
+        return "redirect:/admin/institutions/";
     }
 }

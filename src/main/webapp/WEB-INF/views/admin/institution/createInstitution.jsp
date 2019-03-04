@@ -51,7 +51,7 @@
 
             <div class="form-group">
                 <form:select path="whomHelp">
-                    <form:option value="0" disabled="true" >Komu pomaga</form:option>
+                    <form:option value="0" >Komu pomaga</form:option>
                     <form:options  items="${whomHelp}"/>
                 </form:select>
                 <form:errors path="whomHelp" />

@@ -36,7 +36,8 @@ public class InstitutionService {
         model.addAttribute("institution", new Institution());
         model.addAttribute("locations", locations);
         model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/create");
-
     }
+
+    public void saveInstitution(Institution institution){ institutionRepository.save(institution); }
 
 }
