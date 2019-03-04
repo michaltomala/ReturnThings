@@ -38,6 +38,24 @@ public class InstitutionService {
         model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/create");
     }
 
+    public void startAgainAddingInstitution(Model model,HttpServletRequest request){
+        List<InstitutionLocation> locations = institutionLocationRepository.findAll();
+
+        model.addAttribute("locations",locations);
+        model.addAttribute("whomHelp",Institution.listOfWhomHelp());
+        model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/create");
+    }
+
+    public boolean checkIfUnique(Institution institution,Model model) {
+        Institution institutionToCheck = institutionRepository.findFirstByName(institution.getName());
+        if(institutionToCheck != null){
+            model.addAttribute("nameErr","Nazwa organizacji musi być unikalna!");
+        }
+        return institutionToCheck != null;
+    }
+
     public void saveInstitution(Institution institution){ institutionRepository.save(institution); }
 
+    // do edycji
+    // && !institutionToCheck.getName().equals(institution.getName()
 }

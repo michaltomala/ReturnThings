@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,18 +16,18 @@ public class Institution {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Nazwa organizacji nie może być pusta!")
     @Column(unique=true)
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Opis celu i misji organizacji nie może być pusty !")
     private String goal;
 
-    @NotEmpty
+    @NotEmpty(message = "Lokalizacja musi zostać zaznaczona!")
     @ManyToMany(fetch = FetchType.EAGER)
     private List<InstitutionLocation> institutionLocations;
 
-    @NotBlank
+    @NotBlank(message = "Należy zaznaczyć komu organizacja pomagać!")
     private String whomHelp;
 
 

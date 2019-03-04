@@ -46,13 +46,19 @@ public class InstitutionController {
     }
 
     @PostMapping("/create")
-    private String saveInstitution(@Valid Institution institution,BindingResult errors){
-        // walidacja
+    private String saveInstitution(@Valid Institution institution,BindingResult errors,Model model,HttpServletRequest request){
         if(errors.hasErrors()){
+            institutionService.startAgainAddingInstitution(model,request);
             return "admin/institution/createInstitution";
         }
-        //zapis
+
+        if(institutionService.checkIfUnique(institution,model)){
+            institutionService.startAgainAddingInstitution(model,request);
+            return "admin/institution/createInstitution";
+        }
+
         institutionService.saveInstitution(institution);
         return "redirect:/admin/institutions/";
     }
+
 }

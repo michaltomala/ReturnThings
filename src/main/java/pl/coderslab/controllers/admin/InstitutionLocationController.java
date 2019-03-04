@@ -67,7 +67,6 @@ public class InstitutionLocationController {
         return "redirect:/admin/institutions/locations";
     }
 
-    //   todo sprawdzić czy działa - usuwać można tylko wtedy gdy nie ma powiązania z instytucjami
     @GetMapping("/deleteLocation/{id}")
     private String deleteLocation(@PathVariable Long id){
         institutionLocationService.deleteLocation(id);
