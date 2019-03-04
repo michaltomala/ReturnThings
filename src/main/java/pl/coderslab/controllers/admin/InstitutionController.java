@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/admin/institutions/")
+@RequestMapping("/admin/institutions")
 public class InstitutionController {
 
     private final InstitutionService institutionService;
@@ -27,7 +27,7 @@ public class InstitutionController {
     }
 
 
-    @GetMapping("")
+    @GetMapping("/")
     public String institutions(Model model){
         institutionService.addListOfInstitutions(model);
         return "admin/institution/institutions";
@@ -52,12 +52,9 @@ public class InstitutionController {
     }
 
     @PostMapping("/addLocation")
-    private String saveLocation(@Valid InstitutionLocation institutionLocation , BindingResult errors ,Model model){
-//       todo - błąd się nie pokazuje - zrobić przez dodawanie w modelu
-//       todo - nazwy nie są unikalne - zrobić z tym
-        if(errors.hasErrors()){
-            institutionService.startAgainToAddLocation(model,institutionLocation);
-            institutionService.addListOfLocationInstitutions(model);
+    private String saveLocation(InstitutionLocation institutionLocation,Model model){
+
+        if(institutionService.ifLocationIsNotEmptyAndUnique(institutionLocation,model)){
             return "admin/institution/addLocation";
         }
         institutionService.saveLocation(institutionLocation);
@@ -72,14 +69,23 @@ public class InstitutionController {
     }
 
     @PostMapping("/editLocation/{id}")
-    public String saveChangeLocation(@Valid InstitutionLocation location , BindingResult errors){
-        if(errors.hasErrors()){
+    public String saveChangeLocation(InstitutionLocation location , Model model){
+
+        if(institutionService.ifLocationIsNotEmptyAndUniqueDuringEditing(location,model)){
             return "admin/institution/addLocation";
         }
+
         institutionService.saveLocation(location);
-        return "redirect:/admin/institution/addLocation";
+        return "redirect:/admin/institutions/locations";
     }
 
+    @GetMapping("/deleteLocation/{id}")
+    private String deleteLocation(@PathVariable Long id){
+        institutionService.deleteLocation(id);
+        return "redirect:/admin/institutions/locations";
+    }
+
+//   todo sprawdzić czy działa - usuwać można tylko wtedy gdy nie ma powiązania z instytucjami
 
     /**
      * CRUD Institution

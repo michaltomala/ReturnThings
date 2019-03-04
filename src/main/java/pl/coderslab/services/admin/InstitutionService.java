@@ -37,10 +37,51 @@ public class InstitutionService {
     public void startAgainToAddLocation(Model model,InstitutionLocation intitutionLocation){
         model.addAttribute("addLocation",intitutionLocation);
     }
+
+    public boolean ifLocationIsNotEmptyAndUnique(InstitutionLocation institutionLocation, Model model){
+        if(institutionLocation.getLocation().equals("")){
+            addListOfLocationInstitutions(model);
+            startAddLocation(model);
+            model.addAttribute("locationErr","Lokalizacja nie może być pusta!");
+            return true;
+        }
+        InstitutionLocation location =
+                institutionLocationRepository.findFirstByLocation(institutionLocation.getLocation());
+        if(location!=null){
+            addListOfLocationInstitutions(model);
+            startAddLocation(model);
+            model.addAttribute("locationErr","Podana lokalizacja już istnieje!");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean ifLocationIsNotEmptyAndUniqueDuringEditing(InstitutionLocation institutionLocation, Model model){
+        if(institutionLocation.getLocation().equals("")) {
+            addListOfLocationInstitutions(model);
+            editLocation(model,institutionLocation.getId());
+            model.addAttribute("locationErr","Lokalizacja nie może być pusta!");
+            return true;
+        }
+        InstitutionLocation location =
+                institutionLocationRepository.findFirstByLocation(institutionLocation.getLocation());
+        if(location!=null){
+            addListOfLocationInstitutions(model);
+            editLocation(model,institutionLocation.getId());
+            model.addAttribute("locationErr","Podana lokalizacja już istnieje!");
+            return true;
+        }
+        return false;
+    }
+
     public void saveLocation(InstitutionLocation location){ institutionLocationRepository.save(location); }
 
     public void editLocation(Model model , Long id){
         model.addAttribute("editLocation",institutionLocationRepository.findOne(id));
+    }
+
+    public void deleteLocation(Long id){
+        institutionLocationRepository.delete(id);
     }
 
     public void startAddingInstitution(Model model , HttpServletRequest request){

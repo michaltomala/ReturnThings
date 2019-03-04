@@ -30,25 +30,25 @@
             <div class="form-group">
                 <form:input path="location" placeholder="Nazwa miejscowości"/>
             </div>
+            <c:if test="${not empty locationErr}">
+                    <div class="form-group">${locationErr}</div>
+            </c:if>
+
             <button class="btn" type="submit">Zapisz miejscowość</button>
-            <form:errors path="location" />
-
-            <div class="form-group">
-            <form:errors path="location" />
-            </div>
-
         </form:form>
     </c:if>
 
 
-    <p>Aby edytować wciśnij numer lokalizacji</p>
+    <p>Aby edytować wciśnij nazwę lokalizacji</p>
     <p>Usunięcie jest możliwe dopiero w przypadku gdy nie ma żadnej organizacji przypisanej do danej lokalizacji!</p>
     <ul>
         <c:forEach items="${locations}" var="location" varStatus="loop">
             <li>
-                <a href="${pageContext.request.contextPath}/admin/institutions/editLocation/${location.id}">
-                    ${loop.count}
-                </a><c:if test="${empty editLocation}">${location.location}
+                <c:if test="${editLocation.id != location.id}">
+                    <a href="${pageContext.request.contextPath}/admin/institutions/editLocation/${location.id}">
+                        ${loop.count} ${location.location}
+                    </a>
+
                     <c:forEach items="${locationsEnableToDelete}" var="locationEnableToDelete">
                             <c:if test="${locationEnableToDelete.id == location.id}">
                                 <a href="${pageContext.request.contextPath}/admin/institutions/deleteLocation/${location.id}">
@@ -56,19 +56,21 @@
                                 </a>
                             </c:if>
                     </c:forEach>
-
                 </c:if>
 
-                <c:if test="${not empty editLocation}">
+                <c:if test="${editLocation.id == location.id}">
                     <form:form method="post"
-                               action="/admin/institutions/editLocation"
+                               action="/admin/institutions/editLocation/${location.id}"
                                modelAttribute="editLocation"
                                cssClass="form--contact">
                         <form:hidden path="id" />
                         <div class="form-group">
                             <form:input path="location" placeholder="${editLocation.location}"/>
-                            <form:errors path="location" />
                         </div>
+                        <c:if test="${not empty locationErr}">
+                            <div class="form-group">${locationErr}</div>
+                        </c:if>
+
                         <button class="btn" type="submit">Zapisz zmiany</button>
                     </form:form>
                 </c:if>
