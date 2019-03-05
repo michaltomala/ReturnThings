@@ -69,6 +69,7 @@ public class InstitutionLocationController {
 
     @GetMapping("/deleteLocation/{id}")
     private String deleteLocation(@PathVariable Long id){
+//       todo - dla pewności oprócz w widoku sprawdzić tutaj też czy nie ma powiązania z instytucjami
         institutionLocationService.deleteLocation(id);
         return "redirect:/admin/institutions/locations";
     }

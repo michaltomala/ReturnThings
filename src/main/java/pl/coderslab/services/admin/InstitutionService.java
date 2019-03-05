@@ -86,5 +86,6 @@ public class InstitutionService {
         return (institutionToCheck != null && institutionToCheck.getId()!=(institution.getId()));
     }
 
+    public void deleteInstitution(Long id){ institutionRepository.delete(id); }
 
 }

@@ -30,6 +30,9 @@
                 <a href="${pageContext.request.contextPath}/admin/institutions/edit/${institution.id}">
                         ${institution.name}
                 </a>
+                <a href="${pageContext.request.contextPath}/admin/institutions/delete/${institution.id}">
+                        Kliknij tutaj aby usunąć
+                </a>
 
             </li>
         </c:forEach>
