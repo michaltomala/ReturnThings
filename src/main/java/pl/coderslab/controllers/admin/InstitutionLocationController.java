@@ -25,7 +25,7 @@ public class InstitutionLocationController {
     @GetMapping("/locations")
     public String locations(Model model){
         institutionLocationService.addListOfLocationInstitutions(model);
-        return "admin/institution/addLocation";
+        return "admin/institution/locationForm";
     }
 
     /**
@@ -36,14 +36,14 @@ public class InstitutionLocationController {
     public String addLocation(Model model){
         institutionLocationService.startAddLocation(model);
         institutionLocationService.addListOfLocationInstitutions(model);
-        return "admin/institution/addLocation";
+        return "admin/institution/locationForm";
     }
 
     @PostMapping("/addLocation")
     private String saveLocation(InstitutionLocation institutionLocation, Model model){
 
         if(institutionLocationService.ifLocationIsNotEmptyAndUnique(institutionLocation,model)){
-            return "admin/institution/addLocation";
+            return "admin/institution/locationForm";
         }
         institutionLocationService.saveLocation(institutionLocation);
         return "redirect:/admin/institutions/locations";
@@ -53,14 +53,14 @@ public class InstitutionLocationController {
     public String editLocation(Model model , @PathVariable Long id){
         institutionLocationService.addListOfLocationInstitutions(model);
         institutionLocationService.editLocation(model,id);
-        return "admin/institution/addLocation";
+        return "admin/institution/locationForm";
     }
 
     @PostMapping("/editLocation/{id}")
     public String saveChangeLocation(InstitutionLocation location , Model model){
 
         if(institutionLocationService.ifLocationIsNotEmptyAndUniqueDuringEditing(location,model)){
-            return "admin/institution/addLocation";
+            return "admin/institution/locationForm";
         }
 
         institutionLocationService.saveLocation(location);

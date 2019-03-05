@@ -42,19 +42,19 @@ public class InstitutionController {
     @GetMapping("/create")
     public String addInstitution(Model model , HttpServletRequest request) {
         institutionService.startAddingInstitution(model,request);
-        return "admin/institution/createInstitution";
+        return "admin/institution/institutionForm";
     }
 
     @PostMapping("/create")
     public String saveInstitution(@Valid Institution institution,BindingResult errors,Model model,HttpServletRequest request){
         if(errors.hasErrors()){
             institutionService.startAgainAddingInstitution(model,request);
-            return "admin/institution/createInstitution";
+            return "admin/institution/institutionForm";
         }
 
         if(institutionService.checkIfUnique(institution,model)){
             institutionService.startAgainAddingInstitution(model,request);
-            return "admin/institution/createInstitution";
+            return "admin/institution/institutionForm";
         }
 
         institutionService.saveInstitution(institution);
@@ -64,7 +64,7 @@ public class InstitutionController {
     @GetMapping("/edit/{id}")
     public String editInstitution(@PathVariable Long id,Model model,HttpServletRequest request){
         institutionService.editInstitution(model,id,request);
-        return "admin/institution/createInstitution";
+        return "admin/institution/institutionForm";
 
     }
 
@@ -72,12 +72,12 @@ public class InstitutionController {
     public String saveChangedInstitution(@Valid Institution institution,BindingResult errors,Model model,HttpServletRequest request){
         if(errors.hasErrors()){
             institutionService.editInstitutionAgain(model,request,institution);
-            return "admin/institution/createInstitution";
+            return "admin/institution/institutionForm";
         }
 
         if(institutionService.checkIfUniqueDuringEditing(institution,model)){
             institutionService.editInstitutionAgain(model,request,institution);
-            return "admin/institution/createInstitution";
+            return "admin/institution/institutionForm";
         }
 
         institutionService.saveInstitution(institution);
