@@ -29,20 +29,17 @@ public class InstitutionService {
     }
 
     public void startAddingInstitution(Model model , HttpServletRequest request){
-
-        List<InstitutionLocation> locations = institutionLocationRepository.findAll();
-
-        model.addAttribute("whomHelp" , Institution.listOfWhomHelp());
+        addListOfWhomHelpAndLocations(model);
+        model.addAttribute("tagHeader","Dodaj nową organizację");
         model.addAttribute("institution", new Institution());
-        model.addAttribute("locations", locations);
         model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/create");
     }
 
-    public void startAgainAddingInstitution(Model model,HttpServletRequest request){
-        List<InstitutionLocation> locations = institutionLocationRepository.findAll();
 
-        model.addAttribute("locations",locations);
-        model.addAttribute("whomHelp",Institution.listOfWhomHelp());
+
+    public void startAgainAddingInstitution(Model model,HttpServletRequest request){
+        addListOfWhomHelpAndLocations(model);
+        model.addAttribute("tagHeader","Dodaj nową organizację");
         model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/create");
     }
 
@@ -58,23 +55,18 @@ public class InstitutionService {
 
 
     public void editInstitution(Model model,Long id,HttpServletRequest request){
-        List<InstitutionLocation> locations = institutionLocationRepository.findAll();
-// todo - często powtarzajace sie dodawanie do modelu
-        model.addAttribute("locations",locations);
-        model.addAttribute("whomHelp",Institution.listOfWhomHelp());
+        addListOfWhomHelpAndLocations(model);
+        model.addAttribute("tagHeader","Edytuj organizację");
         model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/edit/"+id);
-
         model.addAttribute("institution",institutionRepository.findOne(id));
     }
 
     public void editInstitutionAgain(Model model,HttpServletRequest request,Institution institution){
-        List<InstitutionLocation> locations = institutionLocationRepository.findAll();
-
+        addListOfWhomHelpAndLocations(model);
+        model.addAttribute("tagHeader","Edytuj organizację");
         model.addAttribute("institution",institution);
-        model.addAttribute("locations",locations);
-        model.addAttribute("whomHelp",Institution.listOfWhomHelp());
-        model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/edit/"+institution.getId());
-
+        model.addAttribute("formAction", request.getContextPath() +
+                "/admin/institutions/edit/"+institution.getId());
     }
 
 
@@ -87,5 +79,14 @@ public class InstitutionService {
     }
 
     public void deleteInstitution(Long id){ institutionRepository.delete(id); }
+
+
+
+    private void addListOfWhomHelpAndLocations(Model model) {
+        List<InstitutionLocation> locations = institutionLocationRepository.findAll();
+        model.addAttribute("whomHelp" , Institution.listOfWhomHelp());
+        model.addAttribute("locations", locations);
+    }
+
 
 }

@@ -19,7 +19,7 @@
     <%@include file="../adminHeader.jsp"%>
 
     <section class="login-page">
-        <h2>Dodaj nową organizację</h2>
+        <h2>${tagHeader}</h2>
 
         <form:form method="post"
                    action="${formAction}"
