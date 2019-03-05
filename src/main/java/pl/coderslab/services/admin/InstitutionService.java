@@ -56,6 +56,35 @@ public class InstitutionService {
 
     public void saveInstitution(Institution institution){ institutionRepository.save(institution); }
 
-    // do edycji
-    // && !institutionToCheck.getName().equals(institution.getName()
+
+    public void editInstitution(Model model,Long id,HttpServletRequest request){
+        List<InstitutionLocation> locations = institutionLocationRepository.findAll();
+// todo - często powtarzajace sie dodawanie do modelu
+        model.addAttribute("locations",locations);
+        model.addAttribute("whomHelp",Institution.listOfWhomHelp());
+        model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/edit/"+id);
+
+        model.addAttribute("institution",institutionRepository.findOne(id));
+    }
+
+    public void editInstitutionAgain(Model model,HttpServletRequest request,Institution institution){
+        List<InstitutionLocation> locations = institutionLocationRepository.findAll();
+
+        model.addAttribute("institution",institution);
+        model.addAttribute("locations",locations);
+        model.addAttribute("whomHelp",Institution.listOfWhomHelp());
+        model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/edit/"+institution.getId());
+
+    }
+
+
+    public boolean checkIfUniqueDuringEditing(Institution institution,Model model) {
+        Institution institutionToCheck = institutionRepository.findFirstByName(institution.getName());
+        if(institutionToCheck != null && institutionToCheck.getId()!=(institution.getId())){
+            model.addAttribute("nameErr","Nazwa organizacji musi być unikalna!");
+        }
+        return (institutionToCheck != null && institutionToCheck.getId()!=(institution.getId()));
+    }
+
+
 }

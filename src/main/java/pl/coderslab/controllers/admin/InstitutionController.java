@@ -46,7 +46,7 @@ public class InstitutionController {
     }
 
     @PostMapping("/create")
-    private String saveInstitution(@Valid Institution institution,BindingResult errors,Model model,HttpServletRequest request){
+    public String saveInstitution(@Valid Institution institution,BindingResult errors,Model model,HttpServletRequest request){
         if(errors.hasErrors()){
             institutionService.startAgainAddingInstitution(model,request);
             return "admin/institution/createInstitution";
@@ -54,6 +54,29 @@ public class InstitutionController {
 
         if(institutionService.checkIfUnique(institution,model)){
             institutionService.startAgainAddingInstitution(model,request);
+            return "admin/institution/createInstitution";
+        }
+
+        institutionService.saveInstitution(institution);
+        return "redirect:/admin/institutions/";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editInstitution(@PathVariable Long id,Model model,HttpServletRequest request){
+        institutionService.editInstitution(model,id,request);
+        return "admin/institution/createInstitution";
+
+    }
+
+    @PostMapping("/edit/{id}")
+    public String saveChangedInstitution(@Valid Institution institution,BindingResult errors,Model model,HttpServletRequest request){
+        if(errors.hasErrors()){
+            institutionService.editInstitutionAgain(model,request,institution);
+            return "admin/institution/createInstitution";
+        }
+
+        if(institutionService.checkIfUniqueDuringEditing(institution,model)){
+            institutionService.editInstitutionAgain(model,request,institution);
             return "admin/institution/createInstitution";
         }
 

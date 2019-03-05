@@ -22,12 +22,14 @@
 
     <a href="${pageContext.request.contextPath}/admin/institutions/create">Dodaj nową organizację</a>
 
+    <p>Aby edytować kliknij w nazwę konkretnej organizacji</p>
     <ul>
         <c:forEach items="${institutions}" var="institution" varStatus="loop">
 
-            <li>${loop.count} ${institution.name}
-
-                <a href="${pageContext.request.contextPath}/admin/user/edit/${u.id}">edytuj</a>
+            <li>${loop.count}
+                <a href="${pageContext.request.contextPath}/admin/institutions/edit/${institution.id}">
+                        ${institution.name}
+                </a>
 
             </li>
         </c:forEach>

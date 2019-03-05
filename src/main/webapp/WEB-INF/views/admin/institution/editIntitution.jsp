@@ -7,5 +7,7 @@
 </head>
 <body>
 
+    <%@include file="../adminHeader.jsp"%>
+
 </body>
 </html>
