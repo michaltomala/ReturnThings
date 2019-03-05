@@ -71,4 +71,16 @@ public class InstitutionLocationService {
         return false;
     }
 
+
+    public boolean checkIfDeleteLocationIsPossible(Long id,Model model){
+        InstitutionLocation location = institutionLocationRepository.findOne(id);
+        if(location.getInstitution().size() != 0) {
+            model.addAttribute("deleteLocationErr","Usunięcie jest możliwe " +
+                    "dopiero w przypadku gdy nie ma żadnej organizacji przypisanej do danej lokalizacji!");
+            addListOfLocationInstitutions(model);
+            return false;
+        }
+
+        return true;
+    }
 }

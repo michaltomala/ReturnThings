@@ -68,10 +68,14 @@ public class InstitutionLocationController {
     }
 
     @GetMapping("/deleteLocation/{id}")
-    private String deleteLocation(@PathVariable Long id){
-//       todo - dla pewności oprócz w widoku sprawdzić tutaj też czy nie ma powiązania z instytucjami
-        institutionLocationService.deleteLocation(id);
-        return "redirect:/admin/institutions/locations";
+    private String deleteLocation(@PathVariable Long id,Model model){
+
+        if(institutionLocationService.checkIfDeleteLocationIsPossible(id,model)){
+            institutionLocationService.deleteLocation(id);
+            return "redirect:/admin/institutions/locations";
+        }
+
+        return "admin/institution/locationForm";
     }
 
 

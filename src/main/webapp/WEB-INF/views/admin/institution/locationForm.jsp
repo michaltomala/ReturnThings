@@ -78,6 +78,9 @@
 
         </c:forEach>
     </ul>
+    <c:if test="${not empty deleteLocationErr}">
+        <div class="form-group">${deleteLocationErr}</div>
+    </c:if>
 
 
 </body>
