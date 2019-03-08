@@ -2,11 +2,9 @@ package pl.coderslab.entity;
 
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +18,9 @@ public class Bounty {
     private Long id;
 
 
-    @NotBlank(message = "Musisz zaznaczyć co chcesz oddać!")
-    private String name;
+    @NotEmpty(message = "Musisz zaznaczyć co chcesz oddać!")
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<BountyType> bountyType;
 
     @NotNull
     private Long quantityOfBags;
@@ -43,13 +42,14 @@ public class Bounty {
     }
 
 
-
     @Override
     public String toString() {
-        return this.name;
+        return "Bounty{" +
+                "id=" + id +
+                ", bountyType=" + bountyType +
+                ", quantityOfBags=" + quantityOfBags +
+                '}';
     }
-
-
 
     public Long getId() {
         return id;
@@ -59,12 +59,12 @@ public class Bounty {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public List<BountyType> getBountyType() {
+        return bountyType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBountyType(List<BountyType> bountyType) {
+        this.bountyType = bountyType;
     }
 
     public Long getQuantityOfBags() {
