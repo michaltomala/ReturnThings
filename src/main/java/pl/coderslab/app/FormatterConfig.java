@@ -25,6 +25,7 @@ public class FormatterConfig implements WebMvcConfigurer {
         registry.addConverter(getInstitutionConverter());
         registry.addConverter(getBountyConverter());
         registry.addConverter(getInstitutionLocationConverter());
+        registry.addConverter(getInstitutionListOfWhomHelpConverter());
     }
 
     @Bean
@@ -42,6 +43,11 @@ public class FormatterConfig implements WebMvcConfigurer {
     public InstitutionLocationConverter getInstitutionLocationConverter() { return new InstitutionLocationConverter(); }
 
     @Bean
+    public InstitutionListOfWhomHelpConverter getInstitutionListOfWhomHelpConverter() {
+        return new InstitutionListOfWhomHelpConverter(); }
+
+    @Bean
     public BountyConverter getBountyConverter() { return new BountyConverter(); }
+
 
 }
