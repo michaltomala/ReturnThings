@@ -26,6 +26,8 @@ public class AppInitializer implements WebApplicationInitializer {
 
         InitApplicationService initApplicationService = ctx.getBean(InitApplicationService.class);
         initApplicationService.initAdmin();
+        initApplicationService.initBountyTypes();
+        initApplicationService.initListOfWhomHelp();
 
 
     }

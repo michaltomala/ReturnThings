@@ -34,18 +34,6 @@ public class Institution {
     public Institution() {
     }
 
-    public static List<String> listOfWhomHelp (){
-        return new ArrayList<String>() {
-            {
-                add("dzieciom");
-                add("samotnym matkom");
-                add("bezdomnym");
-                add("niepełnosprawnym");
-                add("osobom starszym");
-            }
-        };
-    }
-
     @Override
     public String toString() {
         return name;

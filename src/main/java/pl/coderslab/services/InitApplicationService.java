@@ -4,9 +4,11 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.BountyType;
+import pl.coderslab.entity.InstitutionListOfWhomHelp;
 import pl.coderslab.entity.User;
 import pl.coderslab.entity.UserDetails;
 import pl.coderslab.repository.BountyTypeRepository;
+import pl.coderslab.repository.InstitutionListOfWhomHelpRepository;
 import pl.coderslab.repository.UserDetailsRepository;
 import pl.coderslab.repository.UserRepository;
 
@@ -19,15 +21,18 @@ public class InitApplicationService {
     private final UserRepository userRepository;
     private final UserDetailsRepository userDetailsRepository;
     private final BountyTypeRepository bountyTypeRepository;
+    private final InstitutionListOfWhomHelpRepository institutionListOfWhomHelpRepository;
 
     @Autowired
     public InitApplicationService(UserRepository userRepository ,
                                   UserDetailsRepository userDetailsRepository,
-                                  BountyTypeRepository bountyTypeRepository) {
+                                  BountyTypeRepository bountyTypeRepository,
+                                  InstitutionListOfWhomHelpRepository institutionListOfWhomHelpRepository) {
 
         this.userRepository = userRepository;
         this.userDetailsRepository = userDetailsRepository;
         this.bountyTypeRepository = bountyTypeRepository;
+        this.institutionListOfWhomHelpRepository = institutionListOfWhomHelpRepository;
     }
 
     /**
@@ -54,19 +59,45 @@ public class InitApplicationService {
     }
 
 
-    public void initBountyTypes(){
-        List<String> bountyTypes = new ArrayList<>();
+    public void initBountyTypes() {
+        BountyType type = bountyTypeRepository.findOne((long)1);
+        if (type == null) {
+
+            List<String> bountyTypes = new ArrayList<>();
+
             bountyTypes.add("ubrania, które nadają się do ponownego użycia");
             bountyTypes.add("ubrania do wyrzucenia");
             bountyTypes.add("zabawki");
             bountyTypes.add("książki");
             bountyTypes.add("inne");
 
-        for(String str : bountyTypes){
-            BountyType bountyType = new BountyType();
-            bountyType.setType(str);
-            bountyTypeRepository.save(bountyType);
+            for (String str : bountyTypes) {
+                BountyType bountyType = new BountyType();
+                bountyType.setType(str);
+                bountyTypeRepository.save(bountyType);
+            }
+       }
+    }
+
+    public void initListOfWhomHelp(){
+        InstitutionListOfWhomHelp ListOfWhomHelp = institutionListOfWhomHelpRepository.findOne((long)1);
+        if(ListOfWhomHelp == null) {
+            List<String> whomHelpList = new ArrayList<>();
+
+
+            whomHelpList.add("dzieciom");
+            whomHelpList.add("samotnym matkom");
+            whomHelpList.add("bezdomnym");
+            whomHelpList.add("niepełnosprawnym");
+            whomHelpList.add("osobom starszym");
+
+            for (String str : whomHelpList) {
+                InstitutionListOfWhomHelp institutionListOfWhomHelp = new InstitutionListOfWhomHelp();
+                institutionListOfWhomHelp.setWhomHelp(str);
+                institutionListOfWhomHelpRepository.save(institutionListOfWhomHelp);
+            }
         }
     }
+
 
 }
