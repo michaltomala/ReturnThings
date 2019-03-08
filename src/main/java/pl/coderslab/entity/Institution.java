@@ -26,8 +26,9 @@ public class Institution {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<InstitutionLocation> institutionLocations;
 
-    @NotBlank(message = "Należy zaznaczyć komu organizacja pomagać!")
-    private String whomHelp;
+    @NotEmpty(message = "Musisz zaznaczyć komu organizacja ma pomagać!!")
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<InstitutionListOfWhomHelp> whomHelp;
 
 
     public Institution() {
@@ -82,11 +83,11 @@ public class Institution {
         this.institutionLocations = institutionLocations;
     }
 
-    public String getWhomHelp() {
+    public List<InstitutionListOfWhomHelp> getWhomHelp() {
         return whomHelp;
     }
 
-    public void setWhomHelp(String whomHelp) {
+    public void setWhomHelp(List<InstitutionListOfWhomHelp> whomHelp) {
         this.whomHelp = whomHelp;
     }
 }

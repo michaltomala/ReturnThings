@@ -1,6 +1,8 @@
 package pl.coderslab.entity;
 
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class BountyType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String type;
 
     @ManyToMany(mappedBy = "bountyType",fetch = FetchType.EAGER)
