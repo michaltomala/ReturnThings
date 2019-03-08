@@ -29,19 +29,6 @@ public class Bounty {
     }
 
 
-    public static List<String> listOfBountyNames (){
-        return new ArrayList<String>() {
-            {
-                add("ubrania, które nadają się do ponownego użycia");
-                add("ubrania do wyrzucenia");
-                add("zabawki");
-                add("książki");
-                add("inne");
-            }
-        };
-    }
-
-
     @Override
     public String toString() {
         return "Bounty{" +
