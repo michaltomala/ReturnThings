@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,7 +26,7 @@ public class Institution {
     private List<InstitutionLocation> institutionLocations;
 
     @NotEmpty(message = "Musisz zaznaczyć komu organizacja ma pomagać!!")
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<InstitutionListOfWhomHelp> whomHelp;
 
 

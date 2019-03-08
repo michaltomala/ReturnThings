@@ -1,12 +1,10 @@
 package pl.coderslab.entity;
 
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,7 +17,7 @@ public class Bounty {
 
 
     @NotEmpty(message = "Musisz zaznaczyć co chcesz oddać!")
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<BountyType> bountyType;
 
     @NotNull

@@ -17,7 +17,7 @@ public class BountyType {
     @NotBlank
     private String type;
 
-    @ManyToMany(mappedBy = "bountyType",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "bountyType")
     private List<Bounty> bounty;
 
     public BountyType() {

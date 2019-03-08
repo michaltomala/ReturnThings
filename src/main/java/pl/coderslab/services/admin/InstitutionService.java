@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.coderslab.entity.Institution;
+import pl.coderslab.entity.InstitutionListOfWhomHelp;
 import pl.coderslab.entity.InstitutionLocation;
+import pl.coderslab.repository.InstitutionListOfWhomHelpRepository;
 import pl.coderslab.repository.InstitutionLocationRepository;
 import pl.coderslab.repository.InstitutionRepository;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,11 +20,15 @@ public class InstitutionService {
 
     private final InstitutionRepository institutionRepository;
     private final InstitutionLocationRepository institutionLocationRepository;
+    private final InstitutionListOfWhomHelpRepository institutionListOfWhomHelpRepository;
 
     @Autowired
-    public InstitutionService(InstitutionRepository institutionRepository, InstitutionLocationRepository institutionLocationRepository) {
+    public InstitutionService(InstitutionRepository institutionRepository,
+                              InstitutionLocationRepository institutionLocationRepository,
+                              InstitutionListOfWhomHelpRepository institutionListOfWhomHelpRepository) {
         this.institutionRepository = institutionRepository;
         this.institutionLocationRepository = institutionLocationRepository;
+        this.institutionListOfWhomHelpRepository = institutionListOfWhomHelpRepository;
     }
 
     public void addListOfInstitutions(Model model){
@@ -84,9 +91,23 @@ public class InstitutionService {
 
     private void addListOfWhomHelpAndLocations(Model model) {
         List<InstitutionLocation> locations = institutionLocationRepository.findAll();
-        model.addAttribute("whomHelp" , Institution.listOfWhomHelp());
+        model.addAttribute("whomHelp" , getListOfWhomHelp());
         model.addAttribute("locations", locations);
     }
 
 
+    // todo jeśli się da - wyciągnąć bezpośrednio z repo
+    private List<String> getListOfWhomHelp(){
+        List<InstitutionListOfWhomHelp> listOfWhomHelp = institutionListOfWhomHelpRepository.findAll();
+        List<String> listToReturn = new ArrayList<>();
+        for(InstitutionListOfWhomHelp whomHelp : listOfWhomHelp){
+            listToReturn.add(whomHelp.getWhomHelp());
+        }
+        return listToReturn;
+    }
+
+
+
+
 }
+

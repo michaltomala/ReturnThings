@@ -17,8 +17,9 @@ public class InstitutionListOfWhomHelp {
     @NotBlank
     private String whomHelp;
 
-    @ManyToMany(mappedBy = "whomHelp",fetch = FetchType.EAGER)
-    private List<Institution> intitution;
+    @ManyToMany(mappedBy = "whomHelp")
+    private List<Institution> institution;
+
 
     public InstitutionListOfWhomHelp() {
     }
@@ -45,11 +46,11 @@ public class InstitutionListOfWhomHelp {
         this.whomHelp = whomHelp;
     }
 
-    public List<Institution> getIntitution() {
-        return intitution;
+    public List<Institution> getInstitution() {
+        return institution;
     }
 
-    public void setIntitution(List<Institution> intitution) {
-        this.intitution = intitution;
+    public void setInstitution(List<Institution> institution) {
+        this.institution = institution;
     }
 }
