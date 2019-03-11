@@ -4,8 +4,8 @@
     <nav class="container container--70">
         <ul class="nav--actions">
             <li class="logged-user">
-                <c:if test="${empty user.userDetails.name }">Witaj ${user.email}</c:if>
-                <c:if test="${not empty user.userDetails.name}">Witaj ${user.userDetails.name}</c:if>
+                <c:if test="${empty user.name }">Witaj ${user.email}</c:if>
+                <c:if test="${not empty user.name}">Witaj ${user.name}</c:if>
                 <ul class="dropdown">
                     <c:if test="${user.isAdmin == true}">
                         <li>

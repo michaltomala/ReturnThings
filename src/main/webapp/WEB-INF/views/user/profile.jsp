@@ -20,16 +20,26 @@
 
         <form:form method="post"
                    action="${formAction}"
-                   modelAttribute="userDetails"
+                   modelAttribute="user"
                    cssClass="form--contact">
             <form:hidden path="id" />
 
             <div class="form-group">
-                <form:input path="name" placeholder="${userDetails.name}"/>
+                <c:if test="${empty user.name}">
+                    <form:input path="name" placeholder="Imię" />
+                </c:if>
+                <c:if test="${not empty user.name }">
+                    <form:input path="name" placeholder="${user.name}" />
+                </c:if>
             </div>
 
             <div class="form-group">
-                <form:input path="surname" placeholder="${userDetails.surname}" />
+                <c:if test="${empty user.surname }">
+                    <form:input path="surname" placeholder="Nazwisko" />
+                </c:if>
+                <c:if test="${not empty user.surname }">
+                    <form:input path="surname" placeholder="${user.surname}" />
+                </c:if>
             </div>
 
             <div class="form-group form-group--buttons">

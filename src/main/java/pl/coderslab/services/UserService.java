@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.coderslab.entity.User;
-import pl.coderslab.entity.UserDetails;
-import pl.coderslab.repository.UserDetailsRepository;
 import pl.coderslab.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +15,10 @@ import javax.servlet.http.HttpSession;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserDetailsRepository userDetailsRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository , UserDetailsRepository userDetailsRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userDetailsRepository = userDetailsRepository;
     }
 
     public void edit(Model model, HttpServletRequest request, HttpSession session){
@@ -63,17 +59,19 @@ public class UserService {
 
     public void editUserDetails(Model model, HttpServletRequest request, HttpSession session){
         User user = (User) session.getAttribute("user");
-        UserDetails userDetails = user.getUserDetails();
-        model.addAttribute("userDetails",userDetails);
+
+        model.addAttribute("user",user);
         model.addAttribute("formAction", request.getContextPath() + "/user/profile");
     }
 
-    public void saveUserDetails(UserDetails userDetails , Model model , HttpSession session){
-        userDetailsRepository.save(userDetails);
+    public void saveUserDetails(User user , HttpSession session){
+        User userFromSession = (User) session.getAttribute("user");
 
-        User user = (User) session.getAttribute("user");
-        user.setUserDetails(userDetails);
-        model.addAttribute("user",user);
+        userFromSession.setName(user.getName());
+        userFromSession.setSurname(user.getSurname());
+
+        userRepository.save(userFromSession);
+        session.setAttribute("user",userFromSession);
     }
 
 }

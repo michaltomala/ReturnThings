@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.entity.User;
-import pl.coderslab.entity.UserDetails;
 import pl.coderslab.services.UserService;
 import pl.coderslab.services.admin.AdminUserService;
 import pl.coderslab.validator.ValidationRegisterUserGroup;
@@ -88,8 +87,12 @@ public class UserController {
     }
 
     @PostMapping("profile")
-    public String saveProfile(UserDetails userDetails,Model model,HttpSession session, HttpServletRequest request){
-        userService.saveUserDetails(userDetails,model, session);
+    public String saveProfile(User user,HttpSession session, HttpServletRequest request){
+//    todo - zapisuje nowy obiekt tylko z name i surname - (prawdopodobnie)
+//     trzeba zapisywac na obiekcie user z sesji
+
+        userService.saveUserDetails(user,session);
         return "redirect:"+request.getContextPath()+"/user/profile";
     }
+
 }

@@ -20,6 +20,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
+    private String surname;
+
+
     @NotBlank(groups = { ValidationLoginUserGroup.class,
                         ValidationRegisterUserGroup.class,
                         ValidationEditUserGroup.class} , message = "Email nie może być pusty!")
@@ -42,10 +47,6 @@ public class User {
     private boolean isBlocked = false;
 
     private boolean isAdmin = false;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    private UserDetails userDetails;
-
 
     public User() {
     }
@@ -106,11 +107,19 @@ public class User {
     public void setBlocked(boolean blocked) { isBlocked = blocked; }
     public void setIsBlocked(boolean blocked) { isBlocked = blocked; }
 
-    public UserDetails getUserDetails() {
-        return userDetails;
+    public String getName() {
+        return name;
     }
 
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 }

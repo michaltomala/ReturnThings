@@ -6,10 +6,8 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.entity.BountyType;
 import pl.coderslab.entity.InstitutionListOfWhomHelp;
 import pl.coderslab.entity.User;
-import pl.coderslab.entity.UserDetails;
 import pl.coderslab.repository.BountyTypeRepository;
 import pl.coderslab.repository.InstitutionListOfWhomHelpRepository;
-import pl.coderslab.repository.UserDetailsRepository;
 import pl.coderslab.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -19,18 +17,15 @@ import java.util.List;
 public class InitApplicationService {
 
     private final UserRepository userRepository;
-    private final UserDetailsRepository userDetailsRepository;
     private final BountyTypeRepository bountyTypeRepository;
     private final InstitutionListOfWhomHelpRepository institutionListOfWhomHelpRepository;
 
     @Autowired
     public InitApplicationService(UserRepository userRepository ,
-                                  UserDetailsRepository userDetailsRepository,
                                   BountyTypeRepository bountyTypeRepository,
                                   InstitutionListOfWhomHelpRepository institutionListOfWhomHelpRepository) {
 
         this.userRepository = userRepository;
-        this.userDetailsRepository = userDetailsRepository;
         this.bountyTypeRepository = bountyTypeRepository;
         this.institutionListOfWhomHelpRepository = institutionListOfWhomHelpRepository;
     }
@@ -46,14 +41,11 @@ public class InitApplicationService {
             user.setEmail("admin@admin.pl");
             user.setPassword("123456");
             user.setAdmin(true);
+            user.setName("Michał");
+            user.setSurname("Staropolski");
 
-            UserDetails userDetails = new UserDetails();
-            userDetails.setName("Michał");
-            userDetails.setSurname("Staropolski");
-            user.setUserDetails(userDetails);
             user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
 
-            userDetailsRepository.save(userDetails);
             userRepository.save(user);
         }
     }
