@@ -9,6 +9,7 @@ import pl.coderslab.entity.BountyType;
 import pl.coderslab.repository.BountyTypeRepository;
 import pl.coderslab.services.admin.InstitutionService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +25,11 @@ public class BountyService {
         this.institutionService = institutionService;
     }
 
-    public void prepareForm(Model model){
+    public void prepareForm(Model model , HttpServletRequest request){
 
         model.addAttribute("bountyTypes",getAllBountyType());
         model.addAttribute("bounty",new Bounty());
+        model.addAttribute("formAction", request.getContextPath() + "/bountyForm");
         institutionService.addListOfWhomHelpAndLocations(model);
 
     }

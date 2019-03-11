@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import pl.coderslab.services.BountyService;
 import pl.coderslab.services.LoginService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -37,8 +38,8 @@ public class HomeController {
 
 
     @GetMapping("/home")
-    public String home(Model model) {
-        bountyService.prepareForm(model);
+    public String home(Model model, HttpServletRequest request) {
+        bountyService.prepareForm(model,request);
         return "user/home";
     }
 
