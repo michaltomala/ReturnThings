@@ -3,7 +3,9 @@ package pl.coderslab.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import pl.coderslab.services.BountyService;
 import pl.coderslab.services.LoginService;
 
 import javax.servlet.http.HttpSession;
@@ -12,10 +14,12 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
     private final LoginService loginService;
+    private final BountyService bountyService;
 
     @Autowired
-    public HomeController(LoginService loginService) {
+    public HomeController(LoginService loginService,BountyService bountyService) {
         this.loginService = loginService;
+        this.bountyService = bountyService;
     }
 
     @GetMapping("")
@@ -33,5 +37,9 @@ public class HomeController {
 
 
     @GetMapping("/home")
-    public String home() { return "user/home"; }
+    public String home(Model model) {
+        bountyService.prepareForm(model);
+        return "user/home";
+    }
+
 }

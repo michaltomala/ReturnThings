@@ -89,7 +89,7 @@ public class InstitutionService {
 
 
 
-    private void addListOfWhomHelpAndLocations(Model model) {
+    public void addListOfWhomHelpAndLocations(Model model) {
         List<InstitutionLocation> locations = institutionLocationRepository.findAll();
         model.addAttribute("whomHelp" , getListOfWhomHelp());
         model.addAttribute("locations", locations);

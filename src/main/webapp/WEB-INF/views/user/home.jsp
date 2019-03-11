@@ -186,7 +186,8 @@
                     <button type="button" class="btn next-step">Szukaj</button>
                 </div>
             </div>
-
+        </form>
+        <form>
             <!-- STEP 4 -->
             <div data-step="4">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>
