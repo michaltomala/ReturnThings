@@ -97,6 +97,7 @@ public class InstitutionService {
 
 
     // todo jeśli się da - wyciągnąć bezpośrednio z repo
+    //  -adnotacja 13.03 - da sie - wyciągamy wszystkie obiekty i odwołujemy się po nazwie
     private List<String> getListOfWhomHelp(){
         List<InstitutionListOfWhomHelp> listOfWhomHelp = institutionListOfWhomHelpRepository.findAll();
         List<String> listToReturn = new ArrayList<>();

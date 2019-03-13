@@ -23,6 +23,7 @@ public class HomeController {
         this.bountyService = bountyService;
     }
 
+//   todo - ten mapping przenieśc do filtra
     @GetMapping("")
     public String homeRedirect(HttpSession session){
         if(loginService.isLogged(session)){

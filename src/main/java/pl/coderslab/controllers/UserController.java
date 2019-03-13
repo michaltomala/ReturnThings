@@ -88,8 +88,6 @@ public class UserController {
 
     @PostMapping("profile")
     public String saveProfile(User user,HttpSession session, HttpServletRequest request){
-//    todo - zapisuje nowy obiekt tylko z name i surname - (prawdopodobnie)
-//     trzeba zapisywac na obiekcie user z sesji
 
         userService.saveUserDetails(user,session);
         return "redirect:"+request.getContextPath()+"/user/profile";

@@ -25,6 +25,7 @@ public class BountyService {
         this.institutionService = institutionService;
     }
 
+//  todo - wysłać obiekt instytucji
     public void prepareForm(Model model , HttpServletRequest request){
 
         model.addAttribute("bountyTypes",getAllBountyType());
