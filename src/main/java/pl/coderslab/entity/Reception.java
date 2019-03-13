@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.DateTimeException;
+import java.util.Date;
 
 @Entity
 public class Reception {
@@ -19,7 +19,7 @@ public class Reception {
     private String zIPCode;
     private Long phone;
 
-    private DateTimeException date;
+    private Date date;
 //  todo - do sprecyzowania przy działającym formularzu
     private int hour;
     private String comments;
@@ -73,13 +73,13 @@ public class Reception {
 
     public void setPhone(Long phone) {
         this.phone = phone;
-    }
 
-    public DateTimeException getDate() {
+
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(DateTimeException date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
