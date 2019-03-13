@@ -36,6 +36,10 @@ public class BountyService {
 
     }
 
+    public void prepareFormSecondTime(){
+
+    }
+
 //   todo - usunąć metodę i odwoływać się w widoku po obiekcie
     private List<String> getAllBountyType(){
         List<BountyType> bountyTypes = bountyTypeRepository.findAll();
