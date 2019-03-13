@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.coderslab.entity.Bounty;
 import pl.coderslab.entity.BountyType;
+import pl.coderslab.entity.Institution;
 import pl.coderslab.repository.BountyTypeRepository;
 import pl.coderslab.services.admin.InstitutionService;
 
@@ -25,16 +26,17 @@ public class BountyService {
         this.institutionService = institutionService;
     }
 
-//  todo - wysłać obiekt instytucji
     public void prepareForm(Model model , HttpServletRequest request){
 
         model.addAttribute("bountyTypes",getAllBountyType());
         model.addAttribute("bounty",new Bounty());
+        model.addAttribute("institution",new Institution());
         model.addAttribute("formAction", request.getContextPath() + "/bountyForm");
         institutionService.addListOfWhomHelpAndLocations(model);
 
     }
 
+//   todo - usunąć metodę i odwoływać się w widoku po obiekcie
     private List<String> getAllBountyType(){
         List<BountyType> bountyTypes = bountyTypeRepository.findAll();
         List<String> listToReturn = new ArrayList<>();
