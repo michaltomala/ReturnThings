@@ -73,7 +73,7 @@ public class Reception {
 
     public void setPhone(Long phone) {
         this.phone = phone;
-
+    }
 
     public Date getDate() {
         return date;
