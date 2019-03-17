@@ -24,13 +24,7 @@ public class HomeController {
     }
 
 //   todo - ten mapping przenieśc do filtra
-    @GetMapping("")
-    public String homeRedirect(HttpSession session){
-        if(loginService.isLogged(session)){
-            return "redirect:/home";
-        }
-        return "redirect:/landingPage";
-    }
+
 
     @GetMapping("/landingPage")
     public String landingPage (){
