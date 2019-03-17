@@ -28,8 +28,7 @@ public class RegisterService {
     public void checkPwd (User user, Err modelErr) {
 
         if (!user.getPassword().equals(user.getRepeatedPassword())) {
-            String str = "Hasła muszą być takie same!";
-            modelErr.addErr(str);
+            modelErr.addErr("Hasła muszą być takie same!");
         }
     }
 

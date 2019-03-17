@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.User;
+import pl.coderslab.model.Err;
 import pl.coderslab.services.LoginService;
 import pl.coderslab.validator.ValidationLoginUserGroup;
 
@@ -27,26 +28,36 @@ public class LoginController {
 
     @GetMapping("/login")
     public String startlogin(Model model, HttpServletRequest request){
-        loginService.startLogin(model,request);
+
+        model.addAttribute("user", new User());
+        model.addAttribute("formAction", request.getContextPath() + "/login");
         return "auth/login";
     }
 
     @PostMapping("/login")
-    public String loginUser(@Validated(ValidationLoginUserGroup.class) User user , BindingResult errors,Model model,HttpSession session){
+    public String loginUser(@Validated(ValidationLoginUserGroup.class) User user , BindingResult errors,
+                            Model model,HttpSession session){
         if (errors.hasErrors()) {
             return "auth/login";
         }
 
-        if(loginService.loginUser(user,model,session)){
+        Err modelErr = new Err();
+
+        loginService.checkEmailAndPassword(user,modelErr);
+        if(!modelErr.isEmpty()){
+            model.addAttribute("authErr", "Email albo hasło się nie zgadza!");
             return "auth/login";
         }
 
+        session.setAttribute("user", loginService.returnUserFromRepository(user));
+
         if(loginService.isBlocked(user)){
-            loginService.logout(session);
+            session.setAttribute("user", null);
             return "redirect:/blocked";
         }
 
-        if(loginService.isAdmin(session)){
+
+        if(loginService.isAdmin((User) session.getAttribute("user"))){
             return "redirect:/admin/dashboard";
         }
 
@@ -66,7 +77,8 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session){
-        loginService.logout(session);
+
+        session.setAttribute("user", null);
         return "redirect:/landingPage";
     }
 

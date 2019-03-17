@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.coderslab.entity.User;
+import pl.coderslab.model.Err;
 import pl.coderslab.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,36 +23,30 @@ public class LoginService {
         this.userRepository = userRepository;
     }
 
-    public void startLogin(Model model, HttpServletRequest request){
-        model.addAttribute("user", new User());
-        model.addAttribute("formAction", request.getContextPath() + "/login");
+
+    public User returnUserFromRepository(User user){
+        return userRepository.findFirstByEmail(user.getEmail());
     }
 
+    /**
+     * This method check if email exist and if exist - check is password correct
+     * @param user
+     * @param modelErr
+     */
 
-    public boolean loginUser(User user,Model model,HttpSession session){
+    public void checkEmailAndPassword(User user, Err modelErr){
         User userToCheck = userRepository.findFirstByEmail(user.getEmail());
 
         if(userToCheck== null){
-            model.addAttribute("emailErr", "Email jest nieprawidłowy!");
-            return true;
+            modelErr.addErr("Wrong email!");
+        }else{
+            if (!(BCrypt.checkpw(user.getPassword(), userToCheck.getPassword()) )) {
+                modelErr.addErr("Wrong password!");
+            }
         }
-
-        if (!(BCrypt.checkpw(user.getPassword(), userToCheck.getPassword()) )) {
-            model.addAttribute("pwdErr", "Hasło się nie zgadza,spróbuj jeszcze raz");
-            return true;
-        }
-
-        session.setAttribute("user", userToCheck);
-        return false;
     }
 
-    public boolean isLogged(HttpSession session){
-        User user = (User)session.getAttribute("user");
-        return user != null;
-    }
-
-    public boolean isAdmin(HttpSession session){
-        User user = (User)session.getAttribute("user");
+    public boolean isAdmin(User user){
         return user.getIsAdmin();
     }
 
@@ -60,8 +55,5 @@ public class LoginService {
         return userToCheck.getIsBlocked();
     }
 
-    public void logout(HttpSession session){
-        session.setAttribute("user", null);
-    }
 
 }
