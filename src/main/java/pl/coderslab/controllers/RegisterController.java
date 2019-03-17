@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.User;
+import pl.coderslab.model.Err;
 import pl.coderslab.services.RegisterService;
 import pl.coderslab.validator.ValidationRegisterUserGroup;
 
@@ -27,18 +28,34 @@ public class RegisterController {
 
     @GetMapping("/register")
     public String register(Model model,HttpServletRequest request){
-        registerService.startRegister(model,request);
+        model.addAttribute("user", new User());
+        model.addAttribute("formAction", request.getContextPath() + "/register");
         return "auth/register";
     }
 
     @PostMapping("/register")
-    public String saveUser(@Validated(ValidationRegisterUserGroup.class) User user, BindingResult errors, Model model, HttpSession session) {
+    public String saveUser(@Validated(ValidationRegisterUserGroup.class) User user, BindingResult errors,
+                           Model model, HttpSession session) {
         if (errors.hasErrors()) {
             return "auth/register";
         }
-        if(registerService.saveUser(user,model,session)){
+
+        Err modelErr = new Err();
+
+        registerService.checkPwd(user,modelErr);
+        if(!modelErr.isEmpty()){
+            model.addAttribute("pwdErr", "Hasła muszą być takie same!");
             return "auth/register";
         }
+
+        registerService.checkIfEmailIsUnique(user,modelErr);
+        if(!modelErr.isEmpty()){
+            model.addAttribute("emailErr", "Taki użytkownik już istnieje !");
+            return "auth/register";
+        }
+
+        registerService.saveUser(user);
+        session.setAttribute("user",user);
         return "redirect:/home";
     }
 
