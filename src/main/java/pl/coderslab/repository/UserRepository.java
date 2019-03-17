@@ -11,6 +11,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAllByIsAdmin(boolean isAdmin);
 
-
-// todo do wyciągnięcia potrzeba skorzystać z zapytania
+//   todo - przy wyświetlaniu użytkowników skorzystać z
+//    tego zapytania- nie wyswietlac calej listy a pierwsze 20 rekordów
+    List<User> findFirst20ByIdAfter(int id);
 }
