@@ -49,13 +49,13 @@ public class LoginController {
             return "auth/login";
         }
 
-        session.setAttribute("user", loginService.returnUserFromRepository(user));
-
         if(loginService.isBlocked(user)){
             session.setAttribute("user", null);
             return "redirect:/blocked";
         }
 
+
+        session.setAttribute("user", loginService.returnUserFromRepository(user));
 
         if(loginService.isAdmin((User) session.getAttribute("user"))){
             return "redirect:/admin/dashboard";
