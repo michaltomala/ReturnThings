@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import pl.coderslab.entity.Institution;
 import pl.coderslab.entity.InstitutionListOfWhomHelp;
 import pl.coderslab.entity.InstitutionLocation;
+import pl.coderslab.model.Err;
 import pl.coderslab.repository.InstitutionListOfWhomHelpRepository;
 import pl.coderslab.repository.InstitutionLocationRepository;
 import pl.coderslab.repository.InstitutionRepository;
@@ -31,75 +32,36 @@ public class InstitutionService {
         this.institutionListOfWhomHelpRepository = institutionListOfWhomHelpRepository;
     }
 
-    public void addListOfInstitutions(Model model){
-        model.addAttribute("institutions",institutionRepository.findAll());
-    }
-
-    public void startAddingInstitution(Model model , HttpServletRequest request){
-        addListOfWhomHelpAndLocations(model);
-        model.addAttribute("tagHeader","Dodaj nową organizację");
-        model.addAttribute("institution", new Institution());
-        model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/create");
-    }
-
-
-
-    public void startAgainAddingInstitution(Model model,HttpServletRequest request){
-        addListOfWhomHelpAndLocations(model);
-        model.addAttribute("tagHeader","Dodaj nową organizację");
-        model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/create");
-    }
-
-    public boolean checkIfUnique(Institution institution,Model model) {
-        Institution institutionToCheck = institutionRepository.findFirstByName(institution.getName());
-        if(institutionToCheck != null){
-            model.addAttribute("nameErr","Nazwa organizacji musi być unikalna!");
-        }
-        return institutionToCheck != null;
-    }
-
     public void saveInstitution(Institution institution){ institutionRepository.save(institution); }
-
-
-    public void editInstitution(Model model,Long id,HttpServletRequest request){
-        addListOfWhomHelpAndLocations(model);
-        model.addAttribute("tagHeader","Edytuj organizację");
-        model.addAttribute("formAction", request.getContextPath() + "/admin/institutions/edit/"+id);
-        model.addAttribute("institution",institutionRepository.findOne(id));
-    }
-
-    public void editInstitutionAgain(Model model,HttpServletRequest request,Institution institution){
-        addListOfWhomHelpAndLocations(model);
-        model.addAttribute("tagHeader","Edytuj organizację");
-        model.addAttribute("institution",institution);
-        model.addAttribute("formAction", request.getContextPath() +
-                "/admin/institutions/edit/"+institution.getId());
-    }
-
-
-    public boolean checkIfUniqueDuringEditing(Institution institution,Model model) {
-        Institution institutionToCheck = institutionRepository.findFirstByName(institution.getName());
-        if(institutionToCheck != null && institutionToCheck.getId()!=(institution.getId())){
-            model.addAttribute("nameErr","Nazwa organizacji musi być unikalna!");
-        }
-        return (institutionToCheck != null && institutionToCheck.getId()!=(institution.getId()));
-    }
 
     public void deleteInstitution(Long id){ institutionRepository.delete(id); }
 
 
+    public Institution findInstitution(Long id){ return institutionRepository.findOne(id); }
 
-    public void addListOfWhomHelpAndLocations(Model model) {
-        List<InstitutionLocation> locations = institutionLocationRepository.findAll();
-        List<InstitutionListOfWhomHelp> whomHelp = institutionListOfWhomHelpRepository.findAll();
-        model.addAttribute("whomHelp" , whomHelp);
-        model.addAttribute("locations", locations);
+    public List<Institution> returnListOfInstitution(){ return institutionRepository.findAll(); }
+
+    public List<InstitutionListOfWhomHelp> returnWhomHelpList(){
+        return institutionListOfWhomHelpRepository.findAll(); }
+
+
+    public void checkIfInstitutionIsUnique(Institution institution, Err modelErr) {
+
+        Institution institutionToCheck = institutionRepository.findFirstByName(institution.getName());
+
+        if(institutionToCheck != null){
+            modelErr.addErr("Institution isn't unique!");
+        }
     }
 
+    public void checkIfInstitutionIsUniqueDuringEditing(Institution institution,Err modelErr) {
 
-    // todo jeśli się da - wyciągnąć bezpośrednio z repo
-    //  -adnotacja 13.03 - da sie - wyciągamy wszystkie obiekty i odwołujemy się po nazwie
+        Institution institutionToCheck = institutionRepository.findFirstByName(institution.getName());
 
+        if(institutionToCheck != null && institutionToCheck.getId()!=(institution.getId())){
+            modelErr.addErr("Institution isn't unique!");
+        }
+    }
 
 
 }

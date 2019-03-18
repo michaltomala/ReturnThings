@@ -8,6 +8,7 @@ import pl.coderslab.entity.Bounty;
 import pl.coderslab.entity.BountyType;
 import pl.coderslab.entity.Institution;
 import pl.coderslab.repository.BountyTypeRepository;
+import pl.coderslab.services.admin.InstitutionLocationService;
 import pl.coderslab.services.admin.InstitutionService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,11 +20,14 @@ public class BountyService {
 
     private final BountyTypeRepository bountyTypeRepository;
     private final InstitutionService institutionService;
-
+    private final InstitutionLocationService institutionLocationService;
     @Autowired
-    public BountyService(BountyTypeRepository bountyTypeRepository, InstitutionService institutionService) {
+    public BountyService(BountyTypeRepository bountyTypeRepository,
+                         InstitutionService institutionService,
+                         InstitutionLocationService institutionLocationService) {
         this.bountyTypeRepository = bountyTypeRepository;
         this.institutionService = institutionService;
+        this.institutionLocationService = institutionLocationService;
     }
 
     public void prepareForm(Model model , HttpServletRequest request){
@@ -32,7 +36,9 @@ public class BountyService {
         model.addAttribute("bounty",new Bounty());
         model.addAttribute("institution",new Institution());
         model.addAttribute("formAction", request.getContextPath() + "/bountyForm");
-        institutionService.addListOfWhomHelpAndLocations(model);
+
+        model.addAttribute("whomHelp" , institutionService.returnWhomHelpList());
+        model.addAttribute("locations", institutionLocationService.returnListOfLocations());
 
     }
 
