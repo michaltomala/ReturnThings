@@ -27,7 +27,7 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String startlogin(Model model, HttpServletRequest request){
+    public String startLogin(Model model, HttpServletRequest request){
 
         model.addAttribute("user", new User());
         model.addAttribute("formAction", request.getContextPath() + "/login");

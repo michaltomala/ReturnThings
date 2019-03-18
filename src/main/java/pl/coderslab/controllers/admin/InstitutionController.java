@@ -44,7 +44,7 @@ public class InstitutionController {
         institutionService.startAddingInstitution(model,request);
         return "admin/institution/institutionForm";
     }
-
+// todo - bug przy dodawaniu - listy whomHelp i locations nie powinny dawać możliwosci wyboru wielokrotnego
     @PostMapping("/create")
     public String saveInstitution(@Valid Institution institution,BindingResult errors,Model model,HttpServletRequest request){
         if(errors.hasErrors()){

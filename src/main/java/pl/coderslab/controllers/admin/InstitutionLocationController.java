@@ -3,12 +3,12 @@ package pl.coderslab.controllers.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.InstitutionLocation;
+import pl.coderslab.model.Err;
 import pl.coderslab.services.admin.InstitutionLocationService;
+
+import java.util.List;
 
 
 @Controller
@@ -24,7 +24,7 @@ public class InstitutionLocationController {
 
     @GetMapping("/locations")
     public String locations(Model model){
-        institutionLocationService.addListOfLocationInstitutions(model);
+
         return "admin/institution/locationForm";
     }
 
@@ -34,32 +34,57 @@ public class InstitutionLocationController {
 
     @GetMapping("/addLocation")
     public String addLocation(Model model){
-        institutionLocationService.startAddLocation(model);
-        institutionLocationService.addListOfLocationInstitutions(model);
+
+        model.addAttribute("addLocation",new InstitutionLocation());
         return "admin/institution/locationForm";
     }
 
     @PostMapping("/addLocation")
-    private String saveLocation(InstitutionLocation institutionLocation, Model model){
+    private String saveLocation(InstitutionLocation location, Model model){
 
-        if(institutionLocationService.ifLocationIsNotEmptyAndUnique(institutionLocation,model)){
+        Err modelErr = new Err();
+
+        institutionLocationService.checkIfLocationIsNotEmpty(location,modelErr);
+        if(!modelErr.isEmpty()){
+            model.addAttribute("addLocation",new InstitutionLocation());
+            model.addAttribute("locationErr","Lokalizacja nie może być pusta!");
             return "admin/institution/locationForm";
         }
-        institutionLocationService.saveLocation(institutionLocation);
+
+        institutionLocationService.checkIfLocationIsUnique(location,modelErr);
+        if(!modelErr.isEmpty()){
+            model.addAttribute("addLocation",new InstitutionLocation());
+            model.addAttribute("locationErr","Podana lokalizacja już istnieje!");
+            return "admin/institution/locationForm";
+        }
+
+        institutionLocationService.saveLocation(location);
         return "redirect:/admin/institutions/locations";
     }
 
     @GetMapping("/editLocation/{id}")
     public String editLocation(Model model , @PathVariable Long id){
-        institutionLocationService.addListOfLocationInstitutions(model);
-        institutionLocationService.editLocation(model,id);
+
+        model.addAttribute("editLocation",institutionLocationService.findLocation(id));
         return "admin/institution/locationForm";
     }
 
     @PostMapping("/editLocation/{id}")
     public String saveChangeLocation(InstitutionLocation location , Model model){
 
-        if(institutionLocationService.ifLocationIsNotEmptyAndUniqueDuringEditing(location,model)){
+        Err modelErr = new Err();
+
+        institutionLocationService.checkIfLocationIsNotEmpty(location,modelErr);
+        if(!modelErr.isEmpty()){
+            model.addAttribute("editLocation",institutionLocationService.findLocation(location.getId()));
+            model.addAttribute("locationErr","Lokalizacja nie może być pusta!");
+            return "admin/institution/locationForm";
+        }
+
+        institutionLocationService.checkIfLocationIsUniqueDuringEditing(location,modelErr);
+        if(!modelErr.isEmpty()){
+            model.addAttribute("editLocation",institutionLocationService.findLocation(location.getId()));
+            model.addAttribute("locationErr","Podana lokalizacja już istnieje!");
             return "admin/institution/locationForm";
         }
 
@@ -70,14 +95,26 @@ public class InstitutionLocationController {
     @GetMapping("/deleteLocation/{id}")
     private String deleteLocation(@PathVariable Long id,Model model){
 
-        if(institutionLocationService.checkIfDeleteLocationIsPossible(id,model)){
-            institutionLocationService.deleteLocation(id);
-            return "redirect:/admin/institutions/locations";
+        Err modelErr = new Err();
+
+        institutionLocationService.checkIfDeleteLocationIsPossible(id,modelErr);
+        if(!modelErr.isEmpty()) {
+            model.addAttribute("deleteLocationErr", "Usunięcie jest możliwe " +
+                    "dopiero w przypadku gdy nie ma żadnej organizacji przypisanej do danej lokalizacji!");
+            return "admin/institution/locationForm";
         }
 
-        return "admin/institution/locationForm";
+        institutionLocationService.deleteLocation(id);
+        return "redirect:/admin/institutions/locations";
     }
 
+    @ModelAttribute("locations")
+    public List<InstitutionLocation> listOfLocations(Model model){
+        return institutionLocationService.returnListOfLocations(); }
+
+    @ModelAttribute("locationsEnableToDelete")
+    public List<InstitutionLocation>listOfLocationsEnableToDelete(Model model){
+        return institutionLocationService.returnListOfLocationsEnableToDelete(); }
 
 
 }

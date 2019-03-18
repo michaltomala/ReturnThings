@@ -14,12 +14,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 
-    private final LoginService loginService;
     private final BountyService bountyService;
 
     @Autowired
-    public HomeController(LoginService loginService,BountyService bountyService) {
-        this.loginService = loginService;
+    public HomeController(BountyService bountyService) {
         this.bountyService = bountyService;
     }
 
@@ -32,6 +30,8 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home(Model model, HttpServletRequest request) {
+
+      
         bountyService.prepareForm(model,request);
         return "user/home";
     }
