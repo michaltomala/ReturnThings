@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.coderslab.entity.InstitutionLocation;
+import pl.coderslab.model.Err;
 import pl.coderslab.repository.InstitutionLocationRepository;
+
+import java.util.List;
 
 
 @Service
@@ -18,69 +21,53 @@ public class InstitutionLocationService {
         this.institutionLocationRepository = institutionLocationRepository;
     }
 
-
-    public void addListOfLocationInstitutions(Model model){
-        model.addAttribute("locations",institutionLocationRepository.findAll());
-        model.addAttribute("locationsEnableToDelete",institutionLocationRepository.findAllByInstitutionIsNull());
-    }
-
-
-    public void startAddLocation(Model model){ model.addAttribute("addLocation",new InstitutionLocation()); }
-
     public void saveLocation(InstitutionLocation location){ institutionLocationRepository.save(location); }
-
-    public void editLocation(Model model , Long id){
-        model.addAttribute("editLocation",institutionLocationRepository.findOne(id));
-    }
 
     public void deleteLocation(Long id){ institutionLocationRepository.delete(id); }
 
-    public boolean ifLocationIsNotEmptyAndUnique(InstitutionLocation institutionLocation, Model model){
+
+
+    public InstitutionLocation findLocation(Long id){ return institutionLocationRepository.findOne(id); }
+
+    public List<InstitutionLocation> returnListOfLocations(){
+        return institutionLocationRepository.findAll(); }
+
+    public List<InstitutionLocation> returnListOfLocationsEnableToDelete(){
+        return institutionLocationRepository.findAllByInstitutionIsNull(); }
+
+
+
+    public void checkIfLocationIsNotEmpty(InstitutionLocation institutionLocation, Err modelErr){
         if(institutionLocation.getLocation().equals("")) {
-            addListOfLocationInstitutions(model);
-            startAddLocation(model);
-            model.addAttribute("locationErr","Lokalizacja nie może być pusta!");
-            return true;
+            modelErr.addErr("Empty Location!");
         }
+    }
+
+    public void checkIfLocationIsUnique(InstitutionLocation institutionLocation, Err modelErr){
         InstitutionLocation location =
                 institutionLocationRepository.findFirstByLocation(institutionLocation.getLocation());
         if(location!=null){
-            addListOfLocationInstitutions(model);
-            startAddLocation(model);
-            model.addAttribute("locationErr","Podana lokalizacja już istnieje!");
-            return true;
+            modelErr.addErr("Location isn't unique!");
         }
-        return false;
     }
 
-    public boolean ifLocationIsNotEmptyAndUniqueDuringEditing(InstitutionLocation institutionLocation, Model model){
-        if(institutionLocation.getLocation().equals("")) {
-            addListOfLocationInstitutions(model);
-            editLocation(model,institutionLocation.getId());
-            model.addAttribute("locationErr","Lokalizacja nie może być pusta!");
-            return true;
-        }
+    public void checkIfLocationIsUniqueDuringEditing(InstitutionLocation institutionLocation, Err modelErr){
         InstitutionLocation location =
                 institutionLocationRepository.findFirstByLocation(institutionLocation.getLocation());
         if(location!=null && location.getId()!=institutionLocation.getId()){
-           addListOfLocationInstitutions(model);
-           editLocation(model,institutionLocation.getId());
-           model.addAttribute("locationErr","Podana lokalizacja już istnieje!");
-           return true;
+            modelErr.addErr("Location isn't unique!");
         }
-        return false;
     }
 
-
-    public boolean checkIfDeleteLocationIsPossible(Long id,Model model){
+    public void checkIfDeleteLocationIsPossible(Long id, Err modelErr){
         InstitutionLocation location = institutionLocationRepository.findOne(id);
         if(location.getInstitution().size() != 0) {
-            model.addAttribute("deleteLocationErr","Usunięcie jest możliwe " +
-                    "dopiero w przypadku gdy nie ma żadnej organizacji przypisanej do danej lokalizacji!");
-            addListOfLocationInstitutions(model);
-            return false;
+            modelErr.addErr("Not enable to delete!");
         }
-
-        return true;
     }
+
+
+
+
+
 }
