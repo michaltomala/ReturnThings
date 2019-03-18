@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <form:select path="institutionLocations"  >
-                        <form:option value="0" disabled="true" selected="true">Wybierz markę</form:option>
+                        <form:option value="0" disabled="true" selected="true">Wybierz lokalizację</form:option>
                         <form:options  items="${locations}"
                                        itemValue="id"
                                        itemLabel="location" />
@@ -53,7 +53,9 @@
             <div class="form-group">
                 <form:select path="whomHelp">
                     <form:option value="0" disabled="true" selected="true" >Komu pomaga</form:option>
-                    <form:options  items="${whomHelp}"/>
+                    <form:options  items="${whomHelp}"
+                                   itemValue="id"
+                                   itemLabel="whomHelp" />
                 </form:select>
                 <form:errors path="whomHelp" />
             </div>

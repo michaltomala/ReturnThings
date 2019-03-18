@@ -91,22 +91,14 @@ public class InstitutionService {
 
     public void addListOfWhomHelpAndLocations(Model model) {
         List<InstitutionLocation> locations = institutionLocationRepository.findAll();
-        model.addAttribute("whomHelp" , getListOfWhomHelp());
+        List<InstitutionListOfWhomHelp> whomHelp = institutionListOfWhomHelpRepository.findAll();
+        model.addAttribute("whomHelp" , whomHelp);
         model.addAttribute("locations", locations);
     }
 
 
     // todo jeśli się da - wyciągnąć bezpośrednio z repo
     //  -adnotacja 13.03 - da sie - wyciągamy wszystkie obiekty i odwołujemy się po nazwie
-    private List<String> getListOfWhomHelp(){
-        List<InstitutionListOfWhomHelp> listOfWhomHelp = institutionListOfWhomHelpRepository.findAll();
-        List<String> listToReturn = new ArrayList<>();
-        for(InstitutionListOfWhomHelp whomHelp : listOfWhomHelp){
-            listToReturn.add(whomHelp.getWhomHelp());
-        }
-        return listToReturn;
-    }
-
 
 
 
