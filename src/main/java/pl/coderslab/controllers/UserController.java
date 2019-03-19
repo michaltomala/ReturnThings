@@ -52,25 +52,26 @@ public class UserController {
     @PostMapping("settings")
     public String update(@Validated(ValidationRegisterUserGroup.class) User user, BindingResult errors,
                          HttpServletRequest req, Model model, HttpSession session){
+// todo - do zrobienia ten if
 
-        if(user.getPassword().equals("")){
-            if(adminUserService.checkEmail(user,model)){
-                userService.edit(model,req,session);
-                return "user/settings";
-            }else{
-                userService.onlySaveUser(user,session);
-                return "redirect:/user/settings";
-            }
-        }
-
-        if (errors.hasErrors()) {
-            if(adminUserService.checkEmail(user,model)){
-                userService.edit(model,req,session);
-                return "user/settings";
-            }
-
-            return "user/settings";
-        }
+//        if(user.getPassword().equals("")){
+//            if(adminUserService.checkEmail(user,model)){
+//                userService.edit(model,req,session);
+//                return "user/settings";
+//            }else{
+//                userService.onlySaveUser(user,session);
+//                return "redirect:/user/settings";
+//            }
+//        }
+//
+//        if (errors.hasErrors()) {
+//            if(adminUserService.checkEmail(user,model)){
+//                userService.edit(model,req,session);
+//                return "user/settings";
+//            }
+//
+//            return "user/settings";
+//        }
 
         if(userService.update(user,model,session)){
             return "user/settings";

@@ -4,15 +4,14 @@ package pl.coderslab.controllers.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.User;
+import pl.coderslab.model.Err;
 import pl.coderslab.services.admin.AdminUserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
@@ -29,7 +28,7 @@ public class UserAdminController {
 
     @GetMapping("users")
     public String users(Model model){
-        adminUserService.addListOfUsers(model);
+
         return "admin/users";
     }
 
@@ -43,18 +42,28 @@ public class UserAdminController {
 
     @GetMapping("edit/{id}")
     public String edit(@PathVariable Long id, Model model , HttpServletRequest request){
-        adminUserService.addListOfUsers(model);
-        adminUserService.edit(id,model,request);
+
+        model.addAttribute("editingUser",adminUserService.findUser(id));
+        model.addAttribute("formAction", request.getContextPath() + "/admin/user/edit/{id}"+id);
         return "admin/users";
     }
 
     @PostMapping("edit/{id}")
     public String update(User user, HttpServletRequest req, Model model, HttpSession session){
 
-        if(adminUserService.update(user,model,session)){
+        Err modelErr = new Err();
+
+        adminUserService.checkEmail(user,modelErr);
+        if(!modelErr.isEmpty()) {
+            model.addAttribute("emailErr", modelErr.getErrors().get(0));
+
+            model.addAttribute("user",session.getAttribute("user"));
+            User editingUser = adminUserService.findUser(user.getId());
+            model.addAttribute("editingUser",editingUser);
             return "admin/users";
         }
 
+        adminUserService.saveUser(user);
         return "redirect:"+req.getContextPath()+"/admin/user/users";
     }
 
@@ -68,8 +77,10 @@ public class UserAdminController {
 
     @GetMapping("confirm/{id}")
     public String confirm(Model model, @PathVariable Long id){
-        adminUserService.addListOfUsers(model);
-        adminUserService.confirmDeleteUser(model,id);
+
+        User user = adminUserService.findUser(id);
+        model.addAttribute("deletingUser",user);
+        model.addAttribute("confirm",user);
         return "admin/users";
     }
 
@@ -79,6 +90,9 @@ public class UserAdminController {
         adminUserService.deleteUser(user);
         return "redirect:"+request.getContextPath()+"/admin/user/users";
     }
+
+    @ModelAttribute("users")
+    public List<User> listOfAdmins(Model model){ return adminUserService.returnListOfUsers(); }
 
 
 }

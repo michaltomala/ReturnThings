@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import pl.coderslab.entity.InstitutionLocation;
 import pl.coderslab.entity.User;
+import pl.coderslab.model.Err;
 import pl.coderslab.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,69 +23,25 @@ public class AdminUserService {
     @Autowired
     public AdminUserService(UserRepository userRepository) { this.userRepository = userRepository; }
 
-    public void addListOfAdmins(Model model){
-        model.addAttribute("admins",userRepository.findAllByIsAdmin(true));
-    }
 
-    public void addListOfUsers(Model model){
-        model.addAttribute("users",userRepository.findAllByIsAdmin(false));
-    }
+    public void saveUser(User user){ userRepository.save(user); }
+
+    public void deleteUser(User user){ userRepository.delete(user); }
 
 
-    public void edit(Long id, Model model, HttpServletRequest request){
-        User editingUser = userRepository.findOne(id);
-    if(editingUser.getIsAdmin()){
-        model.addAttribute("editingAdmin",editingUser);
-        model.addAttribute("formAction", request.getContextPath() + "/admin/edit/{id}"+id);
-    }else{
-        model.addAttribute("editingUser",editingUser);
-        model.addAttribute("formAction", request.getContextPath() + "/admin/user/edit/{id}"+id);
-        }
-    }
+    public User findUser(Long id){ return userRepository.findOne(id); }
 
-    public boolean update(User user, Model model, HttpSession session){
-        if (checkEmail(user, model)) {
-            return addModelAttributesDuringEditingUser(user, model, session);
-        }
+    public List<User> returnListOfUsers(){ return userRepository.findAllByIsAdmin(false); }
 
-        userRepository.save(user);
-        return false;
-    }
+    public List<User> returnListOfAdmins(){ return userRepository.findAllByIsAdmin(true); }
 
 
 
-    public void confirmDeleteUser(Model model, Long id){
-
-        User user = userRepository.findOne(id);
-        model.addAttribute("deletingUser",user);
-        model.addAttribute("confirm",user);
-    }
-
-    public void deleteUser(User user){
-
-        userRepository.delete(user);
-    }
-
-
-
-    private boolean addModelAttributesDuringEditingUser(User user, Model model, HttpSession session) {
-        model.addAttribute("user",session.getAttribute("user"));
-        User editingUser =userRepository.findOne(user.getId());
-        if(editingUser.getIsAdmin()){
-            model.addAttribute("editingAdmin" , editingUser);
-            addListOfAdmins(model);
-            return true;
-        }
-        model.addAttribute("editingUser",editingUser);
-        addListOfUsers(model);
-        return true;
-    }
-
-    public boolean checkEmail(User user, Model model) {
+    public void checkEmail(User user, Err modelErr) {
 //      Checking if email is empty
         if(user.getEmail().equals("")){
-            model.addAttribute("emailErr", "Email nie może być pusty !");
-            return true;
+            modelErr.addErr("Email nie może być pusty !");
+            return;
         }
 
 //      Checking if email is email
@@ -91,16 +49,16 @@ public class AdminUserService {
         Matcher matcher = pattern.matcher(user.getEmail());
 
         if(!matcher.matches()){
-            model.addAttribute("emailErr", "Niepoprawny format!");
-            return true;
+            modelErr.addErr("Niepoprawny format!");
+            return;
         }
 
 //      Checking if email is unique
         User checkUser = userRepository.findFirstByEmail(user.getEmail());
         if (checkUser != null && !checkUser.getId().equals(user.getId())) {
-            model.addAttribute("emailErr", "Email musi być unikalny !");
-            return true;
+            modelErr.addErr("Email musi być unikalny !");
         }
-        return false;
     }
+
+
 }
