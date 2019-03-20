@@ -8,8 +8,6 @@ import pl.coderslab.entity.Bounty;
 import pl.coderslab.entity.BountyType;
 import pl.coderslab.entity.Institution;
 import pl.coderslab.repository.BountyTypeRepository;
-import pl.coderslab.services.admin.InstitutionLocationService;
-import pl.coderslab.services.admin.InstitutionService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;

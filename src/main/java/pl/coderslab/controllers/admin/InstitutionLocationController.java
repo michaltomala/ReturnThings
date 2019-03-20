@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.InstitutionLocation;
 import pl.coderslab.model.Err;
-import pl.coderslab.services.admin.InstitutionLocationService;
+import pl.coderslab.services.InstitutionLocationService;
 
 import java.util.List;
 

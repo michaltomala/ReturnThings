@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.entity.User;
 import pl.coderslab.model.Err;
 import pl.coderslab.services.UserService;
-import pl.coderslab.services.admin.AdminUserService;
 import pl.coderslab.validator.ValidationRegisterUserGroup;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,13 +23,11 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     private final UserService userService;
-    private final AdminUserService adminUserService;
 
     @Autowired
-    public UserController(UserService userService,AdminUserService adminUserService) {
+    public UserController(UserService userService) {
 
         this.userService = userService;
-        this.adminUserService = adminUserService;
     }
 
     @GetMapping("settings")
@@ -62,7 +59,7 @@ public class UserController {
             return changeOnlyEmail(user, req, model, session, modelErr); }
 
         if (errors.hasErrors()) {
-            adminUserService.checkEmail(user, modelErr);
+            userService.checkEmail(user, modelErr);
             if (!modelErr.isEmpty()) {
                 model.addAttribute("emailErr", modelErr.getErrors().get(0));
                 model.addAttribute("user", session.getAttribute("user"));
@@ -101,7 +98,7 @@ public class UserController {
 
 
     private String changeOnlyEmail(@Validated(ValidationRegisterUserGroup.class) User user, HttpServletRequest req, Model model, HttpSession session, Err modelErr) {
-        adminUserService.checkEmail(user, modelErr);
+        userService.checkEmail(user, modelErr);
         if (!modelErr.isEmpty()) {
             model.addAttribute("emailErr", modelErr.getErrors().get(0));
             model.addAttribute("user", session.getAttribute("user"));

@@ -10,8 +10,8 @@ import pl.coderslab.entity.Institution;
 import pl.coderslab.entity.InstitutionListOfWhomHelp;
 import pl.coderslab.entity.InstitutionLocation;
 import pl.coderslab.model.Err;
-import pl.coderslab.services.admin.InstitutionLocationService;
-import pl.coderslab.services.admin.InstitutionService;
+import pl.coderslab.services.InstitutionLocationService;
+import pl.coderslab.services.InstitutionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;

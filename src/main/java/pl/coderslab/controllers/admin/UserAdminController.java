@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.User;
 import pl.coderslab.model.Err;
-import pl.coderslab.services.admin.AdminUserService;
+import pl.coderslab.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,11 +18,11 @@ import java.util.List;
 @RequestMapping("/admin/user/")
 public class UserAdminController {
 
-    private final AdminUserService adminUserService;
+    private final UserService userService;
 
     @Autowired
-    public UserAdminController(AdminUserService adminUserService) {
-        this.adminUserService = adminUserService;
+    public UserAdminController(UserService userService) {
+        this.userService = userService;
     }
 
 
@@ -43,7 +43,7 @@ public class UserAdminController {
     @GetMapping("edit/{id}")
     public String edit(@PathVariable Long id, Model model , HttpServletRequest request){
 
-        model.addAttribute("editingUser",adminUserService.findUser(id));
+        model.addAttribute("editingUser", userService.findUser(id));
         model.addAttribute("formAction", request.getContextPath() + "/admin/user/edit/{id}"+id);
         return "admin/users";
     }
@@ -53,17 +53,17 @@ public class UserAdminController {
 
         Err modelErr = new Err();
 
-        adminUserService.checkEmail(user,modelErr);
+        userService.checkEmail(user,modelErr);
         if(!modelErr.isEmpty()) {
             model.addAttribute("emailErr", modelErr.getErrors().get(0));
 
             model.addAttribute("user",session.getAttribute("user"));
-            User editingUser = adminUserService.findUser(user.getId());
+            User editingUser = userService.findUser(user.getId());
             model.addAttribute("editingUser",editingUser);
             return "admin/users";
         }
 
-        adminUserService.saveUser(user);
+        userService.saveUser(user);
         return "redirect:"+req.getContextPath()+"/admin/user/users";
     }
 
@@ -78,7 +78,7 @@ public class UserAdminController {
     @GetMapping("confirm/{id}")
     public String confirm(Model model, @PathVariable Long id){
 
-        User user = adminUserService.findUser(id);
+        User user = userService.findUser(id);
         model.addAttribute("deletingUser",user);
         model.addAttribute("confirm",user);
         return "admin/users";
@@ -87,12 +87,12 @@ public class UserAdminController {
     @GetMapping("delete/{id}")
     public String delete(User user,HttpServletRequest request){
 
-        adminUserService.deleteUser(user);
+        userService.deleteUser(user);
         return "redirect:"+request.getContextPath()+"/admin/user/users";
     }
 
     @ModelAttribute("users")
-    public List<User> listOfAdmins(Model model){ return adminUserService.returnListOfUsers(); }
+    public List<User> listOfAdmins(Model model){ return userService.returnListOfUsers(); }
 
 
 }
