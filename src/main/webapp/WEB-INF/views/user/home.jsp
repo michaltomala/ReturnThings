@@ -54,10 +54,10 @@
                             <input
                                     type="checkbox"
                                     name="products[]"
-                                    value="${type}"
+                                    value="${type.type}"
                             />
                             <span class="checkbox"></span>
-                            <span class="description">${type}</span>
+                            <span class="description">${type.type}</span>
                         </label>
                     </div>
                 </c:forEach>
