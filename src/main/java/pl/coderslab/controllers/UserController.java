@@ -48,7 +48,7 @@ public class UserController {
      * @param session
      * @return
      */
-// todo - zrobic dodatkowe pole na stare hasło
+
     @PostMapping("settings")
     public String update(@Validated(ValidationRegisterUserGroup.class) User user, BindingResult errors,
                          HttpServletRequest req, Model model, HttpSession session){

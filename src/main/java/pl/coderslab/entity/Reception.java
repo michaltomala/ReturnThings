@@ -21,6 +21,7 @@ public class Reception {
 
     private Date date;
 //  todo - do sprecyzowania przy działającym formularzu
+
     private int hour;
     private String comments;
 
