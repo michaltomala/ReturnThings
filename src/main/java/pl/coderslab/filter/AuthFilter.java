@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"/user/*","/step*"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = {"/user/*","/form/*"})
 public class AuthFilter implements Filter {
 
     public void destroy() {
