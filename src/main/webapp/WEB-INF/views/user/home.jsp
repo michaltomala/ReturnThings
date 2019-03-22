@@ -28,31 +28,44 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/5</div>
 
-        <form action="${formAction}">
+        <form:form  action="${formAction}"
+                    method="post"
+                    modelAttribute="bounty"
+        >
             <!-- STEP 1: class .active is switching steps -->
-            <div data-step="1" class="active">
+            <div data-step=z"1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
 
                 <c:forEach items="${bountyTypes}" var="type">
                     <div class="form-group form-group--checkbox">
+                        <form:label path="bountyType">
+                            <input type="checkbox" value="${type}"/>
+                            <span class="checkbox"></span>
+                            <span class="description">${type.type}</span>
+                        </form:label>
+                    </div>
+                </c:forEach>
+                <%--<c:forEach items="${bountyTypes}" var="type">--%>
+                    <div class="form-group form-group--checkbox">
                         <label>
                             <input
                                     type="checkbox"
-                                    name="products[]"
-                                    value="${type.type}"
+                                    name="bountyType[]"
+                                    value="${type}"
+
                             />
                             <span class="checkbox"></span>
                             <span class="description">${type.type}</span>
                         </label>
                     </div>
-                </c:forEach>
+                <%--</c:forEach>--%>
 
 
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button type="submit" class="btn">Dalej</button>
                 </div>
             </div>
-        </form>
+        </form:form>
     </div>
 </section>
 

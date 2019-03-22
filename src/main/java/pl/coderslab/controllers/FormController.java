@@ -5,10 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.entity.Bounty;
 
 
 @Controller
 public class FormController {
+
+    @PostMapping("/form/step1")
+    public String step1(Bounty bounty){
+
+
+        return "redirect:/form/step2";
+    }
 
 
     @GetMapping("/form/step2")

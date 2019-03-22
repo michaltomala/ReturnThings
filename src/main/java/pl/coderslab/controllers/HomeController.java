@@ -43,10 +43,10 @@ public class HomeController {
 
         model.addAttribute("bountyTypes",bountyService.returnListOfBountyTypes());
         model.addAttribute("bounty",new Bounty());
-        model.addAttribute("institution",new Institution());
-        model.addAttribute("formAction", request.getContextPath() + "/bountyForm");
-        model.addAttribute("whomHelp" , institutionService.returnWhomHelpList());
-        model.addAttribute("locations", institutionLocationService.returnListOfLocations());
+        model.addAttribute("formAction", request.getContextPath() + "/form/step1");
+//        model.addAttribute("institution",new Institution());
+//        model.addAttribute("whomHelp" , institutionService.returnWhomHelpList());
+//        model.addAttribute("locations", institutionLocationService.returnListOfLocations());
 
         return "user/home";
     }
