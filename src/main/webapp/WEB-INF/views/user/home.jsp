@@ -36,29 +36,9 @@
             <div data-step=z"1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
 
-                <c:forEach items="${bountyTypes}" var="type">
-                    <div class="form-group form-group--checkbox">
-                        <form:label path="bountyType">
-                            <input type="checkbox" value="${type}"/>
-                            <span class="checkbox"></span>
-                            <span class="description">${type.type}</span>
-                        </form:label>
-                    </div>
-                </c:forEach>
-                <%--<c:forEach items="${bountyTypes}" var="type">--%>
-                    <div class="form-group form-group--checkbox">
-                        <label>
-                            <input
-                                    type="checkbox"
-                                    name="bountyType[]"
-                                    value="${type}"
-
-                            />
-                            <span class="checkbox"></span>
-                            <span class="description">${type.type}</span>
-                        </label>
-                    </div>
-                <%--</c:forEach>--%>
+                <form:checkboxes delimiter="<br/>" path="bountyType" multiple="true" items="${bountyTypes}"
+                                 itemLabel="type" itemValue="id"  />
+                <form:errors path="*"/>
 
 
                 <div class="form-group form-group--buttons">
