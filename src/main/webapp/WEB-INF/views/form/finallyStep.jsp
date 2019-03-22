@@ -15,20 +15,13 @@
 <%@include file="../user/homeHeader.jsp"%>
 
 <section class="form--steps">
-    <div class="form--steps-instructions">
-        <div class="form--steps-container">
-            <h3>Ważne!</h3>
-            <p data-step="5" class="active">Podaj adres oraz termin odbioru rzeczy.</p>
-        </div>
-    </div>
 
 
 <div class="form--steps-container">
-    <div class="form--steps-counter">Krok <span>1</span>/5</div>
     <form action="${formAction}">
 
         <!-- STEP 7 -->
-        <div data-step="7">
+        <div data-step="7" class="active">
             <h2>
                 Dziękujemy za przesłanie formularza Na maila prześlemy wszelkie
                 informacje o odbiorze.

@@ -26,7 +26,7 @@
 </div>
 
     <div class="form--steps-container">
-        <div class="form--steps-counter">Krok <span>1</span>/5</div>
+        <div class="form--steps-counter">Krok <span>2</span>/5</div>
         <form action="${formAction}">
             <div data-step="2" class="active">
                 <h3>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
