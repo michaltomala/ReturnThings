@@ -45,11 +45,12 @@ public class FormController {
         session.setAttribute("bounty",bounty);
         return "redirect:/form/step2";
     }
-
+// todo - placeholders to keep values in all steps
 
     @GetMapping("/form/step2")
-    public String step2(Model model,HttpServletRequest request){
+    public String step2(Model model,HttpServletRequest request,HttpSession session){
 
+        model.addAttribute("bounty",session.getAttribute("bounty"));
         model.addAttribute("formAction", request.getContextPath() + "/form/step2");
         return "form/step2";
     }

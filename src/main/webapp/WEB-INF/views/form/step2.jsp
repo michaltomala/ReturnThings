@@ -27,23 +27,27 @@
 
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>2</span>/5</div>
-        <form action="${formAction}">
+
+        <form:form  action="${formAction}"
+                    method="post"
+                    modelAttribute="bounty"
+        >
             <div data-step="2" class="active">
                 <h3>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
 
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <input type="number" name="bags" step="1" min="1" />
+                        <form:input path="quantityOfBags" type="number" step="1" min="1" />
                     </label>
                 </div>
 
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <a href="${pageContext.request.contextPath}/home" class="btn">Wstecz</a>
+                    <button type="submit" class="btn">Dalej</button>
                 </div>
             </div>
-        </form>
+        </form:form>
     </div>
 </section>
 
