@@ -38,14 +38,15 @@
 
                 <form:checkboxes delimiter="<br/>" path="bountyType" multiple="true" items="${bountyTypes}"
                                  itemLabel="type" itemValue="id"  />
-                <form:errors path="*"/>
 
 
                 <div class="form-group form-group--buttons">
                     <button type="submit" class="btn">Dalej</button>
                 </div>
+                <c:if test="${not empty bountyErr}" ><br/>${bountyErr}</c:if>
             </div>
         </form:form>
+
     </div>
 </section>
 

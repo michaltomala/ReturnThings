@@ -9,8 +9,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.Bounty;
-import pl.coderslab.services.BountyService;
-import pl.coderslab.validator.form.ValidationFormStep1;
+import pl.coderslab.model.Err;
+import pl.coderslab.services.FormService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,34 +19,38 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class FormController {
 
-    private final BountyService bountyService;
+    private final FormService formService;
 
     @Autowired
-    public FormController(BountyService bountyService) {
+    public FormController(FormService formService) {
 
-        this.bountyService = bountyService;
+        this.formService = formService;
     }
 
 
     @PostMapping("/form/step1")
-    public String step1(@Validated(ValidationFormStep1.class) Bounty bounty , BindingResult errors,
-                        Model model, HttpServletRequest request, HttpSession session){
+    public String step1(Bounty bounty , Model model, HttpServletRequest request, HttpSession session){
 
-        if(errors.hasErrors()){
-            model.addAttribute("bountyTypes",bountyService.returnListOfBountyTypes());
+        Err modelErr = new Err();
+
+        formService.checkIfNotEmptyBountyType(bounty,modelErr);
+        if(!modelErr.isEmpty()){
+            model.addAttribute("bountyTypes",formService.returnListOfBountyTypes());
             model.addAttribute("bounty",new Bounty());
             model.addAttribute("formAction", request.getContextPath() + "/form/step1");
-//          todo - wyświetlić błąð w jsp
+            model.addAttribute("bountyErr", "Musisz zaznaczyć co chcesz oddać !");
             return "user/home";
         }
+
         session.setAttribute("bounty",bounty);
         return "redirect:/form/step2";
     }
 
 
     @GetMapping("/form/step2")
-    public String step2(){
+    public String step2(Model model,HttpServletRequest request){
 
+        model.addAttribute("formAction", request.getContextPath() + "/form/step2");
         return "form/step2";
     }
 

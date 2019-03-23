@@ -2,7 +2,6 @@ package pl.coderslab.entity;
 
 
 import org.hibernate.validator.constraints.NotEmpty;
-import pl.coderslab.validator.form.ValidationFormStep1;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,7 +16,7 @@ public class Bounty {
     private Long id;
 
 
-    @NotEmpty(groups = ValidationFormStep1.class ,message = "Musisz zaznaczyć co chcesz oddać!")
+    @NotEmpty(message = "Musisz zaznaczyć co chcesz oddać!")
     @ManyToMany
     private List<BountyType> bountyType;
 

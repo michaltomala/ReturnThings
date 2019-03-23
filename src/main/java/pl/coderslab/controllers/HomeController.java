@@ -6,27 +6,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.coderslab.entity.Bounty;
-import pl.coderslab.entity.Institution;
-import pl.coderslab.services.BountyService;
+import pl.coderslab.services.FormService;
 import pl.coderslab.services.InstitutionLocationService;
 import pl.coderslab.services.InstitutionService;
-import pl.coderslab.services.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
 
-    private final BountyService bountyService;
+    private final FormService formService;
     private final InstitutionService institutionService;
     private final InstitutionLocationService institutionLocationService;
 
     @Autowired
-    public HomeController(BountyService bountyService,InstitutionService institutionService,
+    public HomeController(FormService formService, InstitutionService institutionService,
                           InstitutionLocationService institutionLocationService) {
 
-        this.bountyService = bountyService;
+        this.formService = formService;
         this.institutionService = institutionService;
         this.institutionLocationService = institutionLocationService;
     }
@@ -41,7 +38,7 @@ public class HomeController {
     @GetMapping("/home")
     public String home(Model model, HttpServletRequest request) {
 
-        model.addAttribute("bountyTypes",bountyService.returnListOfBountyTypes());
+        model.addAttribute("bountyTypes", formService.returnListOfBountyTypes());
         model.addAttribute("bounty",new Bounty());
         model.addAttribute("formAction", request.getContextPath() + "/form/step1");
 //        model.addAttribute("institution",new Institution());
