@@ -30,6 +30,7 @@ public class FormService {
     public void checkIfNotEmptyBountyType(Bounty bounty, Err modelErr){
         if(bounty.getBountyType().isEmpty()){ modelErr.addErr("Empty BountyTypes!"); } }
 
-
+    public void checkIfNotEmptyQuantityOfBags(Bounty bounty, Err modelErr){
+        if(bounty.getQuantityOfBags()==null){ modelErr.addErr("Empty quantityOfBags!"); } }
 
 }

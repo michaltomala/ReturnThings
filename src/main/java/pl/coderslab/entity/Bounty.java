@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,9 +19,9 @@ public class Bounty {
 
     @NotEmpty(message = "Musisz zaznaczyć co chcesz oddać!")
     @ManyToMany
-    private List<BountyType> bountyType;
+    private List<BountyType> bountyType= new ArrayList<>();
 
-    @NotNull
+    @NotNull(message = "Liczba worków nie może być pusta !")
     private Long quantityOfBags;
 
     public Bounty() {

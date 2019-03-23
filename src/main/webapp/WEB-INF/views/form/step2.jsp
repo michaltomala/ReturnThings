@@ -39,6 +39,7 @@
                     <label>
                         Liczba 60l worków:
                         <form:input path="quantityOfBags" type="number" step="1" min="1" />
+                        <c:if test="${not empty bountyErr}">${bountyErr}</c:if>
                     </label>
                 </div>
 

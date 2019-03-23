@@ -4,8 +4,6 @@ package pl.coderslab.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.Bounty;
@@ -35,14 +33,20 @@ public class FormController {
 
         formService.checkIfNotEmptyBountyType(bounty,modelErr);
         if(!modelErr.isEmpty()){
+
             model.addAttribute("bountyTypes",formService.returnListOfBountyTypes());
-            model.addAttribute("bounty",new Bounty());
             model.addAttribute("formAction", request.getContextPath() + "/form/step1");
             model.addAttribute("bountyErr", "Musisz zaznaczyć co chcesz oddać !");
             return "user/home";
         }
 
-        session.setAttribute("bounty",bounty);
+        Bounty bountyFromSession = (Bounty) session.getAttribute("bounty");
+        if(bountyFromSession==null){
+            session.setAttribute("bounty",bounty);
+        }else{
+            bounty.setQuantityOfBags(bountyFromSession.getQuantityOfBags());
+            session.setAttribute("bounty",bounty);
+        }
         return "redirect:/form/step2";
     }
 // todo - placeholders to keep values in all steps
@@ -56,8 +60,22 @@ public class FormController {
     }
 
     @PostMapping("/form/step2")
-    public String postFormStep2(){
+    public String postFormStep2(Bounty bounty ,HttpSession session,Model model){
 
+        Err modelErr = new Err();
+
+        formService.checkIfNotEmptyQuantityOfBags(bounty,modelErr);
+        if(!modelErr.isEmpty()){
+            model.addAttribute("bountyErr", "Liczba worków nie może być pusta !");
+            return "form/step2";
+        }
+
+        if(bounty.getBountyType().isEmpty()){
+            Bounty bountyFromSession = (Bounty) session.getAttribute("bounty");
+            bounty.setBountyType(bountyFromSession.getBountyType());
+        }
+
+        session.setAttribute("bounty",bounty);
         return "redirect:/form/step3";
     }
 

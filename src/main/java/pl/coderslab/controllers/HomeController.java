@@ -43,7 +43,9 @@ public class HomeController {
         model.addAttribute("formAction", request.getContextPath() + "/form/step1");
         if(session.getAttribute("bounty") == null){
             model.addAttribute("bounty",new Bounty());
-        }else { model.addAttribute("bounty",session.getAttribute("bounty")); }
+        } else {
+            model.addAttribute("bounty",session.getAttribute("bounty"));
+        }
 
 //        model.addAttribute("institution",new Institution());
 //        model.addAttribute("whomHelp" , institutionService.returnWhomHelpList());
