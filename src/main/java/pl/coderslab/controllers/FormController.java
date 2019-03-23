@@ -7,8 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.Bounty;
+import pl.coderslab.entity.Institution;
 import pl.coderslab.model.Err;
 import pl.coderslab.services.FormService;
+import pl.coderslab.services.InstitutionLocationService;
+import pl.coderslab.services.InstitutionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,11 +21,17 @@ import javax.servlet.http.HttpSession;
 public class FormController {
 
     private final FormService formService;
+    private final InstitutionService institutionService;
+    private final InstitutionLocationService institutionLocationService;
 
     @Autowired
-    public FormController(FormService formService) {
+    public FormController(FormService formService,
+                          InstitutionService institutionService,
+                          InstitutionLocationService institutionLocationService) {
 
         this.formService = formService;
+        this.institutionService = institutionService;
+        this.institutionLocationService = institutionLocationService;
     }
 
 
@@ -80,13 +89,17 @@ public class FormController {
     }
 
     @GetMapping("/form/step3")
-    public String step3(){
+    public String step3(Model model,HttpServletRequest request){
 
+        model.addAttribute("institution",new Institution());
+        model.addAttribute("whomHelp" , institutionService.returnWhomHelpList());
+        model.addAttribute("locations", institutionLocationService.returnListOfLocations());
+        model.addAttribute("formAction", request.getContextPath() + "/form/step3");
         return "form/step3";
     }
 
     @PostMapping("/form/step3")
-    public String postFormStep3(){
+    public String postFormStep3(Institution institution){
 
         return "redirect:/form/step4";
     }

@@ -82,6 +82,7 @@ public class InitApplicationService {
             whomHelpList.add("bezdomnym");
             whomHelpList.add("niepełnosprawnym");
             whomHelpList.add("osobom starszym");
+            whomHelpList.add("dupa");
 
             for (String str : whomHelpList) {
                 InstitutionListOfWhomHelp institutionListOfWhomHelp = new InstitutionListOfWhomHelp();

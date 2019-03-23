@@ -28,65 +28,53 @@
 
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>3</span>/5</div>
-        <form action="${formAction}">
+
+        <form:form action="${formAction}"
+                   method="post"
+                   modelAttribute="institution">
 
             <div data-step="3" class="active">
                 <h3>Lokalizacja:</h3>
 
                 <div class="form-group form-group--dropdown">
-                    <select name="localization">
+                    <%--<select name="localization">--%>
+                        <form:select path="institutionLocations" name="localization">
                         <option value="0">- wybierz -</option>
-                        <option value="warsaw">Warszawa</option>
-                        <option value="wroclaw">Wrocław</option>
-                        <option value="poznan">Poznań</option>
-                        <option value="gdansk">Gdańsk</option>
-                    </select>
+                        <c:forEach items="${locations}" var="location">
+                            <option value="${location.id}" >${location.location}</option>
+                        </c:forEach>
+                        <%--<div class="form-group form-group--dropdown">--%>
+                            <%--<select name="localization">--%>
+                                <%--<option value="0">- wybierz -</option>--%>
+                                <%--<option value="warsaw">Warszawa</option>--%>
+                                <%--<option value="wroclaw">Wrocław</option>--%>
+                                <%--<option value="poznan">Poznań</option>--%>
+                                <%--<option value="gdansk">Gdańsk</option>--%>
+                            <%--</select>--%>
+                        <%--</div>--%>
+
+
+                            <%--<form:select path="fruit" items="${fruit}" multiple="true"/> - typ select--%>
+                            <%--<form:select path="book"> - typ select z dodatkową opcją--%>
+                                <%--<form:option value="-" label="--Please Select--"/>--%>
+                                <%--<form:options items="${books}"/>--%>
+                            <%--</form:select>--%>
+
+                        </form:select>
+
+                    <%--</select>--%>
                 </div>
 
                 <div class="form-section">
                     <h4>Komu chcesz pomóc?</h4>
-                    <div class="form-section--checkboxes">
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input type="checkbox" name="help[]" value="children" />
-                                <span class="checkbox">dzieciom</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input type="checkbox" name="help[]" value="mothers" />
-                                <span class="checkbox">samotnym matkom</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input type="checkbox" name="help[]" value="homeless" />
-                                <span class="checkbox">bezdomnym</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input type="checkbox" name="help[]" value="disabled" />
-                                <span class="checkbox">niepełnosprawnym</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input type="checkbox" name="help[]" value="old" />
-                                <span class="checkbox">osobom starszym</span>
-                            </label>
-                        </div>
-                    </div>
+                    <form:checkboxes delimiter="<br/>" path="whomHelp" items="${whomHelp}" multiple="true"
+                                     itemValue="id" itemLabel="whomHelp" />
                 </div>
 
                 <div class="form-section">
                     <h4>Wpisz nazwę konkretnej organizacji (opcjonalnie)</h4>
                     <div class="form-group">
-                        <textarea rows="4" name="organization_search"></textarea>
+                        <form:textarea rows="4" path="name"/>
                     </div>
                 </div>
 
@@ -96,7 +84,7 @@
                 </div>
             </div>
 
-        </form>
+        </form:form>
     </div>
 </section>
 

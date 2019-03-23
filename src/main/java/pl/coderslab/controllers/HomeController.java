@@ -47,10 +47,6 @@ public class HomeController {
             model.addAttribute("bounty",session.getAttribute("bounty"));
         }
 
-//        model.addAttribute("institution",new Institution());
-//        model.addAttribute("whomHelp" , institutionService.returnWhomHelpList());
-//        model.addAttribute("locations", institutionLocationService.returnListOfLocations());
-
         return "user/home";
     }
 

@@ -30,8 +30,7 @@
 
         <form:form  action="${formAction}"
                     method="post"
-                    modelAttribute="bounty"
-        >
+                    modelAttribute="bounty">
             <div data-step="2" class="active">
                 <h3>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
 
