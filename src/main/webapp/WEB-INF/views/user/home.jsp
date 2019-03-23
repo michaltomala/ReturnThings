@@ -32,13 +32,11 @@
                     method="post"
                     modelAttribute="bounty"
         >
-            <!-- STEP 1: class .active is switching steps -->
             <div data-step=z"1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
 
                 <form:checkboxes delimiter="<br/>" path="bountyType" multiple="true" items="${bountyTypes}"
-                                 itemLabel="type" itemValue="id"  />
-
+                                 itemLabel="type" itemValue="id" />
 
                 <div class="form-group form-group--buttons">
                     <button type="submit" class="btn">Dalej</button>

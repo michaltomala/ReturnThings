@@ -11,6 +11,7 @@ import pl.coderslab.services.InstitutionLocationService;
 import pl.coderslab.services.InstitutionService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -36,11 +37,14 @@ public class HomeController {
 
 
     @GetMapping("/home")
-    public String home(Model model, HttpServletRequest request) {
+    public String home(Model model, HttpServletRequest request, HttpSession session) {
 
         model.addAttribute("bountyTypes", formService.returnListOfBountyTypes());
-        model.addAttribute("bounty",new Bounty());
         model.addAttribute("formAction", request.getContextPath() + "/form/step1");
+        if(session.getAttribute("bounty") == null){
+            model.addAttribute("bounty",new Bounty());
+        }else { model.addAttribute("bounty",session.getAttribute("bounty")); }
+
 //        model.addAttribute("institution",new Institution());
 //        model.addAttribute("whomHelp" , institutionService.returnWhomHelpList());
 //        model.addAttribute("locations", institutionLocationService.returnListOfLocations());
