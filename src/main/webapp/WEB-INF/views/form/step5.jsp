@@ -74,9 +74,10 @@
                     </div>
                 </div>
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <a href="${pageContext.request.contextPath}/form/step4" class="btn">Wstecz</a>
+                    <button type="submit" class="btn">Dalej</button>
                 </div>
+
             </div>
 
 

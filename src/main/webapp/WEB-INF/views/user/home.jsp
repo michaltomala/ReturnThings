@@ -30,8 +30,8 @@
 
         <form:form  action="${formAction}"
                     method="post"
-                    modelAttribute="bounty"
-        >
+                    modelAttribute="bounty">
+
             <div data-step=z"1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
 
