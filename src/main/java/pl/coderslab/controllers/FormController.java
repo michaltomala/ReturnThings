@@ -15,6 +15,7 @@ import pl.coderslab.services.InstitutionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
@@ -91,24 +92,38 @@ public class FormController {
     @GetMapping("/form/step3")
     public String step3(Model model,HttpServletRequest request){
 
-        model.addAttribute("institution",new Institution());
-        model.addAttribute("whomHelp" , institutionService.returnWhomHelpList());
-        model.addAttribute("locations", institutionLocationService.returnListOfLocations());
-        model.addAttribute("formAction", request.getContextPath() + "/form/step3");
-        return "form/step3";
+        return AddAttributeModelsToStep3(model, request);
     }
 
     @PostMapping("/form/step3")
-    public String postFormStep3(Institution institution,Model model){
-//       todo - walidacja  - co najmniej jedna opcja musi być spełniona z pierwszych dwóch
+    public String postFormStep3(Institution institution,Model model,
+                                HttpServletRequest request,HttpSession session){
 
-//       todo przesłać obiekt do formSerwisu - ma on zwrócić listę instytucji
-//       todo - jeśli lista bedzie pusta - zwrócić komunikat,że nie znaleziono
-//        - w takim wypadku zaleca się wybranie np.tylko lokalizacji
-        model.addAttribute("institutions",formService.findInstitutions(institution));
+        formService.setLocationsToEmptyStringWhenNull(institution);
+
+        Err modelErr = new Err();
+        formService.checkInstitution(institution,modelErr);
+        if(!modelErr.isEmpty()){
+            model.addAttribute("institutionErr","Aby wyszukać instytucję musisz " +
+                    "wyznaczyć jakiekolwiek parametry!");
+            return AddAttributeModelsToStep3(model, request);
+        }
+
+//      todo tu trzeba obsłużyć wyjątek na null pointer exception try catchem
+//       List<Institution> institutionList = formService.findInstitutions(institution);
+
+        if(formService.findInstitutions(institution)==null){
+            model.addAttribute("institutionErr","Nie znaleziono instytucji o podanych kryteriach \n " +
+                    "W takich sytuacjach zalecamy wybranie tylko lokalizacji - pomoże to w dobraniu " +
+                    "odpowiedniej instytucji");
+            return AddAttributeModelsToStep3(model,request);
+        }
+//      todo - findInstitutions do sprawdzenia
+        session.setAttribute("institutions",formService.findInstitutions(institution));
         return "redirect:/form/step4";
     }
 
+//   todo - Formfiltr  żeby nie można było przejść np od razu na step4
     @GetMapping("/form/step4")
     public String step4(){
 
@@ -153,5 +168,12 @@ public class FormController {
     }
 
 
+    private String AddAttributeModelsToStep3(Model model, HttpServletRequest request) {
+        model.addAttribute("institution", new Institution());
+        model.addAttribute("whomHelp", institutionService.returnWhomHelpList());
+        model.addAttribute("locations", institutionLocationService.returnListOfLocations());
+        model.addAttribute("formAction", request.getContextPath() + "/form/step3");
+        return "form/step3";
+    }
 
 }

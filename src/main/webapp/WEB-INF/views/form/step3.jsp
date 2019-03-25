@@ -37,32 +37,12 @@
                 <h3>Lokalizacja:</h3>
 
                 <div class="form-group form-group--dropdown">
-                    <%--<select name="localization">--%>
                         <form:select path="institutionLocations" name="localization">
                         <option value="0">- wybierz -</option>
                         <c:forEach items="${locations}" var="location">
                             <option value="${location.id}" >${location.location}</option>
                         </c:forEach>
-                        <%--<div class="form-group form-group--dropdown">--%>
-                            <%--<select name="localization">--%>
-                                <%--<option value="0">- wybierz -</option>--%>
-                                <%--<option value="warsaw">Warszawa</option>--%>
-                                <%--<option value="wroclaw">Wrocław</option>--%>
-                                <%--<option value="poznan">Poznań</option>--%>
-                                <%--<option value="gdansk">Gdańsk</option>--%>
-                            <%--</select>--%>
-                        <%--</div>--%>
-
-
-                            <%--<form:select path="fruit" items="${fruit}" multiple="true"/> - typ select--%>
-                            <%--<form:select path="book"> - typ select z dodatkową opcją--%>
-                                <%--<form:option value="-" label="--Please Select--"/>--%>
-                                <%--<form:options items="${books}"/>--%>
-                            <%--</form:select>--%>
-
                         </form:select>
-
-                    <%--</select>--%>
                 </div>
 
                 <div class="form-section">
@@ -82,6 +62,8 @@
                     <a href="${pageContext.request.contextPath}/form/step2" class="btn">Wstecz</a>
                     <button type="submit" class="btn">Dalej</button>
                 </div>
+
+                <c:if test="${not empty institutionErr}"><h4><br/>${institutionErr}</h4></c:if>
             </div>
 
         </form:form>

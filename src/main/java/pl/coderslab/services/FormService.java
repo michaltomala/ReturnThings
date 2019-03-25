@@ -6,10 +6,12 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Bounty;
 import pl.coderslab.entity.BountyType;
 import pl.coderslab.entity.Institution;
+import pl.coderslab.entity.InstitutionLocation;
 import pl.coderslab.model.Err;
 import pl.coderslab.repository.BountyTypeRepository;
 import pl.coderslab.repository.InstitutionRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,14 +42,40 @@ public class FormService {
     public void checkIfNotEmptyQuantityOfBags(Bounty bounty, Err modelErr){
         if(bounty.getQuantityOfBags()==null){ modelErr.addErr("Empty quantityOfBags!"); } }
 
-
-    public List<Institution> findInstitutions(Institution institution){
-//       todo warunek 1 - jeśli nazwa nie jest pusta to po nazwie
-//        warunek 2 - jeżeli nazwa jest pusta to po jednym i drugim
-        return institutionRepository.findAllByNameContainingIgnoreCase(institution.getName());
+    public void checkInstitution(Institution institution,Err modelErr){
+        if(institution.getName().equals("") &&
+                institution.getWhomHelp().isEmpty() &&
+                institution.getInstitutionLocations().isEmpty()){
+            modelErr.addErr("Nothing to find!");
+        }
     }
 
+    public List<Institution> findInstitutions(Institution institution) throws NullPointerException{
 
+        if(!institution.getName().equals("")){
+            if(!institutionRepository.findAllByNameContainingIgnoreCase(institution.getName()).isEmpty()){
+                 return institutionRepository.findAllByNameContainingIgnoreCase(institution.getName()); }
+        }
+
+        if(institution.getWhomHelp().isEmpty()){
+            return institutionRepository.findAllByInstitutionLocations(
+                    institution.getInstitutionLocations());
+        }
+
+        if(institution.getInstitutionLocations().isEmpty()){
+            return institutionRepository.findAllByWhomHelp(institution.getWhomHelp());
+        }
+
+        return institutionRepository.findAllByWhomHelpAndInstitutionLocations(
+                institution.getInstitutionLocations(), institution.getWhomHelp());
+    }
+
+    public void setLocationsToEmptyStringWhenNull(Institution institution){
+        if(institution.getInstitutionLocations().get(0)==null){
+            List<InstitutionLocation> listToAdd = new ArrayList<>();
+            institution.setInstitutionLocations(listToAdd);
+        }
+    }
 
 }
 
