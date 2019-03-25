@@ -99,8 +99,13 @@ public class FormController {
     }
 
     @PostMapping("/form/step3")
-    public String postFormStep3(Institution institution){
+    public String postFormStep3(Institution institution,Model model){
+//       todo - walidacja  - co najmniej jedna opcja musi być spełniona z pierwszych dwóch
 
+//       todo przesłać obiekt do formSerwisu - ma on zwrócić listę instytucji
+//       todo - jeśli lista bedzie pusta - zwrócić komunikat,że nie znaleziono
+//        - w takim wypadku zaleca się wybranie np.tylko lokalizacji
+        model.addAttribute("institutions",formService.findInstitutions(institution));
         return "redirect:/form/step4";
     }
 
