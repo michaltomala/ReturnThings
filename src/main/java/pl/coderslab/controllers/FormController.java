@@ -109,15 +109,21 @@ public class FormController {
             return AddAttributeModelsToStep3(model, request);
         }
 
-//      todo tu trzeba obsłużyć wyjątek na null pointer exception try catchem
-//       List<Institution> institutionList = formService.findInstitutions(institution);
-
-        if(formService.findInstitutions(institution)==null){
+        try{
+            List<Institution> institutions = formService.findInstitutions(institution);
+        }catch(NullPointerException e){
             model.addAttribute("institutionErr","Nie znaleziono instytucji o podanych kryteriach \n " +
                     "W takich sytuacjach zalecamy wybranie tylko lokalizacji - pomoże to w dobraniu " +
                     "odpowiedniej instytucji");
             return AddAttributeModelsToStep3(model,request);
         }
+
+//        if(formService.findInstitutions(institution)==null){
+//            model.addAttribute("institutionErr","Nie znaleziono instytucji o podanych kryteriach \n " +
+//                    "W takich sytuacjach zalecamy wybranie tylko lokalizacji - pomoże to w dobraniu " +
+//                    "odpowiedniej instytucji");
+//            return AddAttributeModelsToStep3(model,request);
+//        }
 //      todo - findInstitutions do sprawdzenia
         session.setAttribute("institutions",formService.findInstitutions(institution));
         return "redirect:/form/step4";
