@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.Bounty;
 import pl.coderslab.entity.Institution;
@@ -96,8 +97,8 @@ public class FormController {
         return AddAttributeModelsToStep3(model, request,session);
     }
 
-    @PostMapping("/form/step3")
-    public String postFormStep3(Institution institution,Model model,
+    @PostMapping("/form/step4")
+    public String step4(Institution institution,Model model,
                                 HttpServletRequest request,HttpSession session){
 
         formService.setLocationsToEmptyStringWhenNull(institution);
@@ -127,30 +128,25 @@ public class FormController {
         }
 
         session.setAttribute("institution",institution);
-
-        return "redirect:/form/step4";
-    }
-
-//   todo - Formfiltr  żeby nie można było przejść np od razu na step4
-    @GetMapping("/form/step4")
-    public String step4(HttpSession session,Model model,HttpServletRequest request){
-
-
-        model.addAttribute("formAction", request.getContextPath() + "/form/step4");
-
-
-//        if(session.getAttribute("bounty") == null){
-//            model.addAttribute("bounty",new Bounty());
-//        } else {
-//            model.addAttribute("bounty",session.getAttribute("bounty"));
-//        }
-//        institutions
         return "form/step4";
     }
 
-    @PostMapping("/form/step4")
-    public String postFormStep4(){
+//   todo - Formfiltr  żeby nie można było przejść np od razu na step4
 
+    /**
+     * This mapping is only for callback from step5
+     * @return
+     */
+    @GetMapping("/form/step4")
+    public String step4(){
+
+        return "form/step4";
+    }
+
+    @GetMapping("/form/step4/{name}")
+    public String getInstitution(@PathVariable String name,HttpSession session){
+
+        session.setAttribute("chosenInstitution",institutionService.findInstitutionByName(name));
         return "redirect:/form/step5";
     }
 
@@ -195,7 +191,7 @@ public class FormController {
         }
         model.addAttribute("whomHelp", institutionService.returnWhomHelpList());
         model.addAttribute("locations", institutionLocationService.returnListOfLocations());
-        model.addAttribute("formAction", request.getContextPath() + "/form/step3");
+        model.addAttribute("formAction", request.getContextPath() + "/form/step4");
         return "form/step3";
     }
 

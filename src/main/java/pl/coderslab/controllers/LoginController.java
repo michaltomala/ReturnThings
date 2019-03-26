@@ -87,6 +87,8 @@ public class LoginController {
         session.setAttribute("user",null);
         session.setAttribute("bounty",null);
         session.setAttribute("institutions",null);
+        session.setAttribute("institution",null);
+        session.setAttribute("chosenInstitution",null);
 
         return "redirect:/landingPage";
     }

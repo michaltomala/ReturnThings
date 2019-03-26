@@ -39,6 +39,10 @@ public class InstitutionService {
 
     public Institution findInstitution(Long id){ return institutionRepository.findOne(id); }
 
+    public Institution findInstitutionByName(String name){
+        return institutionRepository.findFirstByName(name); }
+
+
     public List<Institution> returnListOfInstitution(){ return institutionRepository.findAll(); }
 
     public List<InstitutionListOfWhomHelp> returnWhomHelpList(){

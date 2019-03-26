@@ -29,43 +29,27 @@
 
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>4</span>/5</div>
-        <form action="${formAction}">
 
+        <form>
             <div data-step="4" class="active">
-                <h3>Wybierz organizacje, której chcesz pomóc:</h3>
+                <h3>Wybierz organizacje, której chcesz pomóc klikając w nią:</h3>
 
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="radio" name="organization" value="old" />
-                        <span class="checkbox radio"></span>
-                        <span class="description">
-                  <div class="title">Fundacja “Bez domu”</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc dla osób nie posiadających miejsca
-                    zamieszkania
-                  </div>
-                </span>
-                    </label>
-                </div>
+                <c:forEach items="${institutions}" var="institution">
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <span class="description">
+                                <a href="${pageContext.request.contextPath}/form/step4/${institution.name}">
+                                    <div class="title">Fundacja ${institution.name}</div>
+                                </a>
+                                    <div class="subtitle">Cel i misja: ${institution.goal}</div>
+                            </span>
+                        </label>
+                    </div>
+                </c:forEach>
 
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="radio" name="organization" value="old" />
-                        <span class="checkbox radio"></span>
-                        <span class="description">
-                  <div class="title">Fundacja “Dla dzieci"</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji
-                    życiowej.
-                  </div>
-                </span>
-                    </label>
-                </div>
                 <div class="form-group form-group--buttons">
                     <a href="${pageContext.request.contextPath}/form/step3" class="btn">Wstecz</a>
-                    <button type="submit" class="btn">Dalej</button>
                 </div>
-
             </div>
 
 
