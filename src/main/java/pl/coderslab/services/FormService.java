@@ -70,6 +70,7 @@ public class FormService {
                 institution.getInstitutionLocations(), institution.getWhomHelp());
     }
 
+//   todo - just initialize list of Locations in Institution -  there wouldn't be nullPointer ,but empty list
     public void setLocationsToEmptyStringWhenNull(Institution institution){
         if(institution.getInstitutionLocations().get(0)==null){
             List<InstitutionLocation> listToAdd = new ArrayList<>();
