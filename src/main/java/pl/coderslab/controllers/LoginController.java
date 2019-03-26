@@ -60,7 +60,7 @@ public class LoginController {
 
 
         session.setAttribute("user", loginService.returnUserFromRepository(user));
-// todo ustawic czas sesji
+        session.setMaxInactiveInterval(600);
         if(loginService.isAdmin((User) session.getAttribute("user"))){
             return "redirect:/admin/dashboard";
         }
@@ -86,6 +86,7 @@ public class LoginController {
 
         session.setAttribute("user",null);
         session.setAttribute("bounty",null);
+        session.setAttribute("institutions",null);
 
         return "redirect:/landingPage";
     }

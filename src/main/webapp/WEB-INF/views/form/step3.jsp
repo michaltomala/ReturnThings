@@ -38,7 +38,18 @@
 
                 <div class="form-group form-group--dropdown">
                         <form:select path="institutionLocations" name="localization">
-                        <option value="0">- wybierz -</option>
+
+                        <c:if test="${not empty sessionScope.institution.institutionLocations}">
+                            <c:forEach items="${sessionScope.institution.institutionLocations}"
+                                       var="institutionLocations">
+                                <option value="${institutionLocations.id}" >
+                                        ${institutionLocations.location}
+                                </option>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${empty sessionScope.institution.institutionLocations}">
+                            <option value="0">- wybierz -</option>
+                        </c:if>
                         <c:forEach items="${locations}" var="location">
                             <option value="${location.id}" >${location.location}</option>
                         </c:forEach>

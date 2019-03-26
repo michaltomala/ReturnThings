@@ -91,9 +91,9 @@ public class FormController {
     }
 
     @GetMapping("/form/step3")
-    public String step3(Model model,HttpServletRequest request){
+    public String step3(Model model,HttpServletRequest request,HttpSession session){
 
-        return AddAttributeModelsToStep3(model, request);
+        return AddAttributeModelsToStep3(model, request,session);
     }
 
     @PostMapping("/form/step3")
@@ -107,7 +107,7 @@ public class FormController {
         if(!modelErr.isEmpty()){
             model.addAttribute("institutionErr","Aby wyszukać instytucję musisz " +
                     "wyznaczyć jakiekolwiek parametry!");
-            return AddAttributeModelsToStep3(model, request);
+            return AddAttributeModelsToStep3(model, request,session);
         }
 
         try{
@@ -117,22 +117,34 @@ public class FormController {
                 model.addAttribute("institutionErr","Nie znaleziono instytucji o podanych kryteriach \n " +
                         "W takich sytuacjach zalecamy wybranie tylko lokalizacji - pomoże to w dobraniu " +
                         "odpowiedniej instytucji");
-                return AddAttributeModelsToStep3(model, request);
+                return AddAttributeModelsToStep3(model, request,session);
             }
         }catch(NullPointerException e){
             model.addAttribute("institutionErr","Nie znaleziono instytucji o podanych kryteriach \n " +
                     "W takich sytuacjach zalecamy wybranie tylko lokalizacji - pomoże to w dobraniu " +
                     "odpowiedniej instytucji");
-            return AddAttributeModelsToStep3(model,request);
+            return AddAttributeModelsToStep3(model,request,session);
         }
+
+        session.setAttribute("institution",institution);
 
         return "redirect:/form/step4";
     }
 
 //   todo - Formfiltr  żeby nie można było przejść np od razu na step4
     @GetMapping("/form/step4")
-    public String step4(){
+    public String step4(HttpSession session,Model model,HttpServletRequest request){
 
+
+        model.addAttribute("formAction", request.getContextPath() + "/form/step4");
+
+
+//        if(session.getAttribute("bounty") == null){
+//            model.addAttribute("bounty",new Bounty());
+//        } else {
+//            model.addAttribute("bounty",session.getAttribute("bounty"));
+//        }
+//        institutions
         return "form/step4";
     }
 
@@ -174,8 +186,13 @@ public class FormController {
     }
 
 
-    private String AddAttributeModelsToStep3(Model model, HttpServletRequest request) {
-        model.addAttribute("institution", new Institution());
+    private String AddAttributeModelsToStep3(Model model, HttpServletRequest request,HttpSession session) {
+
+        if(session.getAttribute("institution") == null){
+            model.addAttribute("institution", new Institution());
+        } else {
+            model.addAttribute("institution",session.getAttribute("institution"));
+        }
         model.addAttribute("whomHelp", institutionService.returnWhomHelpList());
         model.addAttribute("locations", institutionLocationService.returnListOfLocations());
         model.addAttribute("formAction", request.getContextPath() + "/form/step3");
