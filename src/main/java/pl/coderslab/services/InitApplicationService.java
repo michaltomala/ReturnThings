@@ -76,13 +76,11 @@ public class InitApplicationService {
         if(ListOfWhomHelp == null) {
             List<String> whomHelpList = new ArrayList<>();
 
-
             whomHelpList.add("dzieciom");
             whomHelpList.add("samotnym matkom");
             whomHelpList.add("bezdomnym");
             whomHelpList.add("niepełnosprawnym");
             whomHelpList.add("osobom starszym");
-            whomHelpList.add("dupa");
 
             for (String str : whomHelpList) {
                 InstitutionListOfWhomHelp institutionListOfWhomHelp = new InstitutionListOfWhomHelp();

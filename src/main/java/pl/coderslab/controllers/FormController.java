@@ -16,6 +16,7 @@ import pl.coderslab.services.InstitutionService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -110,7 +111,7 @@ public class FormController {
         }
 
         try{
-            List<Institution> institutions = formService.findInstitutions(institution);
+            Set<Institution> institutions = formService.findInstitutions(institution);
             session.setAttribute("institutions",institutions);
             if(institutions.isEmpty()){
                 model.addAttribute("institutionErr","Nie znaleziono instytucji o podanych kryteriach \n " +
@@ -125,7 +126,6 @@ public class FormController {
             return AddAttributeModelsToStep3(model,request);
         }
 
-//      todo - findInstitutions do sprawdzenia
         return "redirect:/form/step4";
     }
 

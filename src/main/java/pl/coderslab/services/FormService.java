@@ -13,6 +13,7 @@ import pl.coderslab.repository.InstitutionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FormService {
@@ -50,7 +51,7 @@ public class FormService {
         }
     }
 
-    public List<Institution> findInstitutions(Institution institution) throws NullPointerException{
+    public Set<Institution> findInstitutions(Institution institution) throws NullPointerException{
 
         if(!institution.getName().equals("")){
             if(!institutionRepository.findAllByNameContainingIgnoreCase(institution.getName()).isEmpty()){
@@ -63,14 +64,14 @@ public class FormService {
         }
 
         if(institution.getInstitutionLocations().isEmpty()){
-            return institutionRepository.findAllByWhomHelp(institution.getWhomHelp());
+            return institutionRepository.findAllByWhomHelpIn(institution.getWhomHelp());
         }
 
-        return institutionRepository.findAllByWhomHelpAndInstitutionLocations(
-                institution.getInstitutionLocations(), institution.getWhomHelp());
+          return  institutionRepository.findAllByInstitutionLocationsAndWhomHelpIn(institution.getInstitutionLocations(),
+                  institution.getWhomHelp());
+
     }
 
-//   todo - just initialize list of Locations in Institution -  there wouldn't be nullPointer ,but empty list
     public void setLocationsToEmptyStringWhenNull(Institution institution){
         if(institution.getInstitutionLocations().get(0)==null){
             List<InstitutionLocation> listToAdd = new ArrayList<>();

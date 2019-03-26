@@ -60,7 +60,7 @@ public class LoginController {
 
 
         session.setAttribute("user", loginService.returnUserFromRepository(user));
-
+// todo ustawic czas sesji
         if(loginService.isAdmin((User) session.getAttribute("user"))){
             return "redirect:/admin/dashboard";
         }

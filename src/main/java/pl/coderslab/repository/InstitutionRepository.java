@@ -6,16 +6,17 @@ import pl.coderslab.entity.InstitutionListOfWhomHelp;
 import pl.coderslab.entity.InstitutionLocation;
 
 import java.util.List;
+import java.util.Set;
 
 public interface InstitutionRepository extends JpaRepository<Institution, Long> {
 
     Institution findFirstByName (String name);
 
-    List<Institution> findAllByNameContainingIgnoreCase(String name);
-    List<Institution> findAllByInstitutionLocations(List<InstitutionLocation> institutionLocations);
-    List<Institution> findAllByWhomHelp(List<InstitutionListOfWhomHelp> institutionListOfWhomHelp);
+    Set<Institution> findAllByNameContainingIgnoreCase(String name);
+    Set<Institution> findAllByInstitutionLocations(List<InstitutionLocation> institutionLocations);
+    Set<Institution> findAllByWhomHelpIn(List<InstitutionListOfWhomHelp> institutionListOfWhomHelp);
 
-    List<Institution> findAllByWhomHelpAndInstitutionLocations(List<InstitutionLocation> institutionLocations,
+    Set<Institution> findAllByInstitutionLocationsAndWhomHelpIn(List<InstitutionLocation> institutionLocations,
                                        List<InstitutionListOfWhomHelp> institutionListOfWhomHelp);
 
 }
