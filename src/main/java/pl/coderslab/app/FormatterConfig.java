@@ -29,6 +29,9 @@ public class FormatterConfig implements WebMvcConfigurer {
         registry.addConverter(getReceptionConverter());
         registry.addConverter(getBountyDetailsConverter());
 
+        registry.addConverter(getLocalTimeConverter());
+        registry.addConverter(getLocalDateConverter());
+
     }
 
     @Bean
@@ -57,6 +60,12 @@ public class FormatterConfig implements WebMvcConfigurer {
 
     @Bean
     public BountyDetailsConverter getBountyDetailsConverter() { return new BountyDetailsConverter(); }
+
+    @Bean
+    public LocalTimeConverter getLocalTimeConverter() { return new LocalTimeConverter(); }
+
+    @Bean
+    public LocalDateConverter getLocalDateConverter() { return new LocalDateConverter(); }
 
 
 }
