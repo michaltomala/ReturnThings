@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.Bounty;
+import pl.coderslab.entity.BountyDetails;
 import pl.coderslab.entity.Institution;
 import pl.coderslab.entity.Reception;
 import pl.coderslab.model.Err;
@@ -186,9 +187,13 @@ public class FormController {
     }
 
     @GetMapping("/form/saveForm")
-    public String saveForm(){
+    public String saveForm(HttpSession session){
 
-//   todo - tutaj zapisujemy wszystko gdze trzeba i nastepnie przestawiamy w sesji na null
+//   todo - sprawdzić jak działa zapisywanie w bazie i czy działa wgl
+        Bounty bounty = (Bounty) session.getAttribute("bounty");
+        Institution institution = (Institution) session.getAttribute("institution");
+        Reception reception = (Reception) session.getAttribute("reception");
+        formService.saveForm(bounty,institution,reception);
         return "redirect:/form/finallyStep";
     }
 

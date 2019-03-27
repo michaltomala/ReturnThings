@@ -3,10 +3,7 @@ package pl.coderslab.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.coderslab.entity.Bounty;
-import pl.coderslab.entity.BountyType;
-import pl.coderslab.entity.Institution;
-import pl.coderslab.entity.InstitutionLocation;
+import pl.coderslab.entity.*;
 import pl.coderslab.model.Err;
 import pl.coderslab.repository.BountyTypeRepository;
 import pl.coderslab.repository.InstitutionRepository;
@@ -77,6 +74,14 @@ public class FormService {
             List<InstitutionLocation> listToAdd = new ArrayList<>();
             institution.setInstitutionLocations(listToAdd);
         }
+    }
+
+    public void saveForm(Bounty bounty,Institution institution,Reception reception){
+
+        BountyDetails bountyDetails = new BountyDetails();
+        bountyDetails.setBounty(bounty);
+        bountyDetails.setIntitution(institution);
+        bountyDetails.setReception(reception);
     }
 
 }

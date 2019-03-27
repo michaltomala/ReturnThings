@@ -18,7 +18,7 @@ public class BountyDetails{
     private Bounty bounty;
 
     @OneToOne
-    private Institution intitution;
+    private Institution institution;
 
     @OneToOne
     private Reception reception;
@@ -59,11 +59,11 @@ public class BountyDetails{
     }
 
     public Institution getIntitution() {
-        return intitution;
+        return institution;
     }
 
-    public void setIntitution(Institution intitution) {
-        this.intitution = intitution;
+    public void setIntitution(Institution institution) {
+        this.institution = institution;
     }
 
     public Reception getReception() {
