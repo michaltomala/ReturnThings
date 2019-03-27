@@ -1,10 +1,15 @@
 package pl.coderslab.entity;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -16,13 +21,15 @@ public class Reception {
 
     private String city;
     private String street;
-    private String zIPCode;
+    private String postCode;
     private Long phone;
 
-    private Date date;
-//  todo - do sprecyzowania przy działającym formularzu
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private LocalDate date;
 
-    private int hour;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime time;
+
     private String comments;
 
     public Reception() {
@@ -60,12 +67,12 @@ public class Reception {
         this.street = street;
     }
 
-    public String getzIPCode() {
-        return zIPCode;
+    public String getPostCode() {
+        return postCode;
     }
 
-    public void setzIPCode(String zIPCode) {
-        this.zIPCode = zIPCode;
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
     }
 
     public Long getPhone() {
@@ -76,20 +83,20 @@ public class Reception {
         this.phone = phone;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public int getHour() {
-        return hour;
+    public LocalTime getTime() {
+        return time;
     }
 
-    public void setHour(int hour) {
-        this.hour = hour;
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     public String getComments() {

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.Bounty;
 import pl.coderslab.entity.Institution;
+import pl.coderslab.entity.Reception;
 import pl.coderslab.model.Err;
 import pl.coderslab.services.FormService;
 import pl.coderslab.services.InstitutionLocationService;
@@ -151,14 +152,18 @@ public class FormController {
     }
 
     @GetMapping("/form/step5")
-    public String step5(){
+    public String step5(Model model,HttpServletRequest request){
 
+//       todo - callback from step 6
+        model.addAttribute("reception",new Reception());
+        model.addAttribute("formAction", request.getContextPath() + "/form/step5");
         return "form/step5";
     }
 
     @PostMapping("/form/step5")
-    public String postFormStep5(){
+    public String postFormStep5(Reception reception,HttpSession session){
 
+        session.setAttribute("reception",reception);
         return "redirect:/form/step6";
     }
 
