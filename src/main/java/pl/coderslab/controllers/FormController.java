@@ -154,10 +154,14 @@ public class FormController {
     }
 
     @GetMapping("/form/step5")
-    public String step5(Model model,HttpServletRequest request){
+    public String step5(Model model,HttpServletRequest request,HttpSession session){
 
 //       todo - callback from step 6
-        model.addAttribute("reception",new Reception());
+        if(session.getAttribute("reception") == null){
+            model.addAttribute("reception",new Reception());
+        } else {
+            model.addAttribute("reception",session.getAttribute("reception"));
+        }
         model.addAttribute("formAction", request.getContextPath() + "/form/step5");
         return "form/step5";
     }
@@ -176,7 +180,7 @@ public class FormController {
     }
 
     @GetMapping("/form/step6")
-    public String step6(Model model,HttpServletRequest request){
+    public String step6(){
 
         return "form/step6";
     }
