@@ -32,6 +32,7 @@ public class FormatterConfig implements WebMvcConfigurer {
         registry.addConverter(getLocalTimeConverter());
         registry.addConverter(getLocalDateConverter());
 
+
     }
 
     @Bean
@@ -66,6 +67,5 @@ public class FormatterConfig implements WebMvcConfigurer {
 
     @Bean
     public LocalDateConverter getLocalDateConverter() { return new LocalDateConverter(); }
-
 
 }

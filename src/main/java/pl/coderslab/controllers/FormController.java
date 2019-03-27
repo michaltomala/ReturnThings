@@ -4,6 +4,7 @@ package pl.coderslab.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import pl.coderslab.services.InstitutionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
@@ -161,20 +163,26 @@ public class FormController {
     }
 
     @PostMapping("/form/step5")
-    public String postFormStep5(Reception reception,HttpSession session){
+    public String postFormStep5(@Valid Reception reception, BindingResult errors, HttpSession session,
+                                Model model,HttpServletRequest request){
 
+        if(errors.hasErrors()){
+            model.addAttribute("formAction", request.getContextPath() + "/form/step5");
+            return "form/step5";
+        }
         session.setAttribute("reception",reception);
         return "redirect:/form/step6";
     }
 
     @GetMapping("/form/step6")
-    public String step6(){
+    public String step6(Model model,HttpServletRequest request){
 
         return "form/step6";
     }
 
-    @PostMapping("/form/step6")
-    public String postFormStep6(){
+    @GetMapping("/form/saveForm")
+    public String saveForm(){
+
 
         return "redirect:/form/finallyStep";
     }

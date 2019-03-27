@@ -18,7 +18,7 @@
 
 
     <div class="form--steps-container">
-        <form action="${formAction}">
+        <form>
 
             <!-- STEP 6 -->
             <div data-step="6" class="active">
@@ -31,7 +31,7 @@
                             <li>
                                 <span class="icon icon-bag"></span>
                                 <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span
+                                >${sessionScope.} worki ubrań w dobrym stanie dla dzieci</span
                                 >
                             </li>
 
@@ -67,6 +67,7 @@
                 </div>
                 <div class="form-group form-group--buttons">
                     <a href="${pageContext.request.contextPath}/form/step5" class="btn">Wstecz</a>
+                    <a href="${pageContext.request.contextPath}/form/saveForm" class="btn">Dalej</a>
                     <button type="submit" class="btn">Dalej</button>
                 </div>
 

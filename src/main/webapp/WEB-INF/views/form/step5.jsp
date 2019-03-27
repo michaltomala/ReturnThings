@@ -40,28 +40,28 @@
                             <div class="form-group form-group--inline">
                                 <label>
                                     Ulica <form:input type="text" name="address" path="street"/>
-                                    <%--<form:errors path="street"/>--%>
+                                    <form:errors path="street"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
                                     Miasto <form:input type="text" name="city" path="city"/>
-                                    <%--<form:errors path="city"/>--%>
+                                    <form:errors path="city"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
                                     Kod pocztowy <form:input type="text" name="postcode" path="postCode"/>
-                                    <%--<form:errors path="postCode"/>--%>
+                                    <form:errors path="postCode"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
                                     Numer telefonu <form:input type="phone" name="phone" path="phone"/>
-                                    <%--<form:errors path="phone"/>--%>
+                                    <form:errors path="phone"/>
                                 </label>
                             </div>
                         </div>
@@ -72,14 +72,14 @@
                             <div class="form-group form-group--inline">
                                 <label>
                                     Data <form:input type="date" name="data" path="date"/>
-                                    <%--<form:errors path="date"/>--%>
+                                    <form:errors path="date"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
                                     Godzina <form:input type="time" name="time" path="time"/>
-                                    <%--<form:errors path="time"/>--%>
+                                    <form:errors path="time"/>
                                 </label>
                             </div>
 
@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="form-group form-group--buttons">
-                        <a href="${pageContext.request.contextPath}/user/donations/formStep4"
+                        <a href="${pageContext.request.contextPath}/form/step4"
                            class="btn prev-step">Wstecz</a>
                         <button type="submit" class="btn next-step">Dalej</button>
                     </div>
