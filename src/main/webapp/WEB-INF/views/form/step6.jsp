@@ -30,15 +30,27 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >${sessionScope.} worki ubrań w dobrym stanie dla dzieci</span
-                                >
+                                <span class="summary--text">
+                                    <c:if test="${sessionScope.bounty.quantityOfBags == 1}">
+                                        1 worek:
+                                    </c:if>
+                                    <c:if test="${sessionScope.bounty.quantityOfBags <5 && sessionScope.bounty.quantityOfBags >1}">
+                                        ${sessionScope.bounty.quantityOfBags} worki:
+                                    </c:if>
+                                    <c:if test="${sessionScope.bounty.quantityOfBags >4}">
+                                        ${sessionScope.bounty.quantityOfBags} worków:
+                                    </c:if>
+
+                                    <c:forEach var="gift" items="${sessionScope.bounty.bountyType}">
+                                        <br/><span>-${gift.type} </span>
+                                    </c:forEach>
+                                </span>
                             </li>
 
                             <li>
                                 <span class="icon icon-hand"></span>
                                 <span class="summary--text"
-                                >Dla fundacji "Mam marzenie" w Warszawie</span
+                                >Dla fundacji ${sessionScope.chosenInstitution.name}</span
                                 >
                             </li>
                         </ul>
@@ -48,19 +60,19 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
+                                <li>${sessionScope.reception.street}</li>
+                                <li>${sessionScope.reception.city}</li>
+                                <li>${sessionScope.reception.postCode}</li>
+                                <li>${sessionScope.reception.phone}</li>
                             </ul>
                         </div>
 
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                                <li>${sessionScope.reception.date}</li>
+                                <li>${sessionScope.reception.time}</li>
+                                <li>${sessionScope.reception.comments}</li>
                             </ul>
                         </div>
                     </div>
@@ -68,12 +80,8 @@
                 <div class="form-group form-group--buttons">
                     <a href="${pageContext.request.contextPath}/form/step5" class="btn">Wstecz</a>
                     <a href="${pageContext.request.contextPath}/form/saveForm" class="btn">Dalej</a>
-                    <button type="submit" class="btn">Dalej</button>
                 </div>
-
             </div>
-
-
         </form>
     </div>
 </section>

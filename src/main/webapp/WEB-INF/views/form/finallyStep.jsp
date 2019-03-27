@@ -18,7 +18,7 @@
 
 
 <div class="form--steps-container">
-    <form action="${formAction}">
+    <form >
 
         <!-- STEP 7 -->
         <div data-step="7" class="active">

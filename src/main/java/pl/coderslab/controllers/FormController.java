@@ -170,6 +170,7 @@ public class FormController {
             model.addAttribute("formAction", request.getContextPath() + "/form/step5");
             return "form/step5";
         }
+//       todo - przestawienie numeru z 123456789 na 123-456-789
         session.setAttribute("reception",reception);
         return "redirect:/form/step6";
     }
@@ -183,16 +184,19 @@ public class FormController {
     @GetMapping("/form/saveForm")
     public String saveForm(){
 
-
+//   todo - tutaj zapisujemy wszystko gdze trzeba i nastepnie przestawiamy w sesji na null
         return "redirect:/form/finallyStep";
     }
 
 
     @GetMapping("/form/finallyStep")
-    public String finallyStep(){
+    public String finallyStep(HttpSession session){
 
+        LoginController.setSessionAttributesNull(session);
         return "form/finallyStep";
     }
+
+
 
 
     private String AddAttributeModelsToStep3(Model model, HttpServletRequest request,HttpSession session) {

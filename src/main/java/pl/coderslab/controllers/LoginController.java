@@ -85,14 +85,19 @@ public class LoginController {
 //       todo sprawdzić czy wszystko się usuwa ładnie
 
         session.setAttribute("user",null);
+        setSessionAttributesNull(session);
+        return "redirect:/landingPage";
+    }
+
+    /**
+     * This method set all session attributes except user
+     * @param session
+     */
+    static void setSessionAttributesNull(HttpSession session) {
         session.setAttribute("bounty",null);
         session.setAttribute("institutions",null);
         session.setAttribute("institution",null);
         session.setAttribute("chosenInstitution",null);
         session.setAttribute("reception",null);
-
-        return "redirect:/landingPage";
     }
-
-
 }
