@@ -1,14 +1,11 @@
 package pl.coderslab.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 
 @Entity
-public class BountyDetails extends Bounty{
+public class BountyDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,18 +13,23 @@ public class BountyDetails extends Bounty{
 
     private boolean received;
     private Date dateReceived;
-    private Date dateRegistration;
 
+    @OneToOne
+    private Bounty bounty;
+
+    @OneToOne
+    private Institution intitution;
+
+    @OneToOne
+    private Reception reception;
 
     public BountyDetails() {
     }
 
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -48,11 +50,27 @@ public class BountyDetails extends Bounty{
         this.dateReceived = dateReceived;
     }
 
-    public Date getDateRegistration() {
-        return dateRegistration;
+    public Bounty getBounty() {
+        return bounty;
     }
 
-    public void setDateRegistration(Date dateRegistration) {
-        this.dateRegistration = dateRegistration;
+    public void setBounty(Bounty bounty) {
+        this.bounty = bounty;
+    }
+
+    public Institution getIntitution() {
+        return intitution;
+    }
+
+    public void setIntitution(Institution intitution) {
+        this.intitution = intitution;
+    }
+
+    public Reception getReception() {
+        return reception;
+    }
+
+    public void setReception(Reception reception) {
+        this.reception = reception;
     }
 }

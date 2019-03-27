@@ -156,7 +156,7 @@ public class FormController {
     @GetMapping("/form/step5")
     public String step5(Model model,HttpServletRequest request,HttpSession session){
 
-//       todo - callback from step 6
+//       todo - callback from step 6 (only date)
         if(session.getAttribute("reception") == null){
             model.addAttribute("reception",new Reception());
         } else {
