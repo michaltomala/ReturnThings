@@ -50,5 +50,28 @@ public class HomeController {
         return "user/home";
     }
 
+    @GetMapping("/meaning")
+    public String meaning() {
+
+        return "meaning";
+    }
+    @GetMapping("/about")
+    public String about() {
+
+        return "about";
+    }
+
+    @GetMapping("/institutions")
+    public String institutions() {
+
+        return "institutions";
+    }
+
+    @GetMapping("/contact")
+    public String contact() {
+
+        return "contact";
+    }
+
 }
 
