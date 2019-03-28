@@ -85,5 +85,13 @@ public class FormService {
         bountyDetailsRepository.save(bountyDetails);
     }
 
+    public void setCorrectNumber(Reception reception){
+
+        String phone = reception.getPhone();
+        String result = phone.substring(0, 3) + "-" +phone.substring(3, 6) + "-" + phone.substring(6,9);
+        reception.setPhone(result);
+    }
+
+
 }
 

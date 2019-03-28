@@ -174,6 +174,7 @@ public class FormController {
             return "form/step5";
         }
 //       todo - przestawienie numeru z 123456789 na 123-456-789
+        formService.setCorrectNumber(reception);
         session.setAttribute("reception",reception);
         return "redirect:/form/step6";
     }
