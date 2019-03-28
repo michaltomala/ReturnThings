@@ -132,11 +132,9 @@ public class FormController {
         }
 
         session.setAttribute("institution",institution);
-        return "form/step4";
+        return "redirect:/form/step4";
     }
 
-//   todo - Formfiltr  żeby nie można było przejść np od razu na step4
-//  todo - separate footers in form steps
     /**
      * This mapping is only for callback from step5
      * @return
