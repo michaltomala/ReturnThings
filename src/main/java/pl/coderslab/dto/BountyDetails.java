@@ -1,4 +1,8 @@
-package pl.coderslab.entity;
+package pl.coderslab.dto;
+
+import pl.coderslab.entity.Bounty;
+import pl.coderslab.entity.Institution;
+import pl.coderslab.entity.Reception;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,7 +15,7 @@ public class BountyDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean received;
+    private boolean received=false;
     private Date dateReceived;
 
     @OneToOne

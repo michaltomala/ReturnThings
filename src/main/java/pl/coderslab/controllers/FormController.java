@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.Bounty;
-import pl.coderslab.entity.BountyDetails;
 import pl.coderslab.entity.Institution;
 import pl.coderslab.entity.Reception;
 import pl.coderslab.model.Err;
@@ -20,7 +19,6 @@ import pl.coderslab.services.InstitutionService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Set;
 
 

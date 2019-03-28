@@ -3,8 +3,10 @@ package pl.coderslab.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.coderslab.dto.BountyDetails;
 import pl.coderslab.entity.*;
 import pl.coderslab.model.Err;
+import pl.coderslab.repository.BountyDetailsRepository;
 import pl.coderslab.repository.BountyTypeRepository;
 import pl.coderslab.repository.InstitutionRepository;
 
@@ -16,19 +18,17 @@ import java.util.Set;
 public class FormService {
 
     private final BountyTypeRepository bountyTypeRepository;
-    private final InstitutionService institutionService;
-    private final InstitutionLocationService institutionLocationService;
     private final InstitutionRepository institutionRepository;
+    private final BountyDetailsRepository bountyDetailsRepository;
 
     @Autowired
     public FormService(BountyTypeRepository bountyTypeRepository,
-                       InstitutionService institutionService,
-                       InstitutionLocationService institutionLocationService,
-                       InstitutionRepository institutionRepository) {
+                       InstitutionRepository institutionRepository,
+                       BountyDetailsRepository bountyDetailsRepository
+    ) {
         this.bountyTypeRepository = bountyTypeRepository;
-        this.institutionService = institutionService;
-        this.institutionLocationService = institutionLocationService;
         this.institutionRepository = institutionRepository;
+        this.bountyDetailsRepository = bountyDetailsRepository;
     }
 
     public List<BountyType> returnListOfBountyTypes(){ return bountyTypeRepository.findAll(); }
@@ -82,6 +82,7 @@ public class FormService {
         bountyDetails.setBounty(bounty);
         bountyDetails.setIntitution(institution);
         bountyDetails.setReception(reception);
+        bountyDetailsRepository.save(bountyDetails);
     }
 
 }
