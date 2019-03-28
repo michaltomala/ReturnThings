@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.entity.Bounty;
 import pl.coderslab.entity.Institution;
 import pl.coderslab.entity.Reception;
@@ -24,6 +25,7 @@ import java.util.Set;
 
 
 @Controller
+@RequestMapping("/form/")
 public class FormController {
 
     private final FormService formService;
@@ -41,7 +43,7 @@ public class FormController {
     }
 
 
-    @PostMapping("/form/step1")
+    @PostMapping("step1")
     public String step1(Bounty bounty , Model model, HttpServletRequest request, HttpSession session){
 
         Err modelErr = new Err();
@@ -64,9 +66,8 @@ public class FormController {
         }
         return "redirect:/form/step2";
     }
-// todo - placeholders to keep values in all steps
 
-    @GetMapping("/form/step2")
+    @GetMapping("step2")
     public String step2(Model model,HttpServletRequest request,HttpSession session){
 
         model.addAttribute("bounty",session.getAttribute("bounty"));
@@ -74,7 +75,7 @@ public class FormController {
         return "form/step2";
     }
 
-    @PostMapping("/form/step2")
+    @PostMapping("step2")
     public String postFormStep2(Bounty bounty ,HttpSession session,Model model){
 
         Err modelErr = new Err();
@@ -94,13 +95,13 @@ public class FormController {
         return "redirect:/form/step3";
     }
 
-    @GetMapping("/form/step3")
+    @GetMapping("step3")
     public String step3(Model model,HttpServletRequest request,HttpSession session){
 
         return AddAttributeModelsToStep3(model, request,session);
     }
 
-    @PostMapping("/form/step4")
+    @PostMapping("step3")
     public String step4(Institution institution,Model model,
                                 HttpServletRequest request,HttpSession session){
 
@@ -140,20 +141,24 @@ public class FormController {
      * This mapping is only for callback from step5
      * @return
      */
-    @GetMapping("/form/step4")
+    @GetMapping("step4")
     public String step4(){
 
         return "form/step4";
     }
 
-    @GetMapping("/form/step4/{name}")
+    @GetMapping("step4/{name}")
     public String getInstitution(@PathVariable String name,HttpSession session){
 
+        Institution institution = (Institution) session.getAttribute("institution");
+        if(institution == null){
+            return "redirect:/form/step3";
+        }
         session.setAttribute("chosenInstitution",institutionService.findInstitutionByName(name));
         return "redirect:/form/step5";
     }
 
-    @GetMapping("/form/step5")
+    @GetMapping("step5")
     public String step5(Model model,HttpServletRequest request,HttpSession session){
 
 //       todo - callback from step 6 (only date)
@@ -166,7 +171,7 @@ public class FormController {
         return "form/step5";
     }
 
-    @PostMapping("/form/step5")
+    @PostMapping("step5")
     public String postFormStep5(@Valid Reception reception, BindingResult errors, HttpSession session,
                                 Model model,HttpServletRequest request){
 
@@ -179,13 +184,13 @@ public class FormController {
         return "redirect:/form/step6";
     }
 
-    @GetMapping("/form/step6")
+    @GetMapping("step6")
     public String step6(){
 
         return "form/step6";
     }
 
-    @GetMapping("/form/saveForm")
+    @GetMapping("saveForm")
     public String saveForm(HttpSession session){
 
 //   todo - sprawdzić jak działa zapisywanie w bazie i czy działa wgl
@@ -198,7 +203,7 @@ public class FormController {
     }
 
 
-    @GetMapping("/form/finallyStep")
+    @GetMapping("finallyStep")
     public String finallyStep(HttpSession session){
 
         LoginController.setSessionAttributesNull(session);
@@ -217,7 +222,7 @@ public class FormController {
         }
         model.addAttribute("whomHelp", institutionService.returnWhomHelpList());
         model.addAttribute("locations", institutionLocationService.returnListOfLocations());
-        model.addAttribute("formAction", request.getContextPath() + "/form/step4");
+        model.addAttribute("formAction", request.getContextPath() + "/form/step3");
         return "form/step3";
     }
 
