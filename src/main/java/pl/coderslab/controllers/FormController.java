@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.Bounty;
 import pl.coderslab.entity.Institution;
 import pl.coderslab.entity.Reception;
+import pl.coderslab.entity.User;
 import pl.coderslab.model.Err;
 import pl.coderslab.services.FormService;
 import pl.coderslab.services.InstitutionLocationService;
@@ -134,7 +135,7 @@ public class FormController {
     }
 
 //   todo - Formfiltr  żeby nie można było przejść np od razu na step4
-
+//  todo - separate footers in form steps
     /**
      * This mapping is only for callback from step5
      * @return
@@ -173,7 +174,7 @@ public class FormController {
             model.addAttribute("formAction", request.getContextPath() + "/form/step5");
             return "form/step5";
         }
-        formService.setCorrectNumber(reception);
+        formService.setNumberWithBreaks(reception);
         session.setAttribute("reception",reception);
         return "redirect:/form/step6";
     }
@@ -189,9 +190,10 @@ public class FormController {
 
 //   todo - sprawdzić jak działa zapisywanie w bazie i czy działa wgl
         Bounty bounty = (Bounty) session.getAttribute("bounty");
-        Institution institution = (Institution) session.getAttribute("institution");
+        Institution institution = (Institution) session.getAttribute("chosenInstitution");
         Reception reception = (Reception) session.getAttribute("reception");
-        formService.saveForm(bounty,institution,reception);
+        User userFromSession = (User) session.getAttribute("user");
+        formService.saveForm(bounty,institution,reception,userFromSession);
         return "redirect:/form/finallyStep";
     }
 

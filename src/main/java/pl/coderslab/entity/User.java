@@ -4,6 +4,7 @@ package pl.coderslab.entity;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.coderslab.dto.BountyDetails;
 import pl.coderslab.validator.ValidationEditUserGroup;
 import pl.coderslab.validator.ValidationLoginUserGroup;
 import pl.coderslab.validator.ValidationRegisterUserGroup;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 import javax.swing.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class User {
@@ -47,6 +49,9 @@ public class User {
     private boolean isBlocked = false;
 
     private boolean isAdmin = false;
+
+    @OneToMany
+    private List<BountyDetails> bountyDetails;
 
     public User() {
     }
@@ -122,4 +127,13 @@ public class User {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
+    public List<BountyDetails> getBountyDetails() {
+        return bountyDetails;
+    }
+
+    public void setBountyDetails(List<BountyDetails> bountyDetails) {
+        this.bountyDetails = bountyDetails;
+    }
+
 }

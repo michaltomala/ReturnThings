@@ -2,6 +2,7 @@ package pl.coderslab.entity;
 
 
 import org.hibernate.validator.constraints.NotEmpty;
+import pl.coderslab.dto.BountyDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -23,6 +24,9 @@ public class Bounty {
 
     @NotNull(message = "Liczba worków nie może być pusta !")
     private Long quantityOfBags;
+
+    @OneToOne(mappedBy = "bounty")
+    private BountyDetails bountyDetails;
 
     public Bounty() {
     }
@@ -60,4 +64,13 @@ public class Bounty {
     public void setQuantityOfBags(Long quantityOfBags) {
         this.quantityOfBags = quantityOfBags;
     }
+
+    public BountyDetails getBountyDetails() {
+        return bountyDetails;
+    }
+
+    public void setBountyDetails(BountyDetails bountyDetails) {
+        this.bountyDetails = bountyDetails;
+    }
+
 }

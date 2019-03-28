@@ -3,6 +3,7 @@ package pl.coderslab.entity;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import pl.coderslab.dto.BountyDetails;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,6 +30,8 @@ public class Institution {
     @ManyToMany
     private List<InstitutionListOfWhomHelp> whomHelp;
 
+    @OneToMany
+    private List<BountyDetails> bountyDetails;
 
     public Institution() {
     }
@@ -76,5 +79,13 @@ public class Institution {
 
     public void setWhomHelp(List<InstitutionListOfWhomHelp> whomHelp) {
         this.whomHelp = whomHelp;
+    }
+
+    public List<BountyDetails> getBountyDetails() {
+        return bountyDetails;
+    }
+
+    public void setBountyDetails(List<BountyDetails> bountyDetails) {
+        this.bountyDetails = bountyDetails;
     }
 }

@@ -6,9 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.dto.BountyDetails;
 import pl.coderslab.entity.*;
 import pl.coderslab.model.Err;
-import pl.coderslab.repository.BountyDetailsRepository;
-import pl.coderslab.repository.BountyTypeRepository;
-import pl.coderslab.repository.InstitutionRepository;
+import pl.coderslab.repository.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +18,20 @@ public class FormService {
     private final BountyTypeRepository bountyTypeRepository;
     private final InstitutionRepository institutionRepository;
     private final BountyDetailsRepository bountyDetailsRepository;
+    private final ReceptionRepository receptionRepository;
+    private final BountyRepository bountyRepository;
 
     @Autowired
     public FormService(BountyTypeRepository bountyTypeRepository,
                        InstitutionRepository institutionRepository,
-                       BountyDetailsRepository bountyDetailsRepository
-    ) {
+                       BountyDetailsRepository bountyDetailsRepository,
+                       ReceptionRepository receptionRepository,
+                       BountyRepository bountyRepository) {
         this.bountyTypeRepository = bountyTypeRepository;
         this.institutionRepository = institutionRepository;
         this.bountyDetailsRepository = bountyDetailsRepository;
+        this.receptionRepository = receptionRepository;
+        this.bountyRepository = bountyRepository;
     }
 
     public List<BountyType> returnListOfBountyTypes(){ return bountyTypeRepository.findAll(); }
@@ -76,19 +79,31 @@ public class FormService {
         }
     }
 
-    public void saveForm(Bounty bounty,Institution institution,Reception reception){
+    public void saveForm(Bounty bounty,Institution institution,Reception reception,User user){
 
         BountyDetails bountyDetails = new BountyDetails();
         bountyDetails.setBounty(bounty);
-        bountyDetails.setIntitution(institution);
+        bountyDetails.setInstitution(institution);
         bountyDetails.setReception(reception);
+        bountyDetails.setUser(user);
+
+        setNumberWithoutBreaks(reception);
+        bountyRepository.save(bounty);
+        receptionRepository.save(reception);
         bountyDetailsRepository.save(bountyDetails);
     }
 
-    public void setCorrectNumber(Reception reception){
+    public void setNumberWithBreaks(Reception reception){
 
         String phone = reception.getPhone();
         String result = phone.substring(0, 3) + "-" +phone.substring(3, 6) + "-" + phone.substring(6,9);
+        reception.setPhone(result);
+    }
+
+    public void setNumberWithoutBreaks(Reception reception){
+
+        String phone = reception.getPhone();
+        String result = phone.replace("-","");
         reception.setPhone(result);
     }
 

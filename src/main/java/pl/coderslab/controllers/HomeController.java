@@ -17,16 +17,11 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
     private final FormService formService;
-    private final InstitutionService institutionService;
-    private final InstitutionLocationService institutionLocationService;
 
     @Autowired
-    public HomeController(FormService formService, InstitutionService institutionService,
-                          InstitutionLocationService institutionLocationService) {
+    public HomeController(FormService formService) {
 
         this.formService = formService;
-        this.institutionService = institutionService;
-        this.institutionLocationService = institutionLocationService;
     }
 
 

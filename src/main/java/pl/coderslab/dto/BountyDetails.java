@@ -3,13 +3,15 @@ package pl.coderslab.dto;
 import pl.coderslab.entity.Bounty;
 import pl.coderslab.entity.Institution;
 import pl.coderslab.entity.Reception;
+import pl.coderslab.entity.User;
 
 import javax.persistence.*;
 import java.util.Date;
 
 
 @Entity
-public class BountyDetails{
+public class BountyDetails {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +23,14 @@ public class BountyDetails{
     @OneToOne
     private Bounty bounty;
 
-    @OneToOne
+    @ManyToOne
     private Institution institution;
 
     @OneToOne
     private Reception reception;
+
+    @ManyToOne
+    private User user;
 
     public BountyDetails() {
     }
@@ -62,11 +67,11 @@ public class BountyDetails{
         this.bounty = bounty;
     }
 
-    public Institution getIntitution() {
+    public Institution getInstitution() {
         return institution;
     }
 
-    public void setIntitution(Institution institution) {
+    public void setInstitution(Institution institution) {
         this.institution = institution;
     }
 
@@ -76,5 +81,13 @@ public class BountyDetails{
 
     public void setReception(Reception reception) {
         this.reception = reception;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

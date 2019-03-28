@@ -3,11 +3,9 @@ package pl.coderslab.entity;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.coderslab.dto.BountyDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -48,6 +46,9 @@ public class Reception {
     private LocalTime time;
 
     private String comments;
+
+    @OneToOne(mappedBy = "reception")
+    private BountyDetails bountyDetails;
 
     public Reception() {
     }
@@ -122,5 +123,13 @@ public class Reception {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public BountyDetails getBountyDetails() {
+        return bountyDetails;
+    }
+
+    public void setBountyDetails(BountyDetails bountyDetails) {
+        this.bountyDetails = bountyDetails;
     }
 }
