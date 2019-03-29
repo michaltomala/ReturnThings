@@ -19,6 +19,9 @@ public class BountyService {
         this.bountyDetailsRepository = bountyDetailsRepository;
     }
 
+    public BountyDetails findBountyDetail(Long id){
+        return bountyDetailsRepository.findOne(id);
+    }
 
     public List<BountyDetails> returnListOfBounties(){
         return bountyDetailsRepository.findAll();

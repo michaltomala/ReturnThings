@@ -50,6 +50,7 @@ public class User {
 
     private boolean isAdmin = false;
 
+//   todo - add attributes from form5
     @OneToMany
     private List<BountyDetails> bountyDetails;
 
