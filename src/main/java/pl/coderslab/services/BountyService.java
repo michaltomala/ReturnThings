@@ -24,7 +24,28 @@ public class BountyService {
     }
 
     public List<BountyDetails> returnListOfBounties(){
-        return bountyDetailsRepository.findAll();
+        return bountyDetailsRepository.findAllByArchived(false);
     }
 
+    public List<BountyDetails> returnListOfArchivedBounties(){
+        return bountyDetailsRepository.findAllByArchived(true);
+    }
+    public void changeAttributeReceived(Long id){
+
+        BountyDetails bountyDetails = findBountyDetail(id);
+        if(bountyDetails.isReceived()){
+            bountyDetails.setReceived(false);
+            bountyDetailsRepository.save(bountyDetails);
+        }else{
+            bountyDetails.setReceived(true);
+            bountyDetailsRepository.save(bountyDetails);
+        }
+    }
+
+    public void changeAttributeArchived(Long id){
+
+        BountyDetails bountyDetails = findBountyDetail(id);
+        bountyDetails.setArchived(true);
+        bountyDetailsRepository.save(bountyDetails);
+    }
 }

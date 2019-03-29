@@ -18,6 +18,7 @@ public class BountyDetails {
     private Long id;
 
     private boolean received=false;
+    private boolean archived=false;
     private Date dateReceived;
 
     @OneToOne
@@ -89,5 +90,13 @@ public class BountyDetails {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 }
