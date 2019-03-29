@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.entity.User;
@@ -79,7 +80,6 @@ public class UserController {
     }
 
 
-
     @GetMapping("profile")
     public String profile(Model model , HttpServletRequest request , HttpSession session){
 
@@ -88,6 +88,16 @@ public class UserController {
         model.addAttribute("formAction", request.getContextPath() + "/user/profile");
         return "user/profile";
     }
+
+    @PostMapping("profile")
+    public String saveProfile(User user,HttpSession session, HttpServletRequest request){
+
+        User userFromSession = (User) session.getAttribute("user");
+        userService.saveUserDetails(user,userFromSession);
+        session.setAttribute("user",userFromSession);
+        return "redirect:"+request.getContextPath()+"/user/profile";
+    }
+
 
     @GetMapping("collection")
     public String collection(Model model , HttpServletRequest request , HttpSession session){
@@ -100,14 +110,34 @@ public class UserController {
         return "user/collection";
     }
 
-    @PostMapping("profile")
-    public String saveProfile(User user,HttpSession session, HttpServletRequest request){
+//   todo - to check this one method
+    @GetMapping("bounty/{id}")
+    public String singleBounty(@PathVariable Long id,Model model){
 
-        User userFromSession = (User) session.getAttribute("user");
-        userService.saveUserDetails(user,userFromSession);
-        session.setAttribute("user",userFromSession);
-        return "redirect:"+request.getContextPath()+"/user/profile";
+        model.addAttribute("bountyDetail",bountyService.findBountyDetail(id));
+        return "user/singleUserBounty";
     }
+
+    //   todo - to check this one method
+    @GetMapping("bounty/receive/{id}")
+    public String receive(@PathVariable Long id,Model model){
+
+        bountyService.changeAttributeReceived(id);
+        model.addAttribute("bountyDetail",bountyService.findBountyDetail(id));
+        return "user/singleUserBounty";
+    }
+
+
+    //   todo - to check this one method
+    @GetMapping("bounty/archive/{id}")
+    public String archive(Model model, @PathVariable Long id){
+
+        bountyService.changeAttributeArchived(id);
+        return "redirect:/user/collection/";
+    }
+
+
+
 
     private String changeOnlyEmail(@Validated(ValidationRegisterUserGroup.class) User user, HttpServletRequest req, Model model, HttpSession session, Err modelErr) {
         userService.checkEmail(user, modelErr);
