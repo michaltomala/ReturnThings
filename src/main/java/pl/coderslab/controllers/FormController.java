@@ -191,7 +191,6 @@ public class FormController {
     @GetMapping("saveForm")
     public String saveForm(HttpSession session){
 
-//   todo - sprawdzić jak działa zapisywanie w bazie i czy działa wgl
         Bounty bounty = (Bounty) session.getAttribute("bounty");
         Institution institution = (Institution) session.getAttribute("chosenInstitution");
         Reception reception = (Reception) session.getAttribute("reception");

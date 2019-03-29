@@ -32,7 +32,7 @@
         <img class="img--dashboard" src="/images/myImages/Instytucje.jpg" title="Instytucje" >Instytucje
     </a>
 
-    <a href="/admin/bounties" class="a--dashboard">
+    <a href="/admin/bounties/" class="a--dashboard">
         <img class="img--dashboard" src="/images/myImages/bounty.jpeg" title="Dary" alt="">Dary
     </a>
 

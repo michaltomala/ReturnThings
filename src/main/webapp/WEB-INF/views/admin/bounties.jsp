@@ -18,6 +18,25 @@
 
     <%@include file="adminHeader.jsp"%>
 
+    <h2>Oddane Rzeczy</h2>
+    <ul>
+        <c:forEach items="${bounties}" var="b" varStatus="loop">
+
+            <li>${loop.count} -->
+                <c:if test="${b.bounty.quantityOfBags == 1}">
+                    1 worek:
+                </c:if>
+                <c:if test="${b.bounty.quantityOfBags <5 && b.bounty.quantityOfBags >1}">
+                    ${b.bounty.quantityOfBags} worki:
+                </c:if>
+                <c:if test="${b.bounty.quantityOfBags >4}">
+                    ${b.bounty.quantityOfBags} worków:
+                </c:if> dla instytucji ${b.institution.name}
+                ||| Termin odbioru: ${b.reception.date} o godzinie ${b.reception.time} ->
+                <a href="${pageContext.request.contextPath}/admin/bounties/${b.id}">Szczegóły</a>
+            </li>
+        </c:forEach>
+    </ul>
 
 </body>
 </html>
