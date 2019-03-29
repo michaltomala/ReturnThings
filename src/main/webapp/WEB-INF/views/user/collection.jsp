@@ -13,6 +13,51 @@
 </head>
 <body>
 
+    <%@include file="../auth/fundamentalHeader.jsp"%>
+    <h2>Twoje zbiórki</h2>
+
+    <div class="form-section--column">
+        <h4>Odebrane rzeczy:</h4>
+        <ul>
+            <c:forEach items="${receivedBounties}" var="b" varStatus="loop">
+                <li>${loop.count} -->
+                    <c:if test="${b.bounty.quantityOfBags == 1}">
+                        1 worek:
+                    </c:if>
+                    <c:if test="${b.bounty.quantityOfBags <5 && b.bounty.quantityOfBags >1}">
+                        ${b.bounty.quantityOfBags} worki:
+                    </c:if>
+                    <c:if test="${b.bounty.quantityOfBags >4}">
+                        ${b.bounty.quantityOfBags} worków:
+                    </c:if> dla instytucji ${b.institution.name}
+                    ||| Termin odbioru: ${b.reception.date} o godzinie ${b.reception.time} ->
+                    <a href="${pageContext.request.contextPath}/user/bounty/${b.id}">Szczegóły</a>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+    <div class="form-section--column">
+        <h4>Nieodebrane rzeczy:</h4>
+        <ul>
+            <c:forEach items="${notReceivedBounties}" var="b" varStatus="loop">
+                <li>${loop.count} -->
+                    <c:if test="${b.bounty.quantityOfBags == 1}">
+                        1 worek:
+                    </c:if>
+                    <c:if test="${b.bounty.quantityOfBags <5 && b.bounty.quantityOfBags >1}">
+                        ${b.bounty.quantityOfBags} worki:
+                    </c:if>
+                    <c:if test="${b.bounty.quantityOfBags >4}">
+                        ${b.bounty.quantityOfBags} worków:
+                    </c:if> dla instytucji ${b.institution.name}
+                    ||| Termin odbioru: ${b.reception.date} o godzinie ${b.reception.time} ->
+                    <a href="${pageContext.request.contextPath}/user/bounty/${b.id}">Szczegóły</a>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+
+
 
 </body>
 </html>

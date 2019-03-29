@@ -95,8 +95,8 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         model.addAttribute("user",user);
 //        todo do sprawdzenia w przypadku różnych użytkowników
-        model.addAttribute("bounties",bountyService.returnUserListOfBounties(user));
-//        model.addAttribute("formAction", request.getContextPath() + "/user/profile");
+        model.addAttribute("receivedBounties",bountyService.returnUserListOfBounties(user,true));
+        model.addAttribute("notReceivedBounties",bountyService.returnUserListOfBounties(user,false));
         return "user/collection";
     }
 

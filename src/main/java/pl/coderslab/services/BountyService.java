@@ -33,8 +33,8 @@ public class BountyService {
         return bountyDetailsRepository.findAllByArchived(true); }
 
 
-    public List<BountyDetails> returnUserListOfBounties(User user){
-        return bountyDetailsRepository.findAllByUser(user);
+    public List<BountyDetails> returnUserListOfBounties(User user,boolean received){
+        return bountyDetailsRepository.findAllByUserAndReceivedAndArchived(user,received,false);
     }
 
 
