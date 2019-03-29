@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.entity.User;
 import pl.coderslab.model.Err;
+import pl.coderslab.services.BountyService;
 import pl.coderslab.services.UserService;
 import pl.coderslab.validator.ValidationRegisterUserGroup;
 
@@ -23,11 +24,13 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     private final UserService userService;
+    private final BountyService bountyService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, BountyService bountyService) {
 
         this.userService = userService;
+        this.bountyService = bountyService;
     }
 
     @GetMapping("settings")
@@ -86,6 +89,17 @@ public class UserController {
         return "user/profile";
     }
 
+    @GetMapping("collection")
+    public String collection(Model model , HttpServletRequest request , HttpSession session){
+
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user",user);
+//        todo do sprawdzenia w przypadku różnych użytkowników
+        model.addAttribute("bounties",bountyService.returnUserListOfBounties(user));
+//        model.addAttribute("formAction", request.getContextPath() + "/user/profile");
+        return "user/collection";
+    }
+
     @PostMapping("profile")
     public String saveProfile(User user,HttpSession session, HttpServletRequest request){
 
@@ -94,8 +108,6 @@ public class UserController {
         session.setAttribute("user",userFromSession);
         return "redirect:"+request.getContextPath()+"/user/profile";
     }
-
-
 
     private String changeOnlyEmail(@Validated(ValidationRegisterUserGroup.class) User user, HttpServletRequest req, Model model, HttpSession session, Err modelErr) {
         userService.checkEmail(user, modelErr);

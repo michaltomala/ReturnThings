@@ -3,8 +3,8 @@ package pl.coderslab.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.dto.BountyDetails;
+import pl.coderslab.entity.User;
 import pl.coderslab.repository.BountyDetailsRepository;
-import pl.coderslab.repository.BountyRepository;
 
 import java.util.List;
 
@@ -19,17 +19,25 @@ public class BountyService {
         this.bountyDetailsRepository = bountyDetailsRepository;
     }
 
+
     public BountyDetails findBountyDetail(Long id){
         return bountyDetailsRepository.findOne(id);
     }
 
+
     public List<BountyDetails> returnListOfBounties(){
-        return bountyDetailsRepository.findAllByArchived(false);
-    }
+        return bountyDetailsRepository.findAllByArchived(false); }
+
 
     public List<BountyDetails> returnListOfArchivedBounties(){
-        return bountyDetailsRepository.findAllByArchived(true);
+        return bountyDetailsRepository.findAllByArchived(true); }
+
+
+    public List<BountyDetails> returnUserListOfBounties(User user){
+        return bountyDetailsRepository.findAllByUser(user);
     }
+
+
     public void changeAttributeReceived(Long id){
 
         BountyDetails bountyDetails = findBountyDetail(id);

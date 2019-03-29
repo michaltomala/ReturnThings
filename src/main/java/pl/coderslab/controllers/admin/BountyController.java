@@ -29,10 +29,8 @@ public class BountyController {
         model.addAttribute("bounties",bountyService.returnListOfBounties());
         return "admin/bounty/bounties";
     }
+
 // todo ograniczyć tu dostęp przez filtr
-//  todo - w formularzu bounties jeśli puste to w przypadku bounties
-//   ma wyswietlic tylko header i link a w archivedBounties  tylko header
-    
     @GetMapping("/archived/")
     public String archived(Model model){
 

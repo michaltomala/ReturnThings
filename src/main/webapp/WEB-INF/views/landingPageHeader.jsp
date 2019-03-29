@@ -19,7 +19,7 @@
                         </c:if>
                         <li><a href="/user/profile">Profil</a></li>
                         <li><a href="/user/settings">Ustawienia</a></li>
-                        <li><a href="#">Moje zbiórki</a></li>
+                        <li><a href="/user/collection">Moje zbiórki</a></li>
                         <li><a href="/logout">Wyloguj</a></li>
                     </ul>
                 </li>

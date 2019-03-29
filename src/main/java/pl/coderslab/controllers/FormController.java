@@ -66,7 +66,7 @@ public class FormController {
         }
         return "redirect:/form/step2";
     }
-
+// todo - od stepu 2 zmienić nagłówek na ten krótszy - zeby bylo mniej przewijania
     @GetMapping("step2")
     public String step2(Model model,HttpServletRequest request,HttpSession session){
 
