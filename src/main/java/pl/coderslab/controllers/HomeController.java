@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.coderslab.entity.Bounty;
 import pl.coderslab.services.FormService;
-import pl.coderslab.services.InstitutionLocationService;
 import pl.coderslab.services.InstitutionService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +16,13 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
     private final FormService formService;
+    private final InstitutionService institutionService;
 
     @Autowired
-    public HomeController(FormService formService) {
+    public HomeController(FormService formService, InstitutionService institutionService) {
 
         this.formService = formService;
+        this.institutionService = institutionService;
     }
 
 
@@ -57,8 +58,9 @@ public class HomeController {
     }
 
     @GetMapping("/institutions")
-    public String institutions() {
+    public String institutions(Model model) {
 
+        model.addAttribute("institutions",institutionService.returnListOfInstitution());
         return "institutions";
     }
 

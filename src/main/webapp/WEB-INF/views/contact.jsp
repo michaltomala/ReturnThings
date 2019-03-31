@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 
-<%@include file="auth/authHeader.jsp"%>
+<%@include file="auth/fundamentalHeader.jsp"%>
 
 <section class="about-us">
     <div class="about-us--text">
