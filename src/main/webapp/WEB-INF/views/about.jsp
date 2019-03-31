@@ -14,7 +14,29 @@
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 
-<%@include file="auth/fundamentalHeader.jsp"%>
+<%@include file="otherHeader.jsp"%>
+
+<h2>
+    Brak wygodnego sposobu na pozbycie się z
+    domu niechcianych rzeczy ponieważ dostępne
+    rozwiązania są uciążliwe, zabierają czas i
+    często nie wzbudzają zaufania.<br/>
+
+
+    Kogo dotyczy ten problem?
+    ◉ Osób dorosłych, którzy nie chcą sprzedawać ani wyrzucać
+    swoich rzeczy.<br/>
+    ◉ Zależy im na skutecznej pomocy innym.<br/>
+    ◉ Dbają o ekologię<br/>
+
+
+    Maksymalne uproszczenie procesu przekazania rzeczy oraz
+    stworzenie gotowej listy zweryfikowanych fundacji sprawi,
+    że każdy będzie miał poczucie zaufania do instytucji
+    oraz zostanie zachęcony prostym mechanizmem do oddania
+    swoich niechcianych rzeczy potrzebującym.
+</h2>
+
 
 </body>
 </html>

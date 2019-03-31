@@ -14,11 +14,11 @@
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 
-<%@include file="auth/fundamentalHeader.jsp"%>
+<%@include file="otherHeader.jsp"%>
 
 <section class="about-us">
     <div class="about-us--text">
-        <h2>Adres firmy ReturnThings</h2>
+        <h2>Adres siedziby ReturnThings</h2>
         <p>Ul. Emilii Plater 22 00-113 Warszawa, województwo MAZOWIECKIE</p>
         <p>Telefon +48 782-744-122</p>
         <p>Numer NIP 5364884590</p>
