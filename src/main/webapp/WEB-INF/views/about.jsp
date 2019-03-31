@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 
-<%@include file="otherHeader.jsp"%>
+<%@include file="fragments/otherHeader.jsp"%>
 
 <h2>
     Brak wygodnego sposobu na pozbycie się z

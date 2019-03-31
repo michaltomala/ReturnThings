@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <%@include file="authHeader.jsp"%>
+    <%@include file="../fragments/authHeader.jsp"%>
 
     <h2>Przykro nam,twoje konto zostało zablokowane</h2>
 

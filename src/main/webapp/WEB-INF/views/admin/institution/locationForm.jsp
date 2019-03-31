@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 
-    <%@include file="../adminHeader.jsp"%>
+    <%@include file="../../fragments/adminHeader.jsp"%>
 
     <h2>Lokalizacje</h2>
 

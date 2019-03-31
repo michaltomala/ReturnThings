@@ -82,7 +82,7 @@
 </section>
 
 
-<%@include file="../landingPageFooter.jsp"%>
+<%@include file="../fragments/landingPageFooter.jsp"%>
 
 
 <script src="/js/app.js" ></script>

@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 
-<%@include file="otherHeader.jsp"%>
+<%@include file="fragments/otherHeader.jsp"%>
 
 <section class="about-us">
     <div class="about-us--text">

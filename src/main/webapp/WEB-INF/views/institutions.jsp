@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 
-<%@include file="otherHeader.jsp"%>
+<%@include file="fragments/otherHeader.jsp"%>
 
 <section class="form--steps">
     <div class="form--steps-container">

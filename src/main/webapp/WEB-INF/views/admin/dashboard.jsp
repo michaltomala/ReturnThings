@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <%@include file="adminHeader.jsp"%>
+    <%@include file="../fragments/adminHeader.jsp"%>
 
 <section class="section--dashboard">
     <h2>Panel Administracyjny</h2>

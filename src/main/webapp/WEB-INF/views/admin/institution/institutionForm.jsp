@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <%@include file="../adminHeader.jsp"%>
+    <%@include file="../../fragments/adminHeader.jsp"%>
 
     <section class="login-page">
         <h2>${tagHeader}</h2>

@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <%@include file="adminHeader.jsp"%>
+    <%@include file="../fragments/adminHeader.jsp"%>
 
     <h2>Użytkownicy</h2>
 

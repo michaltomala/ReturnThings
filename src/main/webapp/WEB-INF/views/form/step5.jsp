@@ -103,7 +103,7 @@
     </div>
 </section>
 
-<%@include file="../landingPageFooter.jsp"%>
+<%@include file="../fragments/landingPageFooter.jsp"%>
 
 
 </body>

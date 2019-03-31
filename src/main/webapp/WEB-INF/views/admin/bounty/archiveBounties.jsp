@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<%@include file="../adminHeader.jsp"%>
+<%@include file="../../fragments/adminHeader.jsp"%>
 
 <c:if test="${not empty archivedBounties}">
     <h2>Zarchiwizowane rzeczy</h2>

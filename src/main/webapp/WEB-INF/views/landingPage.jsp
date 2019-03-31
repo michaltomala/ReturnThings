@@ -16,7 +16,7 @@
 
 <body>
 
-    <%@include file="landingPageHeader.jsp"%>
+    <%@include file="fragments/landingPageHeader.jsp"%>
 
 <section class="stats">
     <div class="container container--85">
@@ -210,7 +210,7 @@
     </div>
 </section>
 
-    <%@include file="landingPageFooter.jsp"%>
+    <%@include file="fragments/landingPageFooter.jsp"%>
 
     <script src="js/app.js" ></script>
 </body>

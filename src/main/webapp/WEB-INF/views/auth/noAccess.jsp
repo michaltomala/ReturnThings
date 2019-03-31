@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <%@include file="fundamentalHeader.jsp"%>
+    <%@include file="../fragments/fundamentalHeader.jsp"%>
 
 
     <h2>Przykro nam,nie masz dostępu</h2>

@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <%@include file="../auth/fundamentalHeader.jsp"%>
+    <%@include file="../fragments/fundamentalHeader.jsp"%>
 
     <section class="login-page">
         <h2>Twoje dane</h2>

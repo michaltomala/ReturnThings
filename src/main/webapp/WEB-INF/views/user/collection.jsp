@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <%@include file="../auth/fundamentalHeader.jsp"%>
+    <%@include file="../fragments/fundamentalHeader.jsp"%>
     <h2>Twoje zbiórki</h2>
 
     <div class="form-section--column">
