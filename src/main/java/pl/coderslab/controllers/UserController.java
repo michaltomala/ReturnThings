@@ -108,13 +108,11 @@ public class UserController {
 
         User user = (User) session.getAttribute("user");
         model.addAttribute("user",user);
-//        todo do sprawdzenia w przypadku różnych użytkowników
         model.addAttribute("receivedBounties",bountyService.returnUserListOfBounties(user,true));
         model.addAttribute("notReceivedBounties",bountyService.returnUserListOfBounties(user,false));
         return "user/collection";
     }
 
-//   todo - to check this one method
     @GetMapping("bounty/{id}")
     public String singleBounty(@PathVariable Long id,Model model){
 
@@ -122,7 +120,6 @@ public class UserController {
         return "user/singleUserBounty";
     }
 
-    //   todo - to check this one method
     @GetMapping("bounty/receive/{id}")
     public String receive(@PathVariable Long id,Model model){
 
@@ -131,8 +128,6 @@ public class UserController {
         return "user/singleUserBounty";
     }
 
-
-    //   todo - to check this one method
     @GetMapping("bounty/archive/{id}")
     public String archive(Model model, @PathVariable Long id){
 

@@ -26,15 +26,17 @@ public class BountyService {
 
 
     public List<BountyDetails> returnListOfBounties(){
-        return bountyDetailsRepository.findAllByArchived(false); }
+        return bountyDetailsRepository.findAllByArchivedOrderByReceptionDate(false);
+    }
 
 
     public List<BountyDetails> returnListOfArchivedBounties(){
-        return bountyDetailsRepository.findAllByArchived(true); }
+        return bountyDetailsRepository.findAllByArchivedOrderByReceptionDateDesc(true);
+    }
 
 
     public List<BountyDetails> returnUserListOfBounties(User user,boolean received){
-        return bountyDetailsRepository.findAllByUserAndReceivedAndArchived(user,received,false);
+        return bountyDetailsRepository.findAllByUserAndReceivedAndArchivedOrderByReceptionDate(user,received,false);
     }
 
 
