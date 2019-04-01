@@ -42,6 +42,42 @@
                 </c:if>
             </div>
 
+            <div class="form-group">
+                <c:if test="${empty user.city }">
+                    <form:input path="city" placeholder="Miasto" />
+                </c:if>
+                <c:if test="${not empty user.city }">
+                    <form:input path="city" placeholder="${user.city}" />
+                </c:if>
+            </div>
+
+            <div class="form-group">
+                <c:if test="${empty user.street}">
+                    <form:input path="street" placeholder="Ulica" />
+                </c:if>
+                <c:if test="${not empty user.street}">
+                    <form:input path="street" placeholder="${user.street}" />
+                </c:if>
+            </div>
+
+            <div class="form-group">
+                <c:if test="${empty user.postCode}">
+                    <form:input path="postCode" placeholder="Adres Pocztowy" />
+                </c:if>
+                <c:if test="${not empty user.postCode}">
+                    <form:input path="postCode" placeholder="${user.postCode}" />
+                </c:if>
+            </div>
+
+            <div class="form-group">
+                <c:if test="${empty user.phone}">
+                    <form:input path="phone" placeholder="Telefon" />
+                </c:if>
+                <c:if test="${not empty user.phone}">
+                    <form:input path="phone" placeholder="${user.phone}" />
+                </c:if>
+            </div>
+
             <div class="form-group form-group--buttons">
                 <a class="btn btn--without-border"></a>
                 <button class="btn" type="submit">Zapisz zmiany</button>

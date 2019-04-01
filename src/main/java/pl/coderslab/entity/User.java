@@ -50,7 +50,13 @@ public class User {
 
     private boolean isAdmin = false;
 
-//   todo - add attributes from form5
+    private String city;
+    private String street;
+//  todo - to walidate
+    private String postCode;
+    private String phone;
+
+
     @OneToMany
     private List<BountyDetails> bountyDetails;
 
@@ -137,4 +143,35 @@ public class User {
         this.bountyDetails = bountyDetails;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

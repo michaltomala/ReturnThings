@@ -83,6 +83,10 @@ public class UserService {
 
         userFromSession.setName(user.getName());
         userFromSession.setSurname(user.getSurname());
+        userFromSession.setCity(user.getCity());
+        userFromSession.setStreet(user.getStreet());
+        userFromSession.setPostCode(user.getPostCode());
+        userFromSession.setPhone(user.getPhone());
         userRepository.save(userFromSession);
     }
 

@@ -39,28 +39,28 @@
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Ulica <form:input type="text" name="address" path="street"/>
+                                    Ulica <form:input type="text" name="address" path="street" value="${sessionScope.user.street}"/>
                                     <form:errors path="street"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Miasto <form:input type="text" name="city" path="city"/>
+                                    Miasto <form:input type="text" name="city" path="city" value="${sessionScope.user.city}"/>
                                     <form:errors path="city"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Kod pocztowy <form:input type="text" name="postcode" path="postCode"/>
+                                    Kod pocztowy <form:input type="text" name="postcode" path="postCode" value="${sessionScope.user.postCode}"/>
                                     <form:errors path="postCode"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Numer telefonu <form:input type="phone" name="phone" path="phone"/>
+                                    Numer telefonu <form:input type="phone" name="phone" path="phone" value="${sessionScope.user.phone}"/>
                                     <form:errors path="phone"/>
                                 </label>
                             </div>
