@@ -23,6 +23,7 @@
     <a href="${pageContext.request.contextPath}/admin/institutions/create">Dodaj nową organizację</a>
 
     <p>Aby edytować kliknij w nazwę konkretnej organizacji</p>
+    <p>Usunięcie jest możliwe tylko w przypadku gdy nie ma powiązania z darami!!</p>
     <ul>
         <c:forEach items="${institutions}" var="institution" varStatus="loop">
 
@@ -30,10 +31,11 @@
                 <a href="${pageContext.request.contextPath}/admin/institutions/edit/${institution.id}">
                         ${institution.name}
                 </a>
-                <a href="${pageContext.request.contextPath}/admin/institutions/delete/${institution.id}">
+                <c:if test="${ empty institution.bountyDetails}">
+                    <a href="${pageContext.request.contextPath}/admin/institutions/delete/${institution.id}">
                         Kliknij tutaj aby usunąć
-                </a>
-
+                    </a>
+                </c:if>
             </li>
         </c:forEach>
     </ul>

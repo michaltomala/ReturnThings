@@ -66,7 +66,7 @@ public class FormController {
         }
         return "redirect:/form/step2";
     }
-// todo - od stepu 2 zmienić nagłówek na ten krótszy - zeby bylo mniej przewijania
+
     @GetMapping("step2")
     public String step2(Model model,HttpServletRequest request,HttpSession session){
 
@@ -168,7 +168,7 @@ public class FormController {
         model.addAttribute("formAction", request.getContextPath() + "/form/step5");
         return "form/step5";
     }
-
+// todo - zrobić żeby fajnie wyglądały błedy
     @PostMapping("step5")
     public String postFormStep5(@Valid Reception reception, BindingResult errors, HttpSession session,
                                 Model model,HttpServletRequest request){

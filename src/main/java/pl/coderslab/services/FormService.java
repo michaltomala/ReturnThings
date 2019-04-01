@@ -91,6 +91,9 @@ public class FormService {
         bountyRepository.save(bounty);
         receptionRepository.save(reception);
         bountyDetailsRepository.save(bountyDetails);
+
+        institution.addToListBountyDetails(bountyDetails);
+        institutionRepository.save(institution);
     }
 
     public void setNumberWithBreaks(Reception reception){
