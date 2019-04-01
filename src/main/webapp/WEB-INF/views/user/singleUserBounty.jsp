@@ -13,6 +13,7 @@
 </head>
 <body>
 
+<%@include file="../fragments/fundamentalHeader.jsp"%>
 
 <h2>Szczegóły</h2>
 <div class="form-section--column">
@@ -28,11 +29,11 @@
         </c:if> dla instytucji ${bountyDetail.institution.name} , która pomaga
 
         <c:forEach var="gift" items="${bountyDetail.institution.whomHelp}" varStatus="loop">
-            <span>-${gift.type} </span><c:if test="${loop.count>1}"> &&</c:if>
+            <br/><span>-${gift.whomHelp} </span>
         </c:forEach>
         <br/><h4>Oddałeś:</h4>
         <c:forEach var="gift" items="${bountyDetail.bounty.bountyType}">
-            <br/><span>-${gift.type} </span>
+            <span>-${gift.type} </span>
         </c:forEach>
     </li>
 </div>

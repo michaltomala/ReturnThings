@@ -12,6 +12,11 @@
                     <c:if test="${empty user.name }">Witaj ${user.email}</c:if>
                     <c:if test="${not empty user.name}">Witaj ${user.name}</c:if>
                     <ul class="dropdown">
+                        <c:if test="${user.isAdmin == true}">
+                            <li>
+                                <a href="/admin/dashboard">Panel Administracyjny</a>
+                            </li>
+                        </c:if>
                         <li><a href="/user/profile">Profil</a></li>
                         <li><a href="/user/settings">Ustawienia</a></li>
                         <li><a href="/user/collection">Moje zbiórki</a></li>
