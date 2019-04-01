@@ -36,6 +36,10 @@ public class Institution {
     public Institution() {
     }
 
+    public void addToListBountyDetails(BountyDetails bountyDetails){ this.bountyDetails.add(bountyDetails); }
+
+
+
     @Override
     public String toString() {
         return name;

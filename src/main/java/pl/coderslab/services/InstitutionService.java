@@ -67,6 +67,13 @@ public class InstitutionService {
         }
     }
 
+    public boolean isEnableToDeleteInstitution(Long id){
+
+        Institution institution = findInstitution(id);
+        return institution.getBountyDetails().isEmpty();
+    }
+
+
 
 }
 

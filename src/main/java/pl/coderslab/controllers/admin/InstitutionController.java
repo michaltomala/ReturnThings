@@ -101,8 +101,12 @@ public class InstitutionController {
     @GetMapping("/delete/{id}")
     public String deleteInstitution(@PathVariable Long id){
 //      todo - sprawdzić czy nie ma powiązania z darami
-        institutionService.deleteInstitution(id);
+        if(institutionService.isEnableToDeleteInstitution(id)){
+            institutionService.deleteInstitution(id);
+            return "redirect:/admin/institutions/";
+        }
         return "redirect:/admin/institutions/";
+
     }
 
 
