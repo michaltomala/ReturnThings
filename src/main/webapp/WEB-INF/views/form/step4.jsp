@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<%@include file="../user/homeHeader.jsp"%>
+<%@include file="../fragments/homeHeader.jsp"%>
 
 
 <section class="form--steps">

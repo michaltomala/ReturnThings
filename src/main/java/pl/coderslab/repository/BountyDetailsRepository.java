@@ -16,5 +16,4 @@ public interface BountyDetailsRepository extends JpaRepository<BountyDetails, Lo
 
     List<BountyDetails> findAllByUserAndReceivedAndArchivedOrderByReceptionDate(User user,boolean received, boolean archived);
 
-//   todo - find all by date - zarówno do panelu admina jak i usera
 }
