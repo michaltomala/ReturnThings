@@ -1863,7 +1863,9 @@ span.span--dashboard{
   text-align: center;
 }
 
-
+p.just-justify{
+  text-align: justify;
+}
 
 
 
