@@ -136,6 +136,11 @@ public class UserController {
     @GetMapping("bounty/archive/{id}")
     public String archive(Model model, @PathVariable Long id){
 
+        if(bountyService.isEnableToArchive(id)){
+            bountyService.changeAttributeArchived(id);
+        }else{
+            return "redirect:/user/bounty/"+id;
+        }
         bountyService.changeAttributeArchived(id);
         return "redirect:/user/collection/";
     }

@@ -82,8 +82,6 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpSession session){
 
-//       todo sprawdzić czy wszystko się usuwa ładnie
-
         session.setAttribute("user",null);
         setSessionAttributesNull(session);
         return "redirect:/landingPage";

@@ -30,7 +30,6 @@ public class BountyController {
         return "admin/bounty/bounties";
     }
 
-// todo ograniczyć tu dostęp przez filtr
     @GetMapping("/archived/")
     public String archived(Model model){
 
@@ -57,7 +56,11 @@ public class BountyController {
     @GetMapping("/archive/{id}")
         public String archive(Model model, @PathVariable Long id){
 
-        bountyService.changeAttributeArchived(id);
+        if(bountyService.isEnableToArchive(id)){
+            bountyService.changeAttributeArchived(id);
+        }else{
+            return "redirect:/admin/bounties/"+id;
+        }
         return "redirect:/admin/bounties/";
     }
 

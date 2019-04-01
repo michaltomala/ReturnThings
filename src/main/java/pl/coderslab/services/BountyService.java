@@ -56,4 +56,11 @@ public class BountyService {
         bountyDetails.setArchived(true);
         bountyDetailsRepository.save(bountyDetails);
     }
+
+    public boolean isEnableToArchive(Long id){
+
+        BountyDetails bountyDetails = findBountyDetail(id);
+        return bountyDetails.isReceived();
+    }
+
 }
