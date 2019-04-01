@@ -67,6 +67,7 @@
                 <c:if test="${not empty user.postCode}">
                     <form:input path="postCode" placeholder="${user.postCode}" />
                 </c:if>
+                <form:errors path="postCode" />
             </div>
 
             <div class="form-group">
@@ -76,6 +77,7 @@
                 <c:if test="${not empty user.phone}">
                     <form:input path="phone" placeholder="${user.phone}" />
                 </c:if>
+                <form:errors path="phone" />
             </div>
 
             <div class="form-group form-group--buttons">

@@ -18,6 +18,7 @@ import pl.coderslab.validator.ValidationRegisterUserGroup;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 
 @Controller
@@ -90,8 +91,11 @@ public class UserController {
     }
 
     @PostMapping("profile")
-    public String saveProfile(User user,HttpSession session, HttpServletRequest request){
+    public String saveProfile(@Valid User user, BindingResult errors,HttpSession session, HttpServletRequest request){
 
+        if(errors.hasErrors()){
+            return "user/profile";
+        }
         User userFromSession = (User) session.getAttribute("user");
         userService.saveUserDetails(user,userFromSession);
         session.setAttribute("user",userFromSession);

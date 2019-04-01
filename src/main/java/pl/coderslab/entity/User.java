@@ -50,10 +50,15 @@ public class User {
 
     private boolean isAdmin = false;
 
+
     private String city;
+
     private String street;
-//  todo - to walidate
+
+    @Pattern(regexp="(^$|[0-9][0-9]-[0-9][0-9][0-9])" , message = "Nieprawidłowy format !")
     private String postCode;
+
+    @Pattern(regexp="(^$|[0-9]{9})" , message = "Nieprawidłowy format !")
     private String phone;
 
 
