@@ -168,7 +168,10 @@ public class FormController {
         if(session.getAttribute("reception") == null){
             model.addAttribute("reception",new Reception());
         } else {
-            model.addAttribute("reception",session.getAttribute("reception"));
+            Reception reception = (Reception) session.getAttribute("reception");
+            formService.setNumberWithoutBreaks(reception);
+            session.setAttribute("reception" , reception);
+            model.addAttribute("reception", reception);
         }
         model.addAttribute("formAction", request.getContextPath() + "/form/step5");
         return "form/step5";
@@ -202,7 +205,6 @@ public class FormController {
     @GetMapping("step6")
     public String step6(){
 
-//       todo w przypadku powrotu do step5 zmiana numeru z powrotem !
         return "form/step6";
     }
 
