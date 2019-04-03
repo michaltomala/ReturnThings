@@ -10,7 +10,12 @@ public class LocalDateConverter implements Converter<String, LocalDate> {
 
     @Override
     public LocalDate convert(String source) {
-        return LocalDate.parse( source, DateTimeFormatter.ISO_LOCAL_DATE );
+
+        try{
+            return LocalDate.parse( source, DateTimeFormatter.ISO_LOCAL_DATE );
+        }catch(Exception e){
+            return null;
+        }
     }
 
 }

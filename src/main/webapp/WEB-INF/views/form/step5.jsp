@@ -40,28 +40,24 @@
                             <div class="form-group form-group--inline">
                                 <label>
                                     Ulica <form:input type="text" name="address" path="street" value="${sessionScope.user.street}"/>
-                                    <form:errors path="street"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
                                     Miasto <form:input type="text" name="city" path="city" value="${sessionScope.user.city}"/>
-                                    <form:errors path="city"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
                                     Kod pocztowy <form:input type="text" name="postcode" path="postCode" value="${sessionScope.user.postCode}"/>
-                                    <form:errors path="postCode"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
                                     Numer telefonu <form:input type="phone" name="phone" path="phone" value="${sessionScope.user.phone}"/>
-                                    <form:errors path="phone"/>
                                 </label>
                             </div>
                         </div>
@@ -72,14 +68,12 @@
                             <div class="form-group form-group--inline">
                                 <label>
                                     Data <form:input type="date" name="data" path="date"/>
-                                    <form:errors path="date"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
                                     Godzina <form:input type="time" name="time" path="time"/>
-                                    <form:errors path="time"/>
                                 </label>
                             </div>
 
@@ -92,6 +86,8 @@
                         </div>
 
                     </div>
+
+                    <c:if test="${not empty receptionErr}">${receptionErr}</c:if>
 
                     <div class="form-group form-group--buttons">
                         <a href="${pageContext.request.contextPath}/form/step4"

@@ -39,10 +39,12 @@ public class Reception {
 
 //    @Future(message = "Data musi być aktualna" )
 //    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @NotNull(message = "To pole nie może być puste!")
     private LocalDate date;
 
 //    @Future(message = "Data musi być aktualna" )
 //    @DateTimeFormat(pattern = "HH:mm" )
+    @NotNull(message = "To pole nie może być puste!")
     private LocalTime time;
 
     private String comments;
