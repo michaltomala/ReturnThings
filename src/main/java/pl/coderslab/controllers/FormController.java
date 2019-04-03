@@ -173,7 +173,7 @@ public class FormController {
         model.addAttribute("formAction", request.getContextPath() + "/form/step5");
         return "form/step5";
     }
-// todo - zrobić żeby fajnie wyglądały błedy
+
     @PostMapping("step5")
     public String postFormStep5(@Valid Reception reception, BindingResult errors, HttpSession session,
                                 Model model,HttpServletRequest request){
@@ -185,14 +185,14 @@ public class FormController {
             return "form/step5";
         }
 
+        Err modelErr = new Err();
 
-//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
-//        LocalDateTime now = LocalDateTime.now();
-//        System.out.println(dtf.format(now));
-
-//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-//        LocalDate localDate = LocalDate.now();
-//        System.out.println(dtf.format(localDate));
+        formService.checkDate(reception,modelErr);
+        if(!modelErr.isEmpty()){
+            model.addAttribute("receptionErr", "Data musi być przyszła !");
+            model.addAttribute("formAction", request.getContextPath() + "/form/step5");
+            return "form/step5";
+        }
 
         formService.setNumberWithBreaks(reception);
         session.setAttribute("reception",reception);
@@ -202,6 +202,7 @@ public class FormController {
     @GetMapping("step6")
     public String step6(){
 
+//       todo w przypadku powrotu do step5 zmiana numeru z powrotem !
         return "form/step6";
     }
 

@@ -8,7 +8,10 @@ import pl.coderslab.entity.*;
 import pl.coderslab.model.Err;
 import pl.coderslab.repository.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -50,6 +53,20 @@ public class FormService {
             modelErr.addErr("Nothing to find!");
         }
     }
+
+    public void checkDate(Reception reception, Err modelErr){
+
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate today = LocalDate.now();
+//        LocalDate today = dtf.format(localDate);
+
+        if(!reception.getDate().isAfter(today)){
+            modelErr.addErr("The date must be future!");
+        }
+    }
+
+
 
     public Set<Institution> findInstitutions(Institution institution) throws NullPointerException{
 

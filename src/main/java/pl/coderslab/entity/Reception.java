@@ -6,13 +6,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.dto.BountyDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 
 @Entity
 public class Reception {
@@ -35,15 +32,9 @@ public class Reception {
     @Pattern(regexp="(^$|[0-9]{9})" , message = "Nieprawidłowy format !")
     private String phone;
 
-// todo - walidate date and time with message and good position in step5.jsp
-
-//    @Future(message = "Data musi być aktualna" )
-//    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @NotNull(message = "To pole nie może być puste!")
     private LocalDate date;
 
-//    @Future(message = "Data musi być aktualna" )
-//    @DateTimeFormat(pattern = "HH:mm" )
     @NotNull(message = "To pole nie może być puste!")
     private LocalTime time;
 
