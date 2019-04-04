@@ -1879,6 +1879,7 @@ div.meaning-title{
   margin-bottom: 5px;
   text-align: justify;
 }
+
 div.meaning-subtitle{
   font-family: 'Merriweather', serif;
   font-weight: 300;
@@ -1888,6 +1889,9 @@ div.meaning-subtitle{
 
 }
 
+a.withoutDecoration {
+  text-decoration: none;
+}
 
 
 

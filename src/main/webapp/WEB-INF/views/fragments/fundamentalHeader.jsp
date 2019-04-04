@@ -9,13 +9,13 @@
                 <ul class="dropdown">
                     <c:if test="${user.isAdmin == true}">
                         <li>
-                            <a href="/admin/dashboard">Panel Administracyjny</a>
+                            <a class="withoutDecoration" href="/admin/dashboard">Panel Administracyjny</a>
                         </li>
                     </c:if>
-                    <li><a href="/user/profile">Profil</a></li>
-                    <li><a href="/user/settings">Ustawienia</a></li>
-                    <li><a href="/user/collection">Moje zbiórki</a></li>
-                    <li><a href="/logout">Wyloguj</a></li>
+                    <li><a class="withoutDecoration" href="/user/profile">Profil</a></li>
+                    <li><a class="withoutDecoration" href="/user/settings">Ustawienia</a></li>
+                    <li><a class="withoutDecoration" href="/user/collection">Moje zbiórki</a></li>
+                    <li><a class="withoutDecoration" href="/logout">Wyloguj</a></li>
                 </ul>
             </li>
         </ul>

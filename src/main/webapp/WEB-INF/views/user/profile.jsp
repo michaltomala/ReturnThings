@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
@@ -67,7 +68,7 @@
                 <c:if test="${not empty user.postCode}">
                     <form:input path="postCode" placeholder="${user.postCode}" />
                 </c:if>
-                <form:errors path="postCode" />
+                <form:errors path="postCode" cssClass="alert alert-danger" element="div"/>
             </div>
 
             <div class="form-group">
@@ -77,7 +78,7 @@
                 <c:if test="${not empty user.phone}">
                     <form:input path="phone" placeholder="${user.phone}" />
                 </c:if>
-                <form:errors path="phone" />
+                <form:errors path="phone" cssClass="alert alert-danger" element="div"/>
             </div>
 
             <div class="form-group form-group--buttons">
