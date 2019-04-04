@@ -2,7 +2,6 @@ package pl.coderslab.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.coderslab.dto.BountyDetails;
-import pl.coderslab.entity.Bounty;
 import pl.coderslab.entity.User;
 
 import java.util.List;

@@ -2,7 +2,6 @@ package pl.coderslab.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import pl.coderslab.entity.InstitutionLocation;
 import pl.coderslab.model.Err;
 import pl.coderslab.repository.InstitutionLocationRepository;

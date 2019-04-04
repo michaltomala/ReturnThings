@@ -1,14 +1,11 @@
 package pl.coderslab.converter;
 
-
 import org.springframework.core.convert.converter.Converter;
-
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-//import org.springframework.stereotype.Component;
+import java.time.format.DateTimeParseException;
 
 
-//@Component
 public class LocalTimeConverter implements Converter<String, LocalTime> {
 
     @Override
@@ -16,7 +13,7 @@ public class LocalTimeConverter implements Converter<String, LocalTime> {
 
         try{
             return LocalTime.parse( source, DateTimeFormatter.ISO_LOCAL_TIME );
-        }catch(Exception e){
+        }catch(DateTimeParseException e){
             return null;
         }
     }

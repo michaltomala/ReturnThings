@@ -9,9 +9,7 @@ import pl.coderslab.model.Err;
 import pl.coderslab.repository.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -56,10 +54,7 @@ public class FormService {
 
     public void checkDate(Reception reception, Err modelErr){
 
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate today = LocalDate.now();
-//        LocalDate today = dtf.format(localDate);
 
         if(!reception.getDate().isAfter(today)){
             modelErr.addErr("The date must be future!");
@@ -96,11 +91,13 @@ public class FormService {
         }
     }
 
+    public void setPartOfAttributesFromUser(Reception reception,User user){
 
-
-
-
-
+        reception.setStreet(user.getStreet());
+        reception.setCity(user.getCity());
+        reception.setPostCode(user.getPostCode());
+        reception.setPhone(user.getPhone());
+    }
 
     public void saveForm(Bounty bounty,Institution institution,Reception reception,User user){
 

@@ -39,25 +39,25 @@
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Ulica <form:input type="text" name="address" path="street" value="${sessionScope.user.street}"/>
+                                    Ulica <form:input type="text" name="address" path="street" value="${sessionScope.reception.street}"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Miasto <form:input type="text" name="city" path="city" value="${sessionScope.user.city}"/>
+                                    Miasto <form:input type="text" name="city" path="city" value="${sessionScope.reception.city}"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Kod pocztowy <form:input type="text" name="postcode" path="postCode" value="${sessionScope.user.postCode}"/>
+                                    Kod pocztowy <form:input type="text" name="postcode" path="postCode" value="${sessionScope.reception.postCode}"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Numer telefonu <form:input type="phone" name="phone" path="phone" value="${sessionScope.user.phone}"/>
+                                    Numer telefonu <form:input type="phone" name="phone" path="phone" value="${sessionScope.reception.phone}"/>
                                 </label>
                             </div>
                         </div>
@@ -67,20 +67,20 @@
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Data <form:input type="date" name="data" path="date"/>
+                                    Data <form:input type="date" name="data" path="date" value="${sessionScope.reception.date}"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Godzina <form:input type="time" name="time" path="time"/>
+                                    Godzina <form:input type="time" name="time" path="time" value="${sessionScope.reception.time}"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
                                     Uwagi dla kuriera <form:textarea alt="Brak uwag" value="Brak uwag"
-                                    placeholder="Brak uwag"  name="more_info" rows="5" path="comments"/>
+                                    placeholder="Brak uwag"  name="more_info" rows="5" path="comments" />
                                 </label>
                             </div>
                         </div>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+
 @WebFilter(filterName = "LoginAndRegisterFilter ", urlPatterns = {"/login","/register"})
 public class LoginAndRegisterFilter implements Filter {
 
