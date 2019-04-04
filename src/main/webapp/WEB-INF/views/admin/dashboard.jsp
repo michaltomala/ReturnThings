@@ -33,9 +33,8 @@
     </a>
 
     <a href="/admin/bounties/" class="a--dashboard">
-        <img class="img--dashboard" src="/images/myImages/bounty.jpeg" title="Dary" alt="">Dary
+        <img class="img--dashboard" src="/images/myImages/bounty.jpeg" title="Dary" >Dary
     </a>
-
 </section>
 
 
