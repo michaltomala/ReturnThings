@@ -1867,9 +1867,22 @@ p.just-justify{
   text-align: justify;
 }
 
+div.meaning-title{
+  font-family: 'Merriweather', serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 2rem;
+  margin-bottom: 5px;
+  text-align: justify;
+}
+div.meaning-subtitle{
+  font-family: 'Merriweather', serif;
+  font-weight: 300;
+  font-style: light;
+  font-size: 1.2rem;
+  text-align: justify;
 
-
-
+}
 
 
 

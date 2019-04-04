@@ -52,28 +52,16 @@
     <div class="slogan container container--90">
         <div class="slogan--item">
             <h1>O co chodzi ?<br/></h1><h1>
-            <section class="form--steps">
-                    <form>
-                        <div data-step="1" class="active">
-                            <div class="form-group form-group--checkbox">
-                                <label>
-                                <span class="description">
-                                <div class="title">Dużo osób ma w domu rzeczy, których nie używa, ale są
-                                    one w dobrym stanie i chce przekazaćje osobom,
-                                    którym się mogą przydać - nie wie jednak jak w prosty sposób to
-                                    zrobić.</div>
-                                <div class="subtitle">Jest wiele dostępnych rozwiązań, ale wiele z nich
-                                    wymaga dodatkowego wysiłku lub nie budząone zaufania.W zweryfikowane
-                                    miejsca trzeba pojechać, a nie ma na to czasu lub nie ma jak tam
-                                    pojechać. Natomiast kontenery pod domem lub lokalne zbiórki są
-                                    niezweryfikowane i nie wiadomo czy te rzeczy faktycznie trafią
-                                    do potrzebujących.</div>
-                                </span>
-                                </label>
-                            </div>
-                        </div>
-                    </form>
-            </section>
+                <div class="meaning-title">Dużo osób ma w domu rzeczy, których nie używa, ale są
+                    one w dobrym stanie i chce przekazać je osobom,
+                    którym się mogą przydać - nie wie jednak jak w prosty sposób to
+                    zrobić.</div>
+                <div class="meaning-subtitle">Jest wiele dostępnych rozwiązań, ale wiele z nich
+                    wymaga dodatkowego wysiłku lub nie budząone zaufania.W zweryfikowane
+                    miejsca trzeba pojechać, a nie ma na to czasu lub nie ma jak tam
+                    pojechać. Natomiast kontenery pod domem lub lokalne zbiórki są
+                    niezweryfikowane i nie wiadomo czy te rzeczy faktycznie trafią
+                    do potrzebujących.</div>
             </h1>
         </div>
     </div>
